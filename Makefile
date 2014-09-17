@@ -12,4 +12,4 @@ libs:
 
 clean:
 	cd openzwave && make clean 
-	go clean
+	go clean -i
