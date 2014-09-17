@@ -10,6 +10,7 @@
 #include "Options.h"
 #include "platform/Log.h"
 #include "wrapper.hpp"
+#include "watcher.hpp"
 
 int TRUE = 1;
 int FALSE = 0;
@@ -43,4 +44,9 @@ extern Manager lockOptions(Options options)
 extern void addDriver(Manager manager, char * device)
 {
   ((OpenZWave::Manager *)manager)->AddDriver(device);
+}
+
+extern void addWatcher(Manager manager) 
+{
+  ((OpenZWave::Manager *)manager)->AddWatcher( OpenZWave::OnNotification, NULL );
 }

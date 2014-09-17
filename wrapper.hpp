@@ -22,6 +22,7 @@ extern void addIntOption(Options, char *, int );
 extern void addBoolOption(Options, char *, int);
 extern Manager lockOptions(Options );
 extern void addDriver(Manager , char *);
+extern void addWatcher(Manager);
 #ifdef __cplusplus
 }
 #endif
