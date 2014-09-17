@@ -81,3 +81,9 @@ func (self *API) AddDriver(device string) *API {
 	C.addDriver(self.manager, cDevice)
 	return self
 }
+
+// add a watcher
+func (self *API) AddWatcher(channel chan *interface{}) *API {
+	C.addWatcher(self.manager)
+	return self
+}
