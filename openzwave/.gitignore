@@ -1,0 +1,5 @@
+.lib/
+.dep/
+MinOZW
+libopenzwave.a
+libopenzwave.so.1.0
