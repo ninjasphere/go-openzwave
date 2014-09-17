@@ -13,3 +13,5 @@ libs:
 clean:
 	cd openzwave && make clean 
 	go clean -i
+
+deps:	libs
