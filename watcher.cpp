@@ -1,4 +1,5 @@
 #include "Notification.h"
+#include "wrapper.hpp"
 #include "watcher.hpp"
 extern "C" {
 #include "_cgo_export.h"
@@ -48,5 +49,6 @@ void OnNotification (OpenZWave::Notification const* notification, void* context)
   default:
     break;
   }
-  OnNotificationWrapper((void **)notification, context);
+  Notification * notificationT = (Notification *)malloc(sizeof(Notification));
+  OnNotificationWrapper(notificationT, context);
 }
