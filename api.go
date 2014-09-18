@@ -9,6 +9,11 @@ package openzwave
 //
 
 //
+// The following #cgo directives assumed that 'go' is a symbolic link that references the gopath that contains the current directory, e.g. ../../../..
+//
+// All 'go' packages that have this package as a dependency should include such a go link and will then inherit the library built in this package.
+//
+
 // #cgo LDFLAGS: -lopenzwave -Lgo/src/github.com/ninjasphere/go-openzwave/openzwave
 // #cgo CPPFLAGS: -Iopenzwave/cpp/src/platform -Iopenzwave/cpp/src -Iopenzwave/cpp/src/value_classes
 //
