@@ -33,6 +33,14 @@ type API struct {
 	manager C.Manager // an opaque reference to C++ Manager opject
 }
 
+type Notification struct {
+	impl *C.Notification
+}
+
+type channelRef struct {
+	channel chan Notification
+}
+
 // allocate the control block used to track the state of the API
 func NewAPI() *API {
 	return &API{nil, nil}
@@ -88,7 +96,13 @@ func (self *API) AddDriver(device string) *API {
 }
 
 // add a watcher
-func (self *API) AddWatcher(channel chan *interface{}) *API {
-	C.addWatcher(self.manager)
+func (self *API) AddWatcher(channel chan Notification) *API {
+	C.addWatcher(self.manager, unsafe.Pointer(&channelRef{channel}))
 	return self
+}
+
+//export OnNotificationWrapper
+func OnNotificationWrapper(notification *C.Notification, context unsafe.Pointer) {
+	(*channelRef)(context).channel <- Notification{notification}
+
 }

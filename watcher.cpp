@@ -1,50 +1,52 @@
 #include "Notification.h"
 #include "watcher.hpp"
-namespace OpenZWave {
-void OnNotification (Notification const* _notification, void* _context)
+extern "C" {
+#include "_cgo_export.h"
+}
+void OnNotification (OpenZWave::Notification const* notification, void* context)
 {
-  ValueID id = _notification->GetValueID();
-  switch (_notification->GetType()) {
-  case Notification::Type_Notification:
-    switch (_notification->GetNotification()) {
-    case Notification::Code_MsgComplete:
-    case Notification::Code_Timeout:
-    case Notification::Code_NoOperation:
-    case Notification::Code_Awake:
-    case Notification::Code_Sleep:
-    case Notification::Code_Dead:
+  OpenZWave::ValueID id = notification->GetValueID();
+  switch (notification->GetType()) {
+  case OpenZWave::Notification::Type_Notification:
+    switch (notification->GetNotification()) {
+    case OpenZWave::Notification::Code_MsgComplete:
+    case OpenZWave::Notification::Code_Timeout:
+    case OpenZWave::Notification::Code_NoOperation:
+    case OpenZWave::Notification::Code_Awake:
+    case OpenZWave::Notification::Code_Sleep:
+    case OpenZWave::Notification::Code_Dead:
     default:
       break;
     }
     break;
-  case Notification::Type_ValueAdded:
-  case Notification::Type_ValueRemoved:
-  case Notification::Type_ValueChanged:
-  case Notification::Type_ValueRefreshed:
-  case Notification::Type_Group:
-  case Notification::Type_NodeNew:
-  case Notification::Type_NodeAdded:
-  case Notification::Type_NodeRemoved:
-  case Notification::Type_NodeProtocolInfo:
-  case Notification::Type_NodeNaming:
-  case Notification::Type_NodeEvent:
-  case Notification::Type_PollingDisabled:
-  case Notification::Type_PollingEnabled:
-  case Notification::Type_SceneEvent:
-  case Notification::Type_CreateButton:
-  case Notification::Type_DeleteButton:
-  case Notification::Type_ButtonOn:
-  case Notification::Type_ButtonOff:
-  case Notification::Type_DriverReady:
-  case Notification::Type_DriverFailed:
-  case Notification::Type_DriverReset:
-  case Notification::Type_EssentialNodeQueriesComplete:
-  case Notification::Type_NodeQueriesComplete:
-  case Notification::Type_AwakeNodesQueried:
-  case Notification::Type_AllNodesQueriedSomeDead:
-  case Notification::Type_AllNodesQueried:
+  case OpenZWave::Notification::Type_ValueAdded:
+  case OpenZWave::Notification::Type_ValueRemoved:
+  case OpenZWave::Notification::Type_ValueChanged:
+  case OpenZWave::Notification::Type_ValueRefreshed:
+  case OpenZWave::Notification::Type_Group:
+  case OpenZWave::Notification::Type_NodeNew:
+  case OpenZWave::Notification::Type_NodeAdded:
+  case OpenZWave::Notification::Type_NodeRemoved:
+  case OpenZWave::Notification::Type_NodeProtocolInfo:
+  case OpenZWave::Notification::Type_NodeNaming:
+  case OpenZWave::Notification::Type_NodeEvent:
+  case OpenZWave::Notification::Type_PollingDisabled:
+  case OpenZWave::Notification::Type_PollingEnabled:
+  case OpenZWave::Notification::Type_SceneEvent:
+  case OpenZWave::Notification::Type_CreateButton:
+  case OpenZWave::Notification::Type_DeleteButton:
+  case OpenZWave::Notification::Type_ButtonOn:
+  case OpenZWave::Notification::Type_ButtonOff:
+  case OpenZWave::Notification::Type_DriverReady:
+  case OpenZWave::Notification::Type_DriverFailed:
+  case OpenZWave::Notification::Type_DriverReset:
+  case OpenZWave::Notification::Type_EssentialNodeQueriesComplete:
+  case OpenZWave::Notification::Type_NodeQueriesComplete:
+  case OpenZWave::Notification::Type_AwakeNodesQueried:
+  case OpenZWave::Notification::Type_AllNodesQueriedSomeDead:
+  case OpenZWave::Notification::Type_AllNodesQueried:
   default:
     break;
   }
-}
+  OnNotificationWrapper((void **)notification, context);
 }

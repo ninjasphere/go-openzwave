@@ -46,7 +46,7 @@ extern void addDriver(Manager manager, char * device)
   ((OpenZWave::Manager *)manager)->AddDriver(device);
 }
 
-extern void addWatcher(Manager manager) 
+extern void addWatcher(Manager manager, void * context) 
 {
-  ((OpenZWave::Manager *)manager)->AddWatcher( OpenZWave::OnNotification, NULL );
+ ((OpenZWave::Manager *)manager)->AddWatcher( OnNotification, context );
 }

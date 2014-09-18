@@ -18,6 +18,9 @@ extern "C" {
 typedef void * Options;
 typedef void * Manager;
 extern int TRUE;
+typedef void * Notification;
+typedef void * const Context;
+
 extern int FALSE;
 extern int LogLevel_Detail;
 extern int LogLevel_Debug;
@@ -28,7 +31,7 @@ extern void addIntOption(Options, char *, int );
 extern void addBoolOption(Options, char *, int);
 extern Manager lockOptions(Options );
 extern void addDriver(Manager , char *);
-extern void addWatcher(Manager);
+extern void addWatcher(Manager, void *);
 #ifdef __cplusplus
 }
 #endif
