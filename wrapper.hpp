@@ -18,24 +18,13 @@
 extern "C" {
 #endif
 #include <stdint.h>
+
+#include "node.hpp"
+#include "notification.hpp"
+
 typedef void * Options;
 typedef void * Manager;
 extern int TRUE;
-
-typedef struct {
-  uint32_t homeId;
-  uint8_t  nodeId;
-} NodeId;
-
-typedef struct {
-  NodeId nodeId;
-} Node;
-
-typedef struct {
-  uint8_t   notificationType;
-  uint8_t   notificationCode;
-  Node     node;
-} Notification;
 
 typedef void * const Context;
 
