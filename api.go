@@ -55,8 +55,8 @@ func (self Notification) String() string {
 		CODE.ToEnum(int(self.notification.notificationCode)), 
 		self.notification.nodeId.homeId, 
 		self.notification.nodeId.nodeId,
-		VT.ToEnum(int(self.notification.valueType)),
-		self.notification.valueId);
+		VT.ToEnum(int(self.notification.value.valueType)),
+		self.notification.value.valueId);
 }
 
 type channelRef struct {

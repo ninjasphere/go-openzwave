@@ -20,9 +20,11 @@ extern "C" {
 #include <stdint.h>
 
 #include "api/node.h"
+#include "api/value.h"
 #include "api/notification.h"
 #include "api/manager.h"
 #include "api/options.h"
+
 
 extern int TRUE;
 extern int FALSE;
