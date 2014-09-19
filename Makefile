@@ -8,11 +8,6 @@ build: here
 
 here: libs 
 	mkdir -p NT
-	scripts/GenerateNT.sh
-	scripts/GenerateCODE.sh
-	scripts/GenerateCC.sh
-	scripts/GenerateLOG_LEVEL.sh
-	scripts/GenerateVT.sh
 	go install
 
 libs:
@@ -23,4 +18,9 @@ clean:
 	go clean -i
 
 deps:	libs
-	
+	scripts/GenerateNT.sh
+	scripts/GenerateCODE.sh
+	scripts/GenerateCC.sh
+	scripts/GenerateLOG_LEVEL.sh
+	scripts/GenerateVT.sh
+
