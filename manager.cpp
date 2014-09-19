@@ -12,7 +12,7 @@ void addDriver(Manager manager, char * device)
   ((OpenZWave::Manager *)manager)->AddDriver(device);
 }
 
-void addWatcher(Manager manager, void * context) 
+void setNotificationWatcher(Manager manager, void * context) 
 {
  ((OpenZWave::Manager *)manager)->AddWatcher( OnNotification, context );
 }

@@ -116,7 +116,7 @@ func (self *API) AddDriver(device string) *API {
 // add a watcher
 func (self *API) SetNotificationChannel(channel chan Notification) *API {
   self.notifications = channel;
-  C.addWatcher(self.manager, unsafe.Pointer(self))
+  C.setNotificationWatcher(self.manager, unsafe.Pointer(self))
   return self
 }
 
