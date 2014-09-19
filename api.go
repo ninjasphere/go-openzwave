@@ -31,8 +31,8 @@ import "github.com/ninjasphere/go-openzwave/CODE"
 
 type api struct {
 	options       C.Options // an opaque reference to C++ Options object
-	manager       C.Manager // an opaque reference to C++ Manager opject
 	notifications chan Notification
+	device        string
 }
 
 //
@@ -46,20 +46,13 @@ type api struct {
 //
 
 type Phase0 interface {
-	StartOptions(configPath string, logPath string) Phase1
-}
-
-type Phase1 interface {
-	AddIntOption(option string, value int) Phase1
-	AddBoolOption(option string, value bool) Phase1
-	StartDriver(device string) Phase2
+	AddIntOption(option string, value int) Phase0
+	AddBoolOption(option string, value bool) Phase0
+	SetDriver(device string) Phase0
+	Run(loop EventLoop) int
 }
 
 type EventLoop func (chan Notification);
-
-type Phase2 interface {
-	Run(loop EventLoop) int
-}
 
 type Notification struct {
 	notification *C.Notification
@@ -84,22 +77,23 @@ func (self Notification) String() string {
 
 
 // allocate the control block used to track the state of the API
-func API() Phase0 {
-	return api{nil, nil, nil}
-}
-
-// create and stash the C++ Options object
-func (self api) StartOptions(configPath string, logPath string) Phase1 {
-	var cConfigPath *C.char = C.CString(configPath)
-	var cLogPath *C.char = C.CString(logPath)
+func API(configPath string, userPath string, overrides string) Phase0 {
+	var (
+		cConfigPath *C.char = C.CString(configPath)
+		cUserPath *C.char = C.CString(userPath)
+		cOverrides *C.char = C.CString(overrides)
+	)
 	//defer C.free(unsafe.Pointer(cConfigPath))
-	//defer C.free(unsafe.Pointer(cLogPath))
-	self.options = C.startOptions(cConfigPath, cLogPath)
-	return self
+	//defer C.free(unsafe.Pointer(cUserPath))
+	//defer C.free(unsafe.Pointer(cOverrides))
+	return api{
+	       C.startOptions(cConfigPath, cUserPath, cOverrides), 
+	       make(chan Notification),
+	       defaultDriverName}
 }
 
 // configure the C++ Options object with an integer value
-func (self api) AddIntOption(option string, value int) Phase1 {
+func (self api) AddIntOption(option string, value int) Phase0 {
 	var cOption *C.char = C.CString(option)
 	//defer C.free(unsafe.Pointer(cOption))
 
@@ -108,7 +102,7 @@ func (self api) AddIntOption(option string, value int) Phase1 {
 }
 
 // configure the C++ Options object with a boolean value
-func (self api) AddBoolOption(option string, value bool) Phase1 {
+func (self api) AddBoolOption(option string, value bool) Phase0 {
 	var cOption *C.char = C.CString(option)
 	var cBool C.int
 
@@ -123,24 +117,24 @@ func (self api) AddBoolOption(option string, value bool) Phase1 {
 }
 
 // add a driver.
-func (self api) StartDriver(device string) Phase2 {
-	C.endOptions(self.options)
-
-	self.manager = C.createManager()
-	self.notifications = make(chan Notification)
-	C.setNotificationWatcher(self.manager, unsafe.Pointer(&self))
-
-	if device == "" {
-		device = defaultDriverName
+func (self api) SetDriver(device string) Phase0 {
+	if self.device != "" {
+	       self.device = device
 	}
-	var cDevice *C.char = C.CString(device)
-	//defer C.free(unsafe.Pointer(cDevice))
-
-	C.addDriver(self.manager, cDevice)
 	return self
 }
 
 func (self api) Run(loop EventLoop) int {
+
+	C.endOptions(self.options)
+
+	manager := C.createManager()
+	C.setNotificationWatcher(manager, unsafe.Pointer(&self))
+
+	var cDevice *C.char = C.CString(self.device)
+	//defer C.free(unsafe.Pointer(cDevice))
+
+	C.addDriver(manager, cDevice)
 
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt, os.Kill)

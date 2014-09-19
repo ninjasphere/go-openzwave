@@ -1,8 +1,8 @@
 #include "api.h"
 
-Options startOptions(char * config, char * log)
+Options startOptions(char * config, char * userPath, char * overrides)
 {
-  OpenZWave::Options::Create(config, log, "");
+  OpenZWave::Options::Create(config, userPath, overrides);
   return (Options*) OpenZWave::Options::Get();
 }
 
