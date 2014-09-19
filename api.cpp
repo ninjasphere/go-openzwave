@@ -56,49 +56,38 @@ extern void addWatcher(Manager manager, void * context)
 
 void OnNotification (OpenZWave::Notification const* notification, void* context)
 {
-  OpenZWave::ValueID id = notification->GetValueID();
-  switch (notification->GetType()) {
-  case OpenZWave::Notification::Type_Notification:
-    switch (notification->GetNotification()) {
-    case OpenZWave::Notification::Code_MsgComplete:
-    case OpenZWave::Notification::Code_Timeout:
-    case OpenZWave::Notification::Code_NoOperation:
-    case OpenZWave::Notification::Code_Awake:
-    case OpenZWave::Notification::Code_Sleep:
-    case OpenZWave::Notification::Code_Dead:
-    default:
-      break;
-    }
-    break;
-  case OpenZWave::Notification::Type_ValueAdded:
-  case OpenZWave::Notification::Type_ValueRemoved:
-  case OpenZWave::Notification::Type_ValueChanged:
-  case OpenZWave::Notification::Type_ValueRefreshed:
-  case OpenZWave::Notification::Type_Group:
-  case OpenZWave::Notification::Type_NodeNew:
-  case OpenZWave::Notification::Type_NodeAdded:
-  case OpenZWave::Notification::Type_NodeRemoved:
-  case OpenZWave::Notification::Type_NodeProtocolInfo:
-  case OpenZWave::Notification::Type_NodeNaming:
-  case OpenZWave::Notification::Type_NodeEvent:
-  case OpenZWave::Notification::Type_PollingDisabled:
-  case OpenZWave::Notification::Type_PollingEnabled:
-  case OpenZWave::Notification::Type_SceneEvent:
-  case OpenZWave::Notification::Type_CreateButton:
-  case OpenZWave::Notification::Type_DeleteButton:
-  case OpenZWave::Notification::Type_ButtonOn:
-  case OpenZWave::Notification::Type_ButtonOff:
-  case OpenZWave::Notification::Type_DriverReady:
-  case OpenZWave::Notification::Type_DriverFailed:
-  case OpenZWave::Notification::Type_DriverReset:
-  case OpenZWave::Notification::Type_EssentialNodeQueriesComplete:
-  case OpenZWave::Notification::Type_NodeQueriesComplete:
-  case OpenZWave::Notification::Type_AwakeNodesQueried:
-  case OpenZWave::Notification::Type_AllNodesQueriedSomeDead:
-  case OpenZWave::Notification::Type_AllNodesQueried:
-  default:
-    break;
-  }
-  Notification * notificationT = (Notification *)malloc(sizeof(Notification));
-  OnNotificationWrapper(notificationT, context);
+  Notification * result = newNotification(notification->GetType());
+  result->nodeId = (struct NodeId) {notification->GetHomeId(), notification->GetNodeId() };
+  OnNotificationWrapper(result, context);
 }
+
+extern Notification * newNotification(uint8_t notificationType)
+{
+	Notification * tmp = (Notification *)malloc(sizeof(Notification));
+	*tmp = (Notification){0};
+	tmp->notificationType = notificationType;
+	return tmp;
+}
+
+extern void freeNotification(Notification * notification)
+{
+	if (notification->node) {
+		freeNode(notification->node);
+	}
+	free(notification);
+}
+
+extern Node * newNode(uint32_t homeId, uint8_t nodeId)
+{
+	Node * tmp = (Node *)malloc(sizeof(Node));
+	*tmp = (Node){0};
+	tmp->nodeId.homeId = homeId;
+	tmp->nodeId.nodeId = nodeId;
+	return tmp;
+}
+
+extern void freeNode(Node * node)
+{
+	free(node);
+};
+

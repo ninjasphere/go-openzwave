@@ -18,10 +18,13 @@ package openzwave
 // #cgo CPPFLAGS: -Iopenzwave/cpp/src/platform -Iopenzwave/cpp/src -Iopenzwave/cpp/src/value_classes
 //
 // #include <stdlib.h>
+// #include <stdint.h>
 // #include "api.h"
 import "C"
 
 import "unsafe"
+import "fmt"
+import "github.com/ninjasphere/go-openzwave/NT"
 
 var LogLevel_Detail int = int(C.LogLevel_Detail)
 var LogLevel_Error int = int(C.LogLevel_Error)
@@ -34,7 +37,15 @@ type API struct {
 }
 
 type Notification struct {
-	impl *C.Notification
+	notification *C.Notification
+}
+
+func (self Notification) String() string {
+	return fmt.Sprintf(
+		"Notification[notificationType=%s homeId=0x%08x, nodeId=0x%02x]", 
+		NT.ToEnum(int(self.notification.notificationType)), 
+		self.notification.nodeId.homeId, 
+		self.notification.nodeId.nodeId);
 }
 
 type channelRef struct {
