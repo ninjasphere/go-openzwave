@@ -21,32 +21,19 @@ extern "C" {
 
 #include "api/node.h"
 #include "api/notification.h"
+#include "api/manager.h"
+#include "api/options.h"
 
-typedef void * Options;
-typedef void * Manager;
 extern int TRUE;
-
-typedef void * const Context;
+extern int FALSE;
 
 extern int FALSE;
 extern int LogLevel_Detail;
 extern int LogLevel_Debug;
 extern int LogLevel_Info;
 extern int LogLevel_Error;
-extern Options createOptions(char *, char *);
-extern void addIntOption(Options, char *, int );
-extern void addBoolOption(Options, char *, int);
-extern Manager lockOptions(Options );
-extern void addDriver(Manager , char *);
-extern void addWatcher(Manager, void *);
 #ifdef __cplusplus
 }
-#endif
-
-#ifdef __cplusplus
-#include "Notification.h"
-// C++ only parts
-void OnNotification (OpenZWave::Notification const* _notification, void* _context);
 #endif
 
 #endif
