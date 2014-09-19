@@ -10,8 +10,7 @@ Notification * exportNotification(OpenZWave::Notification const* notification)
 	    notification->GetType() == OpenZWave::Notification::Type_Notification
 	    ? notification->GetNotification()
 	    : -1;
-	  OpenZWave::ValueID const & valueId = notification->GetValueID();
-	  result->valueId = newValueID(valueId.GetType(), valueId.GetId());
+	  result->valueId = exportValueID(notification->GetValueID());
 	  return result;
 }
 

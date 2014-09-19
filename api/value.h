@@ -16,3 +16,7 @@ typedef struct Value {
 
 extern Value * newValue();
 extern void freeValue(Value *);
+
+#ifdef __cplusplus
+extern ValueID * exportValueID(OpenZWave::ValueID const & src);
+#endif

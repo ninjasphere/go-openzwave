@@ -14,6 +14,13 @@ void freeValueID(ValueID * value)
   free(value);
 }
 
+ValueID * exportValueID(OpenZWave::ValueID const & src)
+{
+	  ValueID * const target = newValueID(src.GetType(), src.GetId());
+	  return target;
+}
+
+
 Value * newValue()
 {
   Value * tmp = (Value *)malloc(sizeof(Value));
