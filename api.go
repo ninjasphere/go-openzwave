@@ -25,6 +25,7 @@ import "C"
 import "unsafe"
 import "fmt"
 import "github.com/ninjasphere/go-openzwave/NT"
+import "github.com/ninjasphere/go-openzwave/CODE"
 
 var LogLevel_Detail int = int(C.LogLevel_Detail)
 var LogLevel_Error int = int(C.LogLevel_Error)
@@ -42,8 +43,9 @@ type Notification struct {
 
 func (self Notification) String() string {
 	return fmt.Sprintf(
-		"Notification[notificationType=%s homeId=0x%08x, nodeId=0x%02x]", 
+		"Notification[notificationType=%s, notificationCode=%s, homeId=0x%08x, nodeId=0x%02x]", 
 		NT.ToEnum(int(self.notification.notificationType)), 
+		CODE.ToEnum(int(self.notification.notificationCode)), 
 		self.notification.nodeId.homeId, 
 		self.notification.nodeId.nodeId);
 }

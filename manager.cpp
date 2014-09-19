@@ -11,6 +11,10 @@ static void OnNotification (OpenZWave::Notification const* notification, void* c
 {
   Notification * result = newNotification(notification->GetType());
   result->nodeId = (struct NodeId) {notification->GetHomeId(), notification->GetNodeId() };
+  result->notificationCode = 
+    notification->GetType() == OpenZWave::Notification::Type_Notification
+    ? notification->GetNotification() 
+    : -1;
   OnNotificationWrapper(result, context);
 }
 
