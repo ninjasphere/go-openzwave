@@ -105,7 +105,10 @@ func (self *API) CreateManager() *API {
 }
 
 // add a driver.
-func (self *API) AddDriver(device string) *API {
+func (self *API) StartDriver(device string) *API {
+     if device == "" {
+     	device = defaultDriverName
+     }
 	var cDevice *C.char = C.CString(device)
 	defer C.free(unsafe.Pointer(cDevice))
 
