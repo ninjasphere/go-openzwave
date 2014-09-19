@@ -17,8 +17,6 @@ package openzwave
 // #cgo LDFLAGS: -lopenzwave -Lgo/src/github.com/ninjasphere/go-openzwave/openzwave
 // #cgo CPPFLAGS: -Iopenzwave/cpp/src/platform -Iopenzwave/cpp/src -Iopenzwave/cpp/src/value_classes
 //
-// #include <stdlib.h>
-// #include <stdint.h>
 // #include "api.h"
 import "C"
 
@@ -27,11 +25,6 @@ import "fmt"
 import "github.com/ninjasphere/go-openzwave/NT"
 import "github.com/ninjasphere/go-openzwave/VT"
 import "github.com/ninjasphere/go-openzwave/CODE"
-
-var LogLevel_Detail int = int(C.LogLevel_Detail)
-var LogLevel_Error int = int(C.LogLevel_Error)
-var LogLevel_Debug int = int(C.LogLevel_Debug)
-var LogLevel_Info int = int(C.LogLevel_Info)
 
 type API struct {
 	options C.Options // an opaque reference to C++ Options object

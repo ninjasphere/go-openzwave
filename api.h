@@ -45,11 +45,6 @@ extern "C" {
 extern int TRUE;
 extern int FALSE;
 
-extern int FALSE;
-extern int LogLevel_Detail;
-extern int LogLevel_Debug;
-extern int LogLevel_Info;
-extern int LogLevel_Error;
 #ifdef __cplusplus
 #include "_cgo_export.h"
 }
