@@ -29,6 +29,7 @@ import "github.com/ninjasphere/go-openzwave/CODE"
 type API struct {
 	options C.Options // an opaque reference to C++ Options object
 	manager C.Manager // an opaque reference to C++ Manager opject
+	notifications chan Notification;
 }
 
 type Notification struct {
@@ -52,13 +53,9 @@ func (self Notification) String() string {
 		self.notification.valueId.valueId);
 }
 
-type channelRef struct {
-	channel chan Notification
-}
-
 // allocate the control block used to track the state of the API
 func NewAPI() *API {
-	return &API{nil, nil}
+	return &API{nil, nil, nil}
 }
 
 // create and stash the C++ Options object
@@ -117,13 +114,13 @@ func (self *API) AddDriver(device string) *API {
 }
 
 // add a watcher
-func (self *API) AddWatcher(channel chan Notification) *API {
-	C.addWatcher(self.manager, unsafe.Pointer(&channelRef{channel}))
-	return self
+func (self *API) SetNotificationChannel(channel chan Notification) *API {
+  self.notifications = channel;
+  C.addWatcher(self.manager, unsafe.Pointer(self))
+  return self
 }
 
 //export OnNotificationWrapper
 func OnNotificationWrapper(notification *C.Notification, context unsafe.Pointer) {
-	(*channelRef)(context).channel <- Notification{notification}
-
+  (*API)(context).notifications <- Notification{notification}
 }
