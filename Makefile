@@ -10,6 +10,7 @@ here: libs
 	mkdir -p NT
 	scripts/GenerateNT.sh
 	scripts/GenerateCODE.sh
+	scripts/GenerateCC.sh
 	go install
 
 libs:
