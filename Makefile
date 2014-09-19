@@ -9,6 +9,7 @@ build: here
 here: libs 
 	mkdir -p NT
 	scripts/GenerateNT.sh
+	scripts/GenerateCODE.sh
 	go install
 
 libs:
