@@ -18,6 +18,7 @@
 extern "C" {
 #endif 
 #include <stdint.h>
+#include <stdlib.h>
 
 #include "api/node.h"
 #include "api/value.h"
