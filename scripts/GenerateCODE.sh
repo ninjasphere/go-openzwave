@@ -4,7 +4,7 @@ PREFIX=CODE
 
 enumerate()
 {
-    cat openzwave/cpp/src/Notification.h | grep Code | grep Code_ | sed "s/^.*Code/Code/" | sed "s/Code_//" | sed "s/[^A-Za-z].*//"
+    x=0; cat openzwave/cpp/src/Notification.h | grep Code | grep Code_ | sed "s/^.*Code/Code/" | sed "s/Code_//" | sed "s/[^A-Za-z].*//" | while read n; do echo $x $n; let x=x+1; done
 }
 
 symbol()
@@ -25,28 +25,30 @@ package $PREFIX;
 import "fmt"
 
 const (
-$(x=0; enumerate | while read t; do echo "   $(symbol $t) = $x"; let x=x+1; done)
+$(enumerate | while read x n; do echo "   $(symbol $n) = $x"; done)
 )
 
-var names = [...]string{
-$(x=0; enumerate | while read t; do echo "      \"$PREFIX.$(symbol $t)\","; let x=x+1; done)
-		"$PREFIX.UNKNOWN" }
+var UNKNOWN_ENUM = Enum{ -1, "UNKNOWN" }
 
-const UNKNOWN = len(names)
+var enums = [...]Enum{
+$(enumerate | while read x n; do echo "      Enum{ $x, \"$PREFIX.$(symbol $n)\" },"; done)
+		UNKNOWN_ENUM }
+
+const UNKNOWN = len(enums)-1
 
 type Enum struct {
      Code int
      Name string
 }
 
-func ToEnum(code int) Enum {	
+func ToEnum(code int) *Enum {	
      var x int;
      if code < 0 || code >= UNKNOWN {
-     	x = UNKNOWN-1
+     	x = UNKNOWN
      } else {
 	x = code
      }	
-     return Enum{code,names[x]}
+     return &enums[x]
 }
 
 func (val Enum) IsValid() bool {
@@ -57,7 +59,7 @@ func (val Enum) String() string {
      if val.IsValid() {
 	return val.Name
      } else { 
-        return fmt.Sprintf("%s[%d]", names[UNKNOWN-1], val.Code);
+        return fmt.Sprintf("%s[%d]", enums[UNKNOWN].Name, val.Code);
      }	
 }
 
