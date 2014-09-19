@@ -7,6 +7,8 @@ all: build
 build: here
 
 here: libs 
+	mkdir -p NT
+	scripts/GenerateNT.sh
 	go install
 
 libs:
