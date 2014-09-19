@@ -7,7 +7,6 @@ typedef struct Notification {
   ValueID	*valueId; //owned
 } Notification;
 
-extern Notification * newNotification(uint8_t notificationType);
 extern void freeNotification(Notification *);
 
 #ifdef __cplusplus

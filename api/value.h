@@ -3,7 +3,6 @@ typedef struct ValueID {
 	  uint8_t   valueType;
 } ValueID;
 
-extern ValueID * newValueID(uint8_t valueType, uint64_t valueId);
 extern void freeValueID(ValueID *);
 
 typedef struct Value {
@@ -14,9 +13,9 @@ typedef struct Value {
 	char * help;
 } Value;
 
-extern Value * newValue();
 extern void freeValue(Value *);
 
 #ifdef __cplusplus
-extern ValueID * exportValueID(OpenZWave::ValueID const & src);
+extern ValueID * exportValueID(OpenZWave::ValueID const &);
+extern Value * newValue(OpenZWave::Value const &);
 #endif

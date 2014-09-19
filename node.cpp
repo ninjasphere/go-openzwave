@@ -1,6 +1,6 @@
 #include "api.h"
 
-Node * newNode(uint32_t homeId, uint8_t nodeId)
+static Node * newNode(uint32_t homeId, uint8_t nodeId)
 {
 	Node * tmp = (Node *)malloc(sizeof(Node));
 	*tmp = (Node){0};
