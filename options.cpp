@@ -1,5 +1,3 @@
-#include "Manager.h"
-#include "Options.h"
 #include "api.h"
 
 Options startOptions(char * config, char * log)

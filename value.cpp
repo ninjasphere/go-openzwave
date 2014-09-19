@@ -1,6 +1,3 @@
-#include "Manager.h"
-#include "Value.h"
-
 #include "api.h"
 
 ValueID * newValueID(uint8_t valueType, uint64_t valueId)

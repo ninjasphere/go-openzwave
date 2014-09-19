@@ -1,23 +1,10 @@
-#include "Manager.h"
-#include "Notification.h"
-
 #include "api.h"
 
-extern "C" {
-#include "_cgo_export.h"
-}
-
+// forwards the notification from the C++ API to the Go layer - caller must free.
 static void OnNotification (OpenZWave::Notification const* notification, void* context)
 {
-  Notification * result = newNotification(notification->GetType());
-  result->nodeId = (struct NodeId) {notification->GetHomeId(), notification->GetNodeId() };
-  result->notificationCode = 
-    notification->GetType() == OpenZWave::Notification::Type_Notification
-    ? notification->GetNotification() 
-    : -1;
-  OpenZWave::ValueID const & valueId = notification->GetValueID();
-  result->valueId = newValueID(valueId.GetType(), valueId.GetId());
-  OnNotificationWrapper(result, context);
+	Notification * exported = exportNotification(notification);
+	OnNotificationWrapper(exported, context);
 }
 
 void addDriver(Manager manager, char * device)

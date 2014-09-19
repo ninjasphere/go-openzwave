@@ -8,17 +8,32 @@
 // See api.cpp for additional information.
 //
 
+#include <stdint.h>
+#include <stdlib.h>
+
+#ifdef __cplusplus
+
+//
+// __cplusplus will be true only in code that is part of the implementation (C++ code)
+//
+// In these cases, we include the implementation C++ headers so that individual modules
+// do not have to.
+//
+
+#include "Manager.h"
+#include "Notification.h"
+#include "Options.h"
+#include "platform/Log.h"
+
+
 //
 // The following ifdef magic is absolutely required to ensure that #cgo that doesn't understand how to parse C++ headers doesn't
 // see the extern "C" declaration during the C parse of these headers. Failure to include this magic will result in link error
 //
 // See also http://stackoverflow.com/questions/1713214/how-to-use-c-in-go
 //
-#ifdef __cplusplus
 extern "C" {
 #endif 
-#include <stdint.h>
-#include <stdlib.h>
 
 #include "api/node.h"
 #include "api/value.h"
@@ -36,7 +51,9 @@ extern int LogLevel_Debug;
 extern int LogLevel_Info;
 extern int LogLevel_Error;
 #ifdef __cplusplus
+#include "_cgo_export.h"
 }
+
 #endif
 
 #endif

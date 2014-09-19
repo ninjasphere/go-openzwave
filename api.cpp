@@ -4,13 +4,7 @@
 // Provides marshalling between C and C++ abstractions. There is typically one C function in this module for each Go function in api.go
 //
 
-#include <stdio.h>
-
-#include "Manager.h"
-#include "Options.h"
-#include "platform/Log.h"
 #include "api.h"
-
 
 int TRUE = 1;
 int FALSE = 0;

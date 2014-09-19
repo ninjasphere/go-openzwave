@@ -1,5 +1,4 @@
 #include "api.h"
-#include "_cgo_export.h"
 
 Node * newNode(uint32_t homeId, uint8_t nodeId)
 {

@@ -1,4 +1,4 @@
-typedef struct {
+typedef struct Notification {
   uint32_t  flags;
   uint8_t   notificationType;
   uint8_t   notificationCode;
@@ -9,3 +9,7 @@ typedef struct {
 
 extern Notification * newNotification(uint8_t notificationType);
 extern void freeNotification(Notification *);
+
+#ifdef __cplusplus
+extern Notification * exportNotification(OpenZWave::Notification const* notification);
+#endif
