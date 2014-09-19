@@ -36,7 +36,7 @@ type api struct {
 }
 
 //
-// The Phase0 -> Phase5 interface represent 6 different states in the evolution of the api from
+// The Phase0 -> Phase2 interface represent 3 different states in the evolution of the api from
 // creation, through configuration, through use. 
 //
 // Each phase includes at least one method that allows transition to the next phase.
@@ -52,23 +52,13 @@ type Phase0 interface {
 type Phase1 interface {
 	AddIntOption(option string, value int) Phase1
 	AddBoolOption(option string, value bool) Phase1
-	EndOptions() Phase2
+	StartDriver(device string) Phase2
 }
+
+type EventLoop func (chan Notification);
 
 type Phase2 interface {
-	CreateManager() Phase3
-}
-
-type Phase3 interface {
-	SetNotificationChannel(channel chan Notification) Phase4
-}
-
-type Phase4 interface {
-	StartDriver(device string) Phase5
-}
-
-type Phase5 interface {
-	Run() int
+	Run(loop EventLoop) int
 }
 
 type Notification struct {
@@ -91,6 +81,7 @@ func (self Notification) String() string {
 		VT.ToEnum(int(self.notification.valueId.valueType)),
 		self.notification.valueId.valueId)
 }
+
 
 // allocate the control block used to track the state of the API
 func API() Phase0 {
@@ -131,27 +122,14 @@ func (self api) AddBoolOption(option string, value bool) Phase1 {
 	return self
 }
 
-// lock the options object
-func (self api) EndOptions() Phase2 {
-	C.endOptions(self.options)
-	return self
-}
-
-// create the manager object
-func (self api) CreateManager() Phase3 {
-	self.manager = C.createManager()
-	return self
-}
-
-// add a watcher
-func (self api) SetNotificationChannel(channel chan Notification) Phase4 {
-	self.notifications = channel
-	C.setNotificationWatcher(self.manager, unsafe.Pointer(&self))
-	return self
-}
-
 // add a driver.
-func (self api) StartDriver(device string) Phase5 {
+func (self api) StartDriver(device string) Phase2 {
+	C.endOptions(self.options)
+
+	self.manager = C.createManager()
+	self.notifications = make(chan Notification)
+	C.setNotificationWatcher(self.manager, unsafe.Pointer(&self))
+
 	if device == "" {
 		device = defaultDriverName
 	}
@@ -162,13 +140,16 @@ func (self api) StartDriver(device string) Phase5 {
 	return self
 }
 
-func (self api) Run() int {
-	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt, os.Kill)
+func (self api) Run(loop EventLoop) int {
+
+	signals := make(chan os.Signal, 1)
+	signal.Notify(signals, os.Interrupt, os.Kill)
+
+	go loop(self.notifications);
 
 	// Block until a signal is received.
-	s := <-c
-	fmt.Printf("received signal: %v", s)
+	signal := <-signals
+	fmt.Printf("received signal: %v", signal)
 	return 1
 }
 
