@@ -12,6 +12,7 @@ here: libs
 	scripts/GenerateCODE.sh
 	scripts/GenerateCC.sh
 	scripts/GenerateLOG_LEVEL.sh
+	scripts/GenerateVT.sh
 	go install
 
 libs:
