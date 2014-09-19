@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+`#!/usr/bin/env bash
 
 enumerate()
 {
@@ -60,4 +60,4 @@ func (val Enum) String() string {
 }
 
 EOF
-gofmt -s -w NT/NT.go && go build NT/NT.go
+gofmt -s -w NT/NT.go && go install NT/NT.go

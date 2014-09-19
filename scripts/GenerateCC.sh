@@ -68,5 +68,5 @@ func (val Enum) String() string {
 }
 
 EOF
-gofmt -s -w $PREFIX/$PREFIX.go && go build $PREFIX/$PREFIX.go
+gofmt -s -w $PREFIX/$PREFIX.go && go install $PREFIX/$PREFIX.go
 
