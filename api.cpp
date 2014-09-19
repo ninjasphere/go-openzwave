@@ -6,7 +6,5 @@
 
 #include "api.h"
 
-int TRUE = 1;
-int FALSE = 0;
 
 

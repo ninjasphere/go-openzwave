@@ -104,15 +104,9 @@ func (self api) AddIntOption(option string, value int) Phase0 {
 // configure the C++ Options object with a boolean value
 func (self api) AddBoolOption(option string, value bool) Phase0 {
 	var cOption *C.char = C.CString(option)
-	var cBool C.int
 
 	//defer C.free(unsafe.Pointer(cOption))
-	if value {
-		cBool = C.TRUE
-	} else {
-		cBool = C.FALSE
-	}
-	C.addBoolOption(self.options, cOption, cBool)
+	C.addBoolOption(self.options, cOption, C._Bool(value))
 	return self
 }
 

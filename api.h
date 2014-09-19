@@ -10,6 +10,7 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #ifdef __cplusplus
 
@@ -40,10 +41,6 @@ extern "C" {
 #include "api/notification.h"
 #include "api/manager.h"
 #include "api/options.h"
-
-
-extern int TRUE;
-extern int FALSE;
 
 #ifdef __cplusplus
 #include "_cgo_export.h"

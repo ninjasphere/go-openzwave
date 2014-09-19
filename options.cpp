@@ -11,9 +11,9 @@ void addIntOption(Options options, char * option, int value)
   ((OpenZWave::Options *)options)->AddOptionInt(option, value);
 }
 
-void addBoolOption(Options options, char * option, int value)
+void addBoolOption(Options options, char * option, bool flag)
 {
-  ((OpenZWave::Options *)options)->AddOptionBool(option, value == TRUE ? true : false);
+  ((OpenZWave::Options *)options)->AddOptionBool(option, flag);
 }
 
 void endOptions(Options options)
