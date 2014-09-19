@@ -58,12 +58,12 @@ func NewAPI() *API {
 }
 
 // create and stash the C++ Options object
-func (self *API) CreateOptions(configPath string, logPath string) *API {
+func (self *API) StartOptions(configPath string, logPath string) *API {
 	var cConfigPath *C.char = C.CString(configPath)
 	var cLogPath *C.char = C.CString(logPath)
 	defer C.free(unsafe.Pointer(cConfigPath))
 	defer C.free(unsafe.Pointer(cLogPath))
-	self.options = C.createOptions(cConfigPath, cLogPath)
+	self.options = C.startOptions(cConfigPath, cLogPath)
 	return self
 }
 
@@ -91,9 +91,15 @@ func (self *API) AddBoolOption(option string, value bool) *API {
 	return self
 }
 
-// lock the options object and allocate the manager object.
-func (self *API) LockOptions() *API {
-	self.manager = C.lockOptions(self.options)
+// lock the options object 
+func (self *API) EndOptions() *API {
+	C.endOptions(self.options)
+	return self
+}
+
+// create the manager object
+func (self *API) CreateManager() *API {
+	self.manager = C.createManager()
 	return self
 }
 

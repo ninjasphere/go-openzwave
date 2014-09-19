@@ -24,3 +24,7 @@ void addWatcher(Manager manager, void * context)
  ((OpenZWave::Manager *)manager)->AddWatcher( OnNotification, context );
 }
 
+Manager createManager()
+{
+  return (Manager)OpenZWave::Manager::Create();
+}

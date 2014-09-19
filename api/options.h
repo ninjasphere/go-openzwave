@@ -1,5 +1,5 @@
 typedef void * Options;
-extern Options createOptions(char *, char *);
+extern Options startOptions(char *, char *);
 extern void addIntOption(Options, char *, int );
 extern void addBoolOption(Options, char *, int);
-extern Manager lockOptions(Options );
+extern void endOptions(Options );
