@@ -39,18 +39,18 @@ type Notification struct {
 func (self Notification) String() string {
 	return fmt.Sprintf(
 		"Notification[\n"+
-		"notificationType=%s,\n"+
-		"notificationCode=%s,\n"+
-		"homeId=0x%08x,\n"+
-		"nodeId=0x%02x,\n"+
-		"valueType=%s,\n"+
-		"valueId=0x%08x]\n",
-		NT.ToEnum(int(self.notification.notificationType)), 
-		CODE.ToEnum(int(self.notification.notificationCode)), 
-		self.notification.nodeId.homeId, 
+			"notificationType=%s,\n"+
+			"notificationCode=%s,\n"+
+			"homeId=0x%08x,\n"+
+			"nodeId=0x%02x,\n"+
+			"valueType=%s,\n"+
+			"valueId=0x%08x]\n",
+		NT.ToEnum(int(self.notification.notificationType)),
+		CODE.ToEnum(int(self.notification.notificationCode)),
+		self.notification.nodeId.homeId,
 		self.notification.nodeId.nodeId,
 		VT.ToEnum(int(self.notification.valueId.valueType)),
-		self.notification.valueId.valueId);
+		self.notification.valueId.valueId)
 }
 
 // allocate the control block used to track the state of the API
@@ -92,7 +92,7 @@ func (self *API) AddBoolOption(option string, value bool) *API {
 	return self
 }
 
-// lock the options object 
+// lock the options object
 func (self *API) EndOptions() *API {
 	C.endOptions(self.options)
 	return self
@@ -106,9 +106,9 @@ func (self *API) CreateManager() *API {
 
 // add a driver.
 func (self *API) StartDriver(device string) *API {
-     if device == "" {
-     	device = defaultDriverName
-     }
+	if device == "" {
+		device = defaultDriverName
+	}
 	var cDevice *C.char = C.CString(device)
 	defer C.free(unsafe.Pointer(cDevice))
 
