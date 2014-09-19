@@ -5,7 +5,7 @@ package openzwave
 // API to be useful to implementing the Ninja Zwave driver
 //
 // The functions in this module are responsible for marshalling to and from the C functions
-// declared in wrapper.hpp and wrapper.cpp.
+// declared in api.hpp and api.cpp.
 //
 
 //
@@ -18,7 +18,7 @@ package openzwave
 // #cgo CPPFLAGS: -Iopenzwave/cpp/src/platform -Iopenzwave/cpp/src -Iopenzwave/cpp/src/value_classes
 //
 // #include <stdlib.h>
-// #include "wrapper.hpp"
+// #include "api.h"
 import "C"
 
 import "unsafe"

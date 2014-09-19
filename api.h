@@ -1,11 +1,11 @@
-#ifndef WRAPPER_HPP
-#define WRAPPER_HPP
+#ifndef API_H 
+#define API_H
 //
-// wrapper.hpp
+// api.h
 //
 // Provides marshalling between C and C++ abstractions. There is typically one C function in this module for each Go function in api.go
 //
-// See wrapper.cpp for additional information.
+// See api.cpp for additional information.
 //
 
 //
@@ -16,11 +16,11 @@
 //
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif 
 #include <stdint.h>
 
-#include "node.hpp"
-#include "notification.hpp"
+#include "api/node.h"
+#include "api/notification.h"
 
 typedef void * Options;
 typedef void * Manager;
@@ -42,4 +42,11 @@ extern void addWatcher(Manager, void *);
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+#include "Notification.h"
+// C++ only parts
+void OnNotification (OpenZWave::Notification const* _notification, void* _context);
+#endif
+
 #endif
