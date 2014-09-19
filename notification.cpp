@@ -16,5 +16,8 @@ void freeNotification(Notification * notification)
 	if (notification->node) {
 		freeNode(notification->node);
 	}
+	if (notification->valueId) {
+		freeValueID(notification->valueId);
+	}
 	free(notification);
 }

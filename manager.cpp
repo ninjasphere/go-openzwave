@@ -16,7 +16,7 @@ static void OnNotification (OpenZWave::Notification const* notification, void* c
     ? notification->GetNotification() 
     : -1;
   OpenZWave::ValueID const & valueId = notification->GetValueID();
-  result->value = newValue(valueId.GetType(), valueId.GetId());
+  result->valueId = newValueID(valueId.GetType(), valueId.GetId());
   OnNotificationWrapper(result, context);
 }
 

@@ -1,7 +1,7 @@
-typedef struct Value {
+typedef struct ValueID {
 	  uint64_t  valueId;
 	  uint8_t   valueType;
-} Value;
+} ValueID;
 
-extern Value * newValue(uint8_t valueType, uint64_t valueId);
-extern void freeValue(Value *);
+extern ValueID * newValueID(uint8_t valueType, uint64_t valueId);
+extern void freeValueID(ValueID *);
