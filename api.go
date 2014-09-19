@@ -92,8 +92,8 @@ func API() Phase0 {
 func (self api) StartOptions(configPath string, logPath string) Phase1 {
 	var cConfigPath *C.char = C.CString(configPath)
 	var cLogPath *C.char = C.CString(logPath)
-	defer C.free(unsafe.Pointer(cConfigPath))
-	defer C.free(unsafe.Pointer(cLogPath))
+	//defer C.free(unsafe.Pointer(cConfigPath))
+	//defer C.free(unsafe.Pointer(cLogPath))
 	self.options = C.startOptions(cConfigPath, cLogPath)
 	return self
 }
@@ -101,7 +101,7 @@ func (self api) StartOptions(configPath string, logPath string) Phase1 {
 // configure the C++ Options object with an integer value
 func (self api) AddIntOption(option string, value int) Phase1 {
 	var cOption *C.char = C.CString(option)
-	defer C.free(unsafe.Pointer(cOption))
+	//defer C.free(unsafe.Pointer(cOption))
 
 	C.addIntOption(self.options, cOption, C.int(value))
 	return self
@@ -112,7 +112,7 @@ func (self api) AddBoolOption(option string, value bool) Phase1 {
 	var cOption *C.char = C.CString(option)
 	var cBool C.int
 
-	defer C.free(unsafe.Pointer(cOption))
+	//defer C.free(unsafe.Pointer(cOption))
 	if value {
 		cBool = C.TRUE
 	} else {
@@ -134,7 +134,7 @@ func (self api) StartDriver(device string) Phase2 {
 		device = defaultDriverName
 	}
 	var cDevice *C.char = C.CString(device)
-	defer C.free(unsafe.Pointer(cDevice))
+	//defer C.free(unsafe.Pointer(cDevice))
 
 	C.addDriver(self.manager, cDevice)
 	return self
