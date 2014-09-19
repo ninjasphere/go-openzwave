@@ -4,7 +4,7 @@ PREFIX=CC
 
 enumerate()
 {
-    grep [iI]mplements openzwave/cpp/src/command_classes/*.h | tr -d '()' | sed "s|.*/command_classes/||;s|:.*COMMAND_| |;s|,.*||;s|\\.h||;s/ x/ 0x/"
+    grep [iI]mplements openzwave/cpp/src/command_classes/*.h | tr -d '()' | sed "s|.*/command_classes/||;s|:.*COMMAND_CLASS_| |;s|,.*||;s|.*\\.h ||;s/ x/ 0x/"
 }
 
 symbol()
@@ -25,14 +25,14 @@ package $PREFIX;
 import "fmt"
 
 const UNKNOWN = 0xff
-var UNKNOWN_ENUM = Enum{UNKNOWN, "CC.ENUM"}
+var UNKNOWN_ENUM = Enum{UNKNOWN, "$PREFIX.ENUM"}
 
 const (
-$(x=0; enumerate | while read t code value; do echo "   $code = $value"; let x=x+1; done)
+$(x=0; enumerate | while read code value; do echo "   $code = $value"; let x=x+1; done)
 )
 
 var enums = [...]Enum{
-$(x=0; enumerate | while read t code value; do echo "      { $code, \"$PREFIX.$code\" },"; let x=x+1; done)
+$(x=0; enumerate | while read code value; do echo "      { $code, \"$PREFIX.$code\" },"; let x=x+1; done)
 		UNKNOWN_ENUM }
 
 type Enum struct {
