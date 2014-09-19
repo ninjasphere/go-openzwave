@@ -2,9 +2,11 @@
 # Makefile that builds the required library dependency, then installs the go module
 #
 
-all: install
+all: build
 
-install: libs 
+build: here
+
+here: libs 
 	go install
 
 libs:
