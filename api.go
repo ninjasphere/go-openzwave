@@ -20,16 +20,55 @@ package openzwave
 // #include "api.h"
 import "C"
 
-import "unsafe"
 import "fmt"
+import "os"
+import "os/signal"
+import "unsafe"
+
 import "github.com/ninjasphere/go-openzwave/NT"
 import "github.com/ninjasphere/go-openzwave/VT"
 import "github.com/ninjasphere/go-openzwave/CODE"
 
-type API struct {
-	options C.Options // an opaque reference to C++ Options object
-	manager C.Manager // an opaque reference to C++ Manager opject
-	notifications chan Notification;
+type api struct {
+	options       C.Options // an opaque reference to C++ Options object
+	manager       C.Manager // an opaque reference to C++ Manager opject
+	notifications chan Notification
+}
+
+//
+// The Phase0 -> Phase5 interface represent 6 different states in the evolution of the api from
+// creation, through configuration, through use. 
+//
+// Each phase includes at least one method that allows transition to the next phase.
+//
+// Use of strong typing like this helps guide the consumer of the api package
+// to construct a valid build sequence.
+//
+
+type Phase0 interface {
+	StartOptions(configPath string, logPath string) Phase1
+}
+
+type Phase1 interface {
+	AddIntOption(option string, value int) Phase1
+	AddBoolOption(option string, value bool) Phase1
+	EndOptions() Phase2
+}
+
+type Phase2 interface {
+	CreateManager() Phase3
+}
+
+type Phase3 interface {
+	SetNotificationChannel(channel chan Notification) Phase4
+}
+
+type Phase4 interface {
+	StartDriver(device string) Phase5
+}
+
+type Phase5 interface {
+	Run() int
 }
 
 type Notification struct {
@@ -54,12 +93,12 @@ func (self Notification) String() string {
 }
 
 // allocate the control block used to track the state of the API
-func NewAPI() *API {
-	return &API{nil, nil, nil}
+func API() Phase0 {
+	return api{nil, nil, nil}
 }
 
 // create and stash the C++ Options object
-func (self *API) StartOptions(configPath string, logPath string) *API {
+func (self api) StartOptions(configPath string, logPath string) Phase1 {
 	var cConfigPath *C.char = C.CString(configPath)
 	var cLogPath *C.char = C.CString(logPath)
 	defer C.free(unsafe.Pointer(cConfigPath))
@@ -69,7 +108,7 @@ func (self *API) StartOptions(configPath string, logPath string) *API {
 }
 
 // configure the C++ Options object with an integer value
-func (self *API) AddIntOption(option string, value int) *API {
+func (self api) AddIntOption(option string, value int) Phase1 {
 	var cOption *C.char = C.CString(option)
 	defer C.free(unsafe.Pointer(cOption))
 
@@ -78,7 +117,7 @@ func (self *API) AddIntOption(option string, value int) *API {
 }
 
 // configure the C++ Options object with a boolean value
-func (self *API) AddBoolOption(option string, value bool) *API {
+func (self api) AddBoolOption(option string, value bool) Phase1 {
 	var cOption *C.char = C.CString(option)
 	var cBool C.int
 
@@ -93,19 +132,26 @@ func (self *API) AddBoolOption(option string, value bool) *API {
 }
 
 // lock the options object
-func (self *API) EndOptions() *API {
+func (self api) EndOptions() Phase2 {
 	C.endOptions(self.options)
 	return self
 }
 
 // create the manager object
-func (self *API) CreateManager() *API {
+func (self api) CreateManager() Phase3 {
 	self.manager = C.createManager()
 	return self
 }
 
+// add a watcher
+func (self api) SetNotificationChannel(channel chan Notification) Phase4 {
+	self.notifications = channel
+	C.setNotificationWatcher(self.manager, unsafe.Pointer(&self))
+	return self
+}
+
 // add a driver.
-func (self *API) StartDriver(device string) *API {
+func (self api) StartDriver(device string) Phase5 {
 	if device == "" {
 		device = defaultDriverName
 	}
@@ -116,14 +162,17 @@ func (self *API) StartDriver(device string) *API {
 	return self
 }
 
-// add a watcher
-func (self *API) SetNotificationChannel(channel chan Notification) *API {
-  self.notifications = channel;
-  C.setNotificationWatcher(self.manager, unsafe.Pointer(self))
-  return self
+func (self api) Run() int {
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt, os.Kill)
+
+	// Block until a signal is received.
+	s := <-c
+	fmt.Printf("received signal: %v", s)
+	return 1
 }
 
 //export OnNotificationWrapper
 func OnNotificationWrapper(notification *C.Notification, context unsafe.Pointer) {
-  (*API)(context).notifications <- Notification{notification}
+	(*api)(context).notifications <- Notification{notification}
 }
