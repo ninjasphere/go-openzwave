@@ -52,7 +52,7 @@ type Phase0 interface {
 	Run(loop EventLoop) int
 }
 
-type EventLoop func (chan Notification);
+type EventLoop func (chan Notification, chan bool)
 
 type Notification struct {
 	notification *C.Notification
@@ -124,8 +124,10 @@ func (self api) Run(loop EventLoop) int {
 
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt, os.Kill)
-
-	go func() {
+	quit := make(chan bool, 1)
+	exit := make(chan int, 1);
+	
+	go func(quit chan bool) {
 		cSelf := unsafe.Pointer(&self)
 		cDevice := C.CString(self.device)
 		defer C.free(unsafe.Pointer(cDevice))
@@ -133,13 +135,24 @@ func (self api) Run(loop EventLoop) int {
 		manager := C.startManager(cDevice, cSelf)
 		defer C.stopManager(manager, cSelf);
 
-		loop(self.notifications);
-	}()
+		loop(self.notifications, quit);
+		exit <- 1;
+	}(quit);
 	
 	// Block until a signal is received.
 	signal := <-signals
-	fmt.Printf("received signal: %v", signal)
-	return 1
+	fmt.Printf("received %v signal - commencing shutdown\n", signal)
+	quit <- true
+	
+	for {
+		select {
+			case rc := <-exit:
+				return rc;
+			case signal := <-signals:
+				fmt.Printf("received 2nd %v signal - aborting now\n", signal)
+				return 1;
+		}
+	}
 }
 
 //export OnNotificationWrapper
