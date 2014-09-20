@@ -126,11 +126,12 @@ func (self api) Run(loop EventLoop) int {
 	signal.Notify(signals, os.Interrupt, os.Kill)
 
 	go func() {
+		cSelf := unsafe.Pointer(&self)
 		cDevice := C.CString(self.device)
 		//defer C.free(unsafe.Pointer(cDevice))
 
-		manager := C.startManager(cDevice, unsafe.Pointer(&self));
-		defer C.stopManager(manager);
+		manager := C.startManager(cDevice, cSelf)
+		defer C.stopManager(manager, cSelf);
 
 		loop(self.notifications);
 	}()

@@ -15,7 +15,8 @@ Manager startManager(char * device, void * context)
 	return (struct Manager) { manager };
 }
 
-void stopManager(Manager manager)
+void stopManager(Manager manager, void *context)
 {
-
+	manager.manager->RemoveWatcher(OnNotification, context);
+	OpenZWave::Manager::Destroy();
 }
