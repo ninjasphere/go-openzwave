@@ -33,6 +33,18 @@ type api struct {
 	options       C.Options // an opaque reference to C++ Options object
 	notifications chan Notification
 	device        string
+	quit          chan bool
+	manager       C.Manager
+}
+
+type API interface {
+	// notifications are received on this channel
+	Notifications() chan Notification
+
+	//
+	// Used to tell the event loop to quit.
+	//
+	QuitSignal() chan bool
 }
 
 //
@@ -52,7 +64,7 @@ type Phase0 interface {
 	Run(loop EventLoop) int
 }
 
-type EventLoop func(chan Notification, chan bool)
+type EventLoop func(API)
 
 type Notification struct {
 	notification *C.Notification
@@ -76,7 +88,7 @@ func (self Notification) String() string {
 }
 
 // allocate the control block used to track the state of the API
-func API(configPath string, userPath string, overrides string) Phase0 {
+func BuildAPI(configPath string, userPath string, overrides string) Phase0 {
 	var (
 		cConfigPath *C.char = C.CString(configPath)
 		cUserPath   *C.char = C.CString(userPath)
@@ -88,7 +100,9 @@ func API(configPath string, userPath string, overrides string) Phase0 {
 	return api{
 		C.startOptions(cConfigPath, cUserPath, cOverrides),
 		make(chan Notification),
-		defaultDriverName}
+		defaultDriverName,
+		make(chan bool, 1),
+		C.Manager{nil}}
 }
 
 // configure the C++ Options object with an integer value
@@ -123,25 +137,35 @@ func (self api) Run(loop EventLoop) int {
 
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt, os.Kill)
-	quit := make(chan bool, 1)
 	exit := make(chan int, 1)
+	startQuit := make(chan bool, 0)
 
-	go func(quit chan bool) {
+	go func() {
 		cSelf := unsafe.Pointer(&self)
+
+		self.manager = C.startManager(cSelf)
+		defer C.stopManager(self.manager, cSelf)
+
 		cDevice := C.CString(self.device)
 		defer C.free(unsafe.Pointer(cDevice))
 
-		manager := C.startManager(cDevice, cSelf)
-		defer C.stopManager(manager, cSelf)
+		C.addDriver(self.manager, cDevice)
 
-		loop(self.notifications, quit)
+		go func() {
+			<-startQuit
+			C.removeDriver(self.manager, cDevice)
+			self.quit <- true
+		}()
+
+		loop(self)
+
 		exit <- 1
-	}(quit)
+	}()
 
 	// Block until a signal is received.
 	signal := <-signals
 	fmt.Printf("received %v signal - commencing shutdown\n", signal)
-	quit <- true
+	startQuit <- true
 
 	for {
 		select {
@@ -156,5 +180,14 @@ func (self api) Run(loop EventLoop) int {
 
 //export OnNotificationWrapper
 func OnNotificationWrapper(notification *C.Notification, context unsafe.Pointer) {
-	(*api)(context).notifications <- Notification{notification}
+	self := (*api)(context)
+	self.notifications <- Notification{notification}
+}
+
+func (self api) Notifications() chan Notification {
+	return self.notifications
+}
+
+func (self api) QuitSignal() chan bool {
+	return self.quit
 }
