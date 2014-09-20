@@ -112,7 +112,7 @@ func (self api) AddBoolOption(option string, value bool) Phase0 {
 
 // add a driver.
 func (self api) SetDriver(device string) Phase0 {
-	if self.device != "" {
+	if device != "" {
 	       self.device = device
 	}
 	return self
