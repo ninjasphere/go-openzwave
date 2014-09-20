@@ -12,7 +12,7 @@ Manager startManager(char * device, void * context)
 	OpenZWave::Manager * manager = OpenZWave::Manager::Create();
 	manager->AddWatcher( OnNotification, context );
 	manager->AddDriver(device);
-	return (Manager) manager;
+	return (struct Manager) { manager };
 }
 
 void stopManager(Manager manager)

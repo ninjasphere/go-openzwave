@@ -26,6 +26,7 @@
 #include "Options.h"
 #include "platform/Log.h"
 
+#define OPENZWAVE_MANAGER OpenZWave::Manager
 
 //
 // The following ifdef magic is absolutely required to ensure that #cgo that doesn't understand how to parse C++ headers doesn't
@@ -34,7 +35,11 @@
 // See also http://stackoverflow.com/questions/1713214/how-to-use-c-in-go
 //
 extern "C" {
-#endif 
+#else
+
+#define OPENZWAVE_MANAGER void
+
+#endif
 
 #include "api/node.h"
 #include "api/value.h"
