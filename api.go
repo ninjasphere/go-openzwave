@@ -37,7 +37,7 @@ type api struct {
 
 //
 // The Phase0 -> Phase2 interface represent 3 different states in the evolution of the api from
-// creation, through configuration, through use. 
+// creation, through configuration, through use.
 //
 // Each phase includes at least one method that allows transition to the next phase.
 //
@@ -52,7 +52,7 @@ type Phase0 interface {
 	Run(loop EventLoop) int
 }
 
-type EventLoop func (chan Notification, chan bool)
+type EventLoop func(chan Notification, chan bool)
 
 type Notification struct {
 	notification *C.Notification
@@ -75,21 +75,20 @@ func (self Notification) String() string {
 		self.notification.valueId.valueId)
 }
 
-
 // allocate the control block used to track the state of the API
 func API(configPath string, userPath string, overrides string) Phase0 {
 	var (
 		cConfigPath *C.char = C.CString(configPath)
-		cUserPath *C.char = C.CString(userPath)
-		cOverrides *C.char = C.CString(overrides)
+		cUserPath   *C.char = C.CString(userPath)
+		cOverrides  *C.char = C.CString(overrides)
 	)
 	//defer C.free(unsafe.Pointer(cConfigPath))
 	//defer C.free(unsafe.Pointer(cUserPath))
 	//defer C.free(unsafe.Pointer(cOverrides))
 	return api{
-	       C.startOptions(cConfigPath, cUserPath, cOverrides), 
-	       make(chan Notification),
-	       defaultDriverName}
+		C.startOptions(cConfigPath, cUserPath, cOverrides),
+		make(chan Notification),
+		defaultDriverName}
 }
 
 // configure the C++ Options object with an integer value
@@ -113,7 +112,7 @@ func (self api) AddBoolOption(option string, value bool) Phase0 {
 // add a driver.
 func (self api) SetDriver(device string) Phase0 {
 	if device != "" {
-	       self.device = device
+		self.device = device
 	}
 	return self
 }
@@ -125,32 +124,32 @@ func (self api) Run(loop EventLoop) int {
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt, os.Kill)
 	quit := make(chan bool, 1)
-	exit := make(chan int, 1);
-	
+	exit := make(chan int, 1)
+
 	go func(quit chan bool) {
 		cSelf := unsafe.Pointer(&self)
 		cDevice := C.CString(self.device)
 		defer C.free(unsafe.Pointer(cDevice))
 
 		manager := C.startManager(cDevice, cSelf)
-		defer C.stopManager(manager, cSelf);
+		defer C.stopManager(manager, cSelf)
 
-		loop(self.notifications, quit);
-		exit <- 1;
-	}(quit);
-	
+		loop(self.notifications, quit)
+		exit <- 1
+	}(quit)
+
 	// Block until a signal is received.
 	signal := <-signals
 	fmt.Printf("received %v signal - commencing shutdown\n", signal)
 	quit <- true
-	
+
 	for {
 		select {
-			case rc := <-exit:
-				return rc;
-			case signal := <-signals:
-				fmt.Printf("received 2nd %v signal - aborting now\n", signal)
-				return 1;
+		case rc := <-exit:
+			return rc
+		case signal := <-signals:
+			fmt.Printf("received 2nd %v signal - aborting now\n", signal)
+			return 1
 		}
 	}
 }
