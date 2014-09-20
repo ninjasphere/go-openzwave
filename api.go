@@ -118,20 +118,21 @@ func (self api) SetDriver(device string) Phase0 {
 	return self
 }
 
+// start the manager
+func (self api) startManager() C.Manager {
+	var cDevice *C.char = C.CString(self.device)
+	//defer C.free(unsafe.Pointer(cDevice))
+	return C.startManager(cDevice, unsafe.Pointer(&self));
+}
+
 func (self api) Run(loop EventLoop) int {
 
 	C.endOptions(self.options)
 
-	manager := C.createManager()
-	C.setNotificationWatcher(manager, unsafe.Pointer(&self))
-
-	var cDevice *C.char = C.CString(self.device)
-	//defer C.free(unsafe.Pointer(cDevice))
-
-	C.addDriver(manager, cDevice)
-
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt, os.Kill)
+
+	self.startManager()
 
 	go loop(self.notifications);
 

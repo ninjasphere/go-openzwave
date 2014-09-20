@@ -7,17 +7,10 @@ static void OnNotification (OpenZWave::Notification const* notification, void* c
 	OnNotificationWrapper(exported, context);
 }
 
-void addDriver(Manager manager, char * device)
+extern Manager startManager(char * device, void * context)
 {
-  ((OpenZWave::Manager *)manager)->AddDriver(device);
-}
-
-void setNotificationWatcher(Manager manager, void * context) 
-{
- ((OpenZWave::Manager *)manager)->AddWatcher( OnNotification, context );
-}
-
-Manager createManager()
-{
-  return (Manager)OpenZWave::Manager::Create();
+	OpenZWave::Manager * manager = OpenZWave::Manager::Create();
+	manager->AddWatcher( OnNotification, context );
+	manager->AddDriver(device);
+	return (Manager) manager;
 }
