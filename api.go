@@ -128,7 +128,7 @@ func (self api) Run(loop EventLoop) int {
 	go func() {
 		cSelf := unsafe.Pointer(&self)
 		cDevice := C.CString(self.device)
-		//defer C.free(unsafe.Pointer(cDevice))
+		defer C.free(unsafe.Pointer(cDevice))
 
 		manager := C.startManager(cDevice, cSelf)
 		defer C.stopManager(manager, cSelf);
