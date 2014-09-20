@@ -118,13 +118,6 @@ func (self api) SetDriver(device string) Phase0 {
 	return self
 }
 
-// start the manager
-func (self api) startManager() C.Manager {
-	var cDevice *C.char = C.CString(self.device)
-	//defer C.free(unsafe.Pointer(cDevice))
-	return C.startManager(cDevice, unsafe.Pointer(&self));
-}
-
 func (self api) Run(loop EventLoop) int {
 
 	C.endOptions(self.options)
@@ -132,10 +125,16 @@ func (self api) Run(loop EventLoop) int {
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt, os.Kill)
 
-	self.startManager()
+	go func() {
+		cDevice := C.CString(self.device)
+		//defer C.free(unsafe.Pointer(cDevice))
 
-	go loop(self.notifications);
+		manager := C.startManager(cDevice, unsafe.Pointer(&self));
+		defer C.stopManager(manager);
 
+		loop(self.notifications);
+	}()
+	
 	// Block until a signal is received.
 	signal := <-signals
 	fmt.Printf("received signal: %v", signal)
