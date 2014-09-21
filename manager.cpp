@@ -4,7 +4,7 @@
 static void OnNotification (OpenZWave::Notification const* notification, void* context)
 {
   Notification * exported = exportNotification(notification);
-  OnNotificationWrapper(exported, context);
+  onNotificationWrapper(exported, context);
 }
 
 Manager startManager(void * context)

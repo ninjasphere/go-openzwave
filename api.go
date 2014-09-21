@@ -307,8 +307,8 @@ func (self api) FreeNotification(apiNotification Notification) {
 	C.freeNotification(apiNotification.notification)
 }
 
-//export OnNotificationWrapper
-func OnNotificationWrapper(notification *C.Notification, context unsafe.Pointer) {
+//export onNotificationWrapper
+func onNotificationWrapper(notification *C.Notification, context unsafe.Pointer) {
 	self := (*api)(context)
 	self.notifications <- Notification{notification}
 }
