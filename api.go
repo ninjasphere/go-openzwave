@@ -182,12 +182,6 @@ func (self api) Run(loop EventLoop) int {
 	}
 }
 
-//export OnNotificationWrapper
-func OnNotificationWrapper(notification *C.Notification, context unsafe.Pointer) {
-	self := (*api)(context)
-	self.notifications <- Notification{notification}
-}
-
 func (self api) Notifications() chan Notification {
 	return self.notifications
 }
@@ -199,3 +193,10 @@ func (self api) QuitSignal() chan bool {
 func (self api) FreeNotification(apiNotification Notification) {
 	C.freeNotification(apiNotification.notification)
 }
+
+//export OnNotificationWrapper
+func OnNotificationWrapper(notification *C.Notification, context unsafe.Pointer) {
+	self := (*api)(context)
+	self.notifications <- Notification{notification}
+}
+
