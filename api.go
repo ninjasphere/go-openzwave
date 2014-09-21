@@ -166,6 +166,27 @@ func (self api) Run(loop EventLoop) int {
 	// indicate that we want to wait for these signals
 
 	signal.Notify(signals, os.Interrupt, os.Kill)
+	go func() {
+		// Block until a signal is received.
+
+		signal := <-signals
+		// once we receive a signal, exit of the process is inevitable
+		fmt.Printf("received %v signal - commencing shutdown\n", signal)
+
+		startQuit <- true    // try a graceful shutdown of the event loop
+		signalRaised <- true // ensure the device existence loop will exit
+
+		// but, just in case this doesn't happen, set up an abort timer.
+		time.AfterFunc(time.Second*5, func() {
+			fmt.Printf("timed out while waiting for event loop to quit - aborting now\n")
+			exit <- 1
+		})
+
+		// the user is impatient - just die now
+		signal = <-signals
+		fmt.Printf("received 2nd %v signal - aborting now\n", signal)
+		exit <- 2
+	}()
 
 	//
 	// This goroutine does the following
@@ -252,7 +273,7 @@ func (self api) Run(loop EventLoop) int {
 					// we start an abort timer, because if the driver blocks, we need to start the driver process
 					abortTimer := time.AfterFunc(5*time.Second, func() {
 						fmt.Printf("failed to remove driver - exiting driver process\n")
-						os.Exit(1)
+						exit <- 3
 					})
 
 					// try to remove the driver
@@ -269,34 +290,10 @@ func (self api) Run(loop EventLoop) int {
 			}
 		}
 
-		exit <- 1
+		exit <- 4
 	}()
 
-	// Block until a signal is received.
-
-	signal := <-signals
-	fmt.Printf("received %v signal - commencing shutdown\n", signal)
-
-	startQuit <- true    // try a graceful shutdown of the event loop
-	signalRaised <- true // ensure the device existence loop will exit
-
-	// but, just in case this doesn't happen, set up an abort timer.
-	time.AfterFunc(time.Second*5, func() {
-		fmt.Printf("timed out while waiting for event loop to quit - aborting now\n")
-		exit <- 1
-	})
-
-	for {
-		select {
-		// the device existence loop has exited
-		case rc := <-exit:
-			return rc
-		// the user is impatient - just die now
-		case signal := <-signals:
-			fmt.Printf("received 2nd %v signal - aborting now\n", signal)
-			return 1
-		}
-	}
+	return <-exit
 }
 
 func (self api) Notifications() chan Notification {
