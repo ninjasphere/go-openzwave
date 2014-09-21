@@ -41,10 +41,14 @@ type API interface {
 	// notifications are received on this channel
 	Notifications() chan Notification
 
+	// free a notification after use.
+	FreeNotification(Notification);
+
 	//
 	// Used to tell the event loop to quit.
 	//
 	QuitSignal() chan bool
+
 }
 
 //
@@ -190,4 +194,8 @@ func (self api) Notifications() chan Notification {
 
 func (self api) QuitSignal() chan bool {
 	return self.quit
+}
+
+func (self api) FreeNotification(apiNotification Notification) {
+	C.freeNotification(apiNotification.notification)
 }
