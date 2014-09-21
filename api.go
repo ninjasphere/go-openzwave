@@ -36,7 +36,7 @@ type api struct {
 	options       C.Options // an opaque reference to C++ Options object
 	notifications chan Notification
 	device        string
-	quit          chan bool
+	quit          chan struct{}
 	manager       C.Manager
 }
 
@@ -51,7 +51,7 @@ type API interface {
 	FreeNotification(Notification)
 
 	// The EventLoop should return from the function when a signal is received on this channel
-	QuitSignal() chan bool
+	QuitSignal() chan struct{}
 }
 
 // Begin the construction of the API by returning a Configurator
@@ -68,7 +68,7 @@ func BuildAPI(configPath string, userPath string, overrides string) Configurator
 		C.startOptions(cConfigPath, cUserPath, cOverrides),
 		make(chan Notification),
 		defaultDriverName,
-		make(chan bool, 0),
+		make(chan struct{}, 0),
 		C.Manager{nil}}
 }
 
@@ -159,8 +159,8 @@ func (self api) Run(loop EventLoop) int {
 	// allocate various channels we need
 
 	signals := make(chan os.Signal, 1) // used to receive OS signals
-	startQuit := make(chan bool, 2)    // used to indicate we need to quit the event loop
-	signalRaised := make(chan bool, 1) // used to indicate to outer loop that it should exit
+	startQuit := make(chan struct{}, 2)    // used to indicate we need to quit the event loop
+	quitDeviceMonitor := make(chan struct{}, 1) // used to indicate to outer loop that it should exit
 	exit := make(chan int, 1)          // used to indicate we are ready to exit
 
 	// indicate that we want to wait for these signals
@@ -173,8 +173,10 @@ func (self api) Run(loop EventLoop) int {
 		// once we receive a signal, exit of the process is inevitable
 		fmt.Printf("received %v signal - commencing shutdown\n", signal)
 
-		startQuit <- true    // try a graceful shutdown of the event loop
-		signalRaised <- true // ensure the device existence loop will exit
+		// try a graceful shutdown of the event loop
+		startQuit <- struct{}{}         
+		// and the device monitor loop 
+		quitDeviceMonitor <- struct{}{} 
 
 		// but, just in case this doesn't happen, set up an abort timer.
 		time.AfterFunc(time.Second*5, func() {
@@ -207,7 +209,7 @@ func (self api) Run(loop EventLoop) int {
 	// it propagates a quit signal to the event loop. It also sets up an abort timer which will exit the process if either
 	// the driver removal or quit signal propagation blocks for some reason.
 	//
-	// If an OS signal is received, the main go routine will send signals to the startQuit and to the signalRaised channels.
+	// If an OS signal is received, the main go routine will send signals to the startQuit and to the quitDeviceMonitor channels.
 	// It then waits for another signal, for the outer loop to exit or for a 5 second timeout. When one of these occurs, the
 	// process will exit.
 	//
@@ -245,8 +247,9 @@ func (self api) Run(loop EventLoop) int {
 		done := false
 		for !done {
 			select {
-			case done = <-signalRaised: // we received a signal, allow us to quit
-				break
+			case doneSignal := <-quitDeviceMonitor: // we received a signal, allow us to quit
+			     _= doneSignal;
+			     done = true
 			default:
 				// one iteration of a device insert/removal cycle
 
@@ -261,7 +264,7 @@ func (self api) Run(loop EventLoop) int {
 					fmt.Printf("device %s removed\n", self.device)
 
 					// start the removal of the driver
-					startQuit <- true
+					startQuit <- struct{}{}
 				}()
 
 				C.addDriver(self.manager, cDevice)
@@ -278,7 +281,7 @@ func (self api) Run(loop EventLoop) int {
 
 					// try to remove the driver
 					if C.removeDriver(self.manager, cDevice) {
-						self.quit <- true
+						self.quit <- struct{}{}
 						abortTimer.Stop() // if we get to here in a timely fashion we can stop the abort timer
 					} else {
 						// this is unexpected, if we get to here, let the abort timer do its thing
@@ -300,7 +303,7 @@ func (self api) Notifications() chan Notification {
 	return self.notifications
 }
 
-func (self api) QuitSignal() chan bool {
+func (self api) QuitSignal() chan struct{} {
 	return self.quit
 }
 
