@@ -120,13 +120,13 @@ type Notification struct {
 // Converts the notification into a string representation.
 func (self Notification) String() string {
 	return fmt.Sprintf(
-		"Notification[\n"+
-			"notificationType=%s,\n"+
-			"notificationCode=%s,\n"+
-			"homeId=0x%08x,\n"+
-			"nodeId=0x%02x,\n"+
-			"valueType=%s,\n"+
-			"valueId=0x%08x]\n",
+		"Notification["+
+			"notificationType=%s, "+
+			"notificationCode=%s, "+
+			"homeId=0x%08x, "+
+			"nodeId=0x%02x, "+
+			"valueType=%s, "+
+			"valueId=0x%08x]",
 		NT.ToEnum(int(self.notification.notificationType)),
 		CODE.ToEnum(int(self.notification.notificationCode)),
 		self.notification.nodeId.homeId,
