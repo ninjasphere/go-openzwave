@@ -33,7 +33,7 @@ type Signal struct{}
 
 type api struct {
 	options       C.Options // an opaque reference to C++ Options object
-	notifications chan Notification
+	notifications chan *Notification
 	device        string
 	quit          chan Signal
 	manager       *C.Manager
@@ -62,7 +62,7 @@ func BuildAPI(configPath string, userPath string, overrides string) Configurator
 	//defer C.free(unsafe.Pointer(cOverrides))
 	return api{
 		C.startOptions(cConfigPath, cUserPath, cOverrides),
-		make(chan Notification),
+		make(chan *Notification),
 		defaultDriverName,
 		make(chan Signal, 0),
 		nil,
@@ -98,7 +98,7 @@ type Configurator interface {
 //
 type API interface {
 	// notifications are received on this channel
-	Notifications() chan Notification
+	Notifications() chan *Notification
 
 	// The EventLoop should return from the function when a signal is received on this channel
 	QuitSignal() chan Signal
@@ -299,7 +299,7 @@ func (self api) Run(loop EventLoop) int {
 	return <-exit
 }
 
-func (self api) Notifications() chan Notification {
+func (self api) Notifications() chan *Notification {
 	return self.notifications
 }
 
@@ -310,7 +310,7 @@ func (self api) QuitSignal() chan Signal {
 //export onNotificationWrapper
 func onNotificationWrapper(notification *C.Notification, context unsafe.Pointer) {
 	self := (*api)(context)
-	self.notifications <- Notification{notification}
+	self.notifications <- (*Notification)(notification.goRef)
 }
 
 //export asManager
@@ -321,6 +321,6 @@ func asManager(context unsafe.Pointer) *C.Manager {
 
 //export setManager
 func setManager(context unsafe.Pointer, manager *C.Manager) {
-     api := (*api)(context);
-     api.manager = manager;
+	api := (*api)(context)
+	api.manager = manager
 }

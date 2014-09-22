@@ -8,6 +8,7 @@ import "C"
 
 import (
 	"fmt"
+	"unsafe"
 
 	"github.com/ninjasphere/go-openzwave/CODE"
 	"github.com/ninjasphere/go-openzwave/NT"
@@ -44,4 +45,16 @@ func (notification *Notification) GetValueID() *ValueID {
 
 func (notification *Notification) GetValue() *Value {
 	return &Value{notification.cRef.value}
+}
+
+// given a C notification, return the equivalent Go notification
+func asNotification(cRef *C.Notification) *Notification {
+	return (*Notification)(unsafe.Pointer(cRef.goRef))
+}
+
+//export newGoNotification
+func newGoNotification(cRef *C.Notification) unsafe.Pointer {
+	goRef := &Notification{cRef}
+	cRef.goRef = unsafe.Pointer(goRef)
+	return cRef.goRef
 }
