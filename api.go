@@ -201,7 +201,7 @@ func (self api) Run(loop EventLoop) int {
 
 		signal := <-signals
 		// once we receive a signal, exit of the process is inevitable
-		fmt.Printf("received %v signal - commencing shutdown\n", signal)
+		self.logger.Infof("received %v signal - commencing shutdown\n", signal)
 
 		// try a graceful shutdown of the event loop
 		startQuit <- Signal{}         
@@ -210,13 +210,13 @@ func (self api) Run(loop EventLoop) int {
 
 		// but, just in case this doesn't happen, set up an abort timer.
 		time.AfterFunc(time.Second*5, func() {
-			fmt.Printf("timed out while waiting for event loop to quit - aborting now\n")
+			self.logger.Errorf("timed out while waiting for event loop to quit - aborting now\n")
 			exit <- 1
 		})
 
 		// the user is impatient - just die now
 		signal = <-signals
-		fmt.Printf("received 2nd %v signal - aborting now\n", signal)
+		self.logger.Errorf("received 2nd %v signal - aborting now\n", signal)
 		exit <- 2
 	}()
 
@@ -284,14 +284,14 @@ func (self api) Run(loop EventLoop) int {
 				// one iteration of a device insert/removal cycle
 
 				// wait until device present
-				fmt.Printf("waiting until %s is available\n", self.device)
+				self.logger.Infof("waiting until %s is available\n", self.device)
 				pollUntilDeviceExistsStateEquals(true)
 
 				go func() {
 
 					// wait until device absent
 					pollUntilDeviceExistsStateEquals(false)
-					fmt.Printf("device %s removed\n", self.device)
+					self.logger.Infof("device %s removed\n", self.device)
 
 					// start the removal of the driver
 					startQuit <- Signal{}
@@ -306,7 +306,7 @@ func (self api) Run(loop EventLoop) int {
 					// we start an abort timer, because if the driver blocks, we need to restart the driver process
 					// to guarantee successful operation.
 					abortTimer := time.AfterFunc(5*time.Second, func() {
-						fmt.Printf("failed to remove driver - exiting driver process\n")
+						self.logger.Errorf("failed to remove driver - exiting driver process\n")
 						exit <- 3
 					})
 
@@ -316,7 +316,7 @@ func (self api) Run(loop EventLoop) int {
 						abortTimer.Stop() // if we get to here in a timely fashion we can stop the abort timer
 					} else {
 						// this is unexpected, if we get to here, let the abort timer do its thing
-						fmt.Printf("removeDriver call failed - waiting for abort\n")
+						self.logger.Errorf("removeDriver call failed - waiting for abort\n")
 					}
 				}()
 
