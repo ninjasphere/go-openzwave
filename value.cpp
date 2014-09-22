@@ -1,33 +1,10 @@
 #include "api.h"
 
-static ValueID * newValueID(uint8_t valueType, uint64_t id)
-{
-  ValueID * tmp = (ValueID *)malloc(sizeof(ValueID));
-  *tmp = (struct ValueID){0};
-  tmp->valueType = valueType;
-  tmp->id = id;
-  return tmp;
-}
-
-void freeValueID(ValueID * value)
-{
-  free(value);
-}
-
-ValueID * exportValueID(API * api, OpenZWave::ValueID const & src)
-{
-  ValueID * const target = newValueID(src.GetType(), src.GetId());
-  target->commandClassId = src.GetCommandClassId();
-  target->instance = src.GetInstance();
-  target->index = src.GetIndex();
-  return target;
-}
-
-
 static Value * newValue()
 {
   Value * tmp = (Value *)malloc(sizeof(Value));
   *tmp = (struct Value){0};
+  tmp->goRef = newGoValue(tmp);
   return tmp;
 }
 
@@ -53,7 +30,6 @@ Value * exportValue(API * api, OpenZWave::ValueID const &valueId)
 {
   Manager * manager = asManager(api);
   Value * const tmp = newValue();
-  *tmp = (struct Value){0};
 
   std::string value;
 
@@ -65,6 +41,12 @@ Value * exportValue(API * api, OpenZWave::ValueID const &valueId)
 
   OpenZWave::Manager * const zwManager = manager->manager;
 
+  tmp->valueId.id = valueId.GetId();
+  tmp->valueId.valueType = valueId.GetType();
+  tmp->valueId.commandClassId = valueId.GetCommandClassId();
+  tmp->valueId.instance = valueId.GetInstance();
+  tmp->valueId.index = valueId.GetIndex();
+  
   tmp->label = strdup(zwManager->GetValueLabel(valueId).c_str());
   tmp->help = strdup(zwManager->GetValueHelp(valueId).c_str());
   tmp->units = strdup(zwManager->GetValueUnits(valueId).c_str());

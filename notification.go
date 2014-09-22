@@ -23,15 +23,12 @@ type Notification struct {
 func (self Notification) String() string {
 	return fmt.Sprintf(
 		"Notification["+
-			"node=0x%08x:0x%02x, "+
-			"notificationType=%s/%s, "+
-			"valueId=%s, "+
-			"value=%s]",
-		self.cRef.nodeId.homeId,
-		self.cRef.nodeId.nodeId,
+			"notificationType=%v/%v, "+
+			"node=%v, "+
+			"value=%v]",
 		NT.ToEnum(int(self.cRef.notificationType)),
 		CODE.ToEnum(int(self.cRef.notificationCode)),
-		self.GetValueID(),
+		self.GetNode(),
 		self.GetValue())
 }
 
@@ -39,12 +36,12 @@ func (apiNotification *Notification) Free() {
 	C.freeNotification(apiNotification.cRef)
 }
 
-func (notification *Notification) GetValueID() *ValueID {
-	return &ValueID{notification.cRef.valueId}
+func (self *Notification) GetValue() *Value {
+	return asValue(self.cRef.value)
 }
 
-func (notification *Notification) GetValue() *Value {
-	return &Value{notification.cRef.value}
+func (self *Notification) GetNode() *Node {
+	return asNode(self.cRef.node)
 }
 
 // given a C notification, return the equivalent Go notification
