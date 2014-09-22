@@ -3,30 +3,42 @@
 // forwards the notification from the C++ API to the Go layer - caller must free.
 static void OnNotification (OpenZWave::Notification const* notification, void* context)
 {
-  Manager manager = asManager(context);
-  Notification * exported = exportNotification(&manager, notification);
+  Manager * manager = asManager(context);
+  Notification * exported = exportNotification(manager, notification);
   onNotificationWrapper(exported, context);
 }
 
-Manager startManager(void * context)
-{
-  OpenZWave::Manager * manager = OpenZWave::Manager::Create();
-  manager->AddWatcher( OnNotification, context );
-  return (struct Manager) { manager };
+static Manager * newManager(OpenZWave::Manager * cppObj) {
+  Manager * manager = (Manager *)malloc((sizeof *manager));
+  *manager = (struct Manager){ cppObj };
+  return manager;
 }
 
-void stopManager(Manager manager, void *context)
+static void freeManager(Manager * manager)
 {
-  manager.manager->RemoveWatcher(OnNotification, context);
   OpenZWave::Manager::Destroy();
+  free(manager);
 }
 
-bool addDriver(Manager manager, char * device)
+Manager * startManager(void * context)
 {
-  return manager.manager->AddDriver(device);
+  Manager * manager = newManager(OpenZWave::Manager::Create());
+  manager->manager->AddWatcher( OnNotification, context );
+  return manager;
 }
 
-bool removeDriver(Manager manager, char * device)
+void stopManager(Manager * manager, void *context)
 {
-  return manager.manager->RemoveDriver(device);
+  manager->manager->RemoveWatcher(OnNotification, context);
+  freeManager(manager);
+}
+
+bool addDriver(Manager * manager, char * device)
+{
+  return manager->manager->AddDriver(device);
+}
+
+bool removeDriver(Manager * manager, char * device)
+{
+  return manager->manager->RemoveDriver(device);
 }

@@ -69,6 +69,7 @@ Value * exportValue(Manager * manager, OpenZWave::ValueID const &valueId)
 	tmp->units = strdup(zwManager->GetValueUnits(valueId).c_str());
 	tmp->min = zwManager->GetValueMin(valueId);
 	tmp->max = zwManager->GetValueMax(valueId);
+	tmp->isSet = zwManager->IsValueSet(valueId);
 
 	return tmp;
 }

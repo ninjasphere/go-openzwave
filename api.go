@@ -36,7 +36,7 @@ type api struct {
 	notifications chan Notification
 	device        string
 	quit          chan Signal
-	manager       C.Manager
+	manager       *C.Manager
 	logger        Logger
 }
 
@@ -65,7 +65,7 @@ func BuildAPI(configPath string, userPath string, overrides string) Configurator
 		make(chan Notification),
 		defaultDriverName,
 		make(chan Signal, 0),
-		C.Manager{nil},
+		nil,
 		defaultLogger{}}
 }
 
@@ -314,7 +314,7 @@ func onNotificationWrapper(notification *C.Notification, context unsafe.Pointer)
 }
 
 //export asManager
-func asManager(context unsafe.Pointer) C.Manager {
+func asManager(context unsafe.Pointer) *C.Manager {
 	self := (*api)(context)
 	return self.manager
 }
