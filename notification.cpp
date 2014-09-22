@@ -10,7 +10,7 @@ static Notification * newNotification(uint8_t notificationType)
 
 // exports a C++ notification into a copy that can be consumed by the Go Layer. The consumer
 // must propagate the responsibility to free the returned object to its callers.
-Notification * exportNotification(OpenZWave::Notification const* notification)
+Notification * exportNotification(Manager * manager, OpenZWave::Notification const* notification)
 {
 	  Notification * result = newNotification(notification->GetType());
 	  result->nodeId = (struct NodeId) {notification->GetHomeId(), notification->GetNodeId() };
@@ -18,7 +18,7 @@ Notification * exportNotification(OpenZWave::Notification const* notification)
 	    notification->GetType() == OpenZWave::Notification::Type_Notification
 	    ? notification->GetNotification()
 	    : -1;
-	  result->valueId = exportValueID(notification->GetValueID());
+	  result->valueId = exportValueID(manager, notification->GetValueID());
 	  return result;
 }
 

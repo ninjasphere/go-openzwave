@@ -3,7 +3,8 @@
 // forwards the notification from the C++ API to the Go layer - caller must free.
 static void OnNotification (OpenZWave::Notification const* notification, void* context)
 {
-  Notification * exported = exportNotification(notification);
+  Manager manager = asManager(context);
+  Notification * exported = exportNotification(&manager, notification);
   onNotificationWrapper(exported, context);
 }
 

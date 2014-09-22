@@ -1,11 +1,11 @@
 #include "api.h"
 
-ValueID * newValueID(uint8_t valueType, uint64_t valueId)
+ValueID * newValueID(uint8_t valueType, uint64_t id)
 {
   ValueID * tmp = (ValueID *)malloc(sizeof(ValueID));
   *tmp = (struct ValueID){0};
   tmp->valueType = valueType;
-  tmp->valueId = valueId;
+  tmp->id = id;
   return tmp;
 }
 
@@ -14,7 +14,7 @@ void freeValueID(ValueID * value)
   free(value);
 }
 
-ValueID * exportValueID(OpenZWave::ValueID const & src)
+ValueID * exportValueID(Manager * manager, OpenZWave::ValueID const & src)
 {
 	  ValueID * const target = newValueID(src.GetType(), src.GetId());
 	  return target;

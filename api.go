@@ -136,7 +136,7 @@ func (self Notification) String() string {
 		self.notification.nodeId.homeId,
 		self.notification.nodeId.nodeId,
 		VT.ToEnum(int(self.notification.valueId.valueType)),
-		self.notification.valueId.valueId)
+		self.notification.valueId.id)
 }
 
 // configure the C++ Options object with an integer value
@@ -346,4 +346,10 @@ func (self api) FreeNotification(apiNotification Notification) {
 func onNotificationWrapper(notification *C.Notification, context unsafe.Pointer) {
 	self := (*api)(context)
 	self.notifications <- Notification{notification}
+}
+
+//export asManager
+func asManager(context unsafe.Pointer) C.Manager {
+	self := (*api)(context)
+	return self.manager;
 }

@@ -21,6 +21,7 @@
 // do not have to.
 //
 
+#include "Value.h"
 #include "Manager.h"
 #include "Notification.h"
 #include "Options.h"
@@ -41,10 +42,10 @@ extern "C" {
 
 #endif
 
+#include "api/manager.h"
 #include "api/node.h"
 #include "api/value.h"
 #include "api/notification.h"
-#include "api/manager.h"
 #include "api/options.h"
 
 #ifdef __cplusplus
