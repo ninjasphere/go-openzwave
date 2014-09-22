@@ -102,6 +102,9 @@ type API interface {
 
 	// The EventLoop should return from the function when a signal is received on this channel
 	QuitSignal() chan Signal
+
+	// the API logger
+	Logger() Logger
 }
 
 // Clients of the API should provide Configuration.Run() with an implementation of this type to
@@ -305,6 +308,10 @@ func (self api) Notifications() chan *Notification {
 
 func (self api) QuitSignal() chan Signal {
 	return self.quit
+}
+
+func (self api) Logger() Logger {
+	return self.logger
 }
 
 //export onNotificationWrapper

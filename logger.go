@@ -20,21 +20,21 @@ type defaultLogger struct {
 }
 
 func (defaultLogger) Infof(message string, args ...interface{}) {
-	fmt.Printf(message, args)
+	fmt.Printf(message, args...)
 }
 
 func (defaultLogger) Warningf(message string, args ...interface{}) {
-	fmt.Printf(message, args)
+	fmt.Printf(message, args...)
 }
 
 func (defaultLogger) Errorf(message string, args ...interface{}) {
-	fmt.Printf(message, args)
+	fmt.Printf(message, args...)
 }
 
 func (defaultLogger) Debugf(message string, args ...interface{}) {
-	fmt.Printf(message, args)
+	fmt.Printf(message, args...)
 }
 
 func (defaultLogger) Tracef(message string, args ...interface{}) {
-	fmt.Printf(message, args)
+	fmt.Printf(message, args...)
 }
