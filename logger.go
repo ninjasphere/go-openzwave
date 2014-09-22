@@ -1,5 +1,7 @@
 package openzwave
 
+import "fmt"
+
 // A logger interface. Modelled on github.com/juju/loggo so that can be used substituted by default.
 type Logger interface {
      	// Log an info message.
@@ -13,3 +15,27 @@ type Logger interface {
 	// Log a trace message.
 	Tracef(message string, args ...interface{})
 }
+
+type defaultLogger struct {
+}
+
+func (defaultLogger) Infof(message string, args ...interface{}) {
+     fmt.Printf(message, args);
+}
+
+func (defaultLogger) Warningf(message string, args ...interface{}) {
+     fmt.Printf(message, args);
+}
+
+func (defaultLogger) Errorf(message string, args ...interface{}) {
+     fmt.Printf(message, args);
+}
+
+func (defaultLogger) Debugf(message string, args ...interface{}) {
+     fmt.Printf(message, args);
+}
+
+func (defaultLogger) Tracef(message string, args ...interface{}) {
+     fmt.Printf(message, args);
+}
+

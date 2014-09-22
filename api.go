@@ -42,6 +42,7 @@ type api struct {
 	device        string
 	quit          chan Signal
 	manager       C.Manager
+	logger	      Logger
 }
 
 //
@@ -69,7 +70,8 @@ func BuildAPI(configPath string, userPath string, overrides string) Configurator
 		make(chan Notification),
 		defaultDriverName,
 		make(chan Signal, 0),
-		C.Manager{nil}}
+		C.Manager{nil},
+		defaultLogger{}}
 }
 
 // This interface is used to configure the API by setting various options,
@@ -82,12 +84,14 @@ func BuildAPI(configPath string, userPath string, overrides string) Configurator
 //
 //
 type Configurator interface {
+        //Configure the logger implementation
+	SetLogger(Logger) Configurator
 	// Add an integer option.
 	AddIntOption(option string, value int) Configurator
-	// Add a boolean option.
+	// Add a boolean ``option.
 	AddBoolOption(option string, value bool) Configurator
 	// Set the device name used by the driver.
-	SetDriver(device string) Configurator
+	SetDeviceName(device string) Configurator
 	// Conclude the configuration and start running the supplied event loop. The
 	// body of the EventLoop has access to an API reference.
 	Run(loop EventLoop) int
@@ -153,12 +157,17 @@ func (self api) AddBoolOption(option string, value bool) Configurator {
 	return self
 }
 
-// add a driver.
-func (self api) SetDriver(device string) Configurator {
+// set the device name
+func (self api) SetDeviceName(device string) Configurator {
 	if device != "" {
 		self.device = device
 	}
 	return self
+}
+
+func (self api) SetLogger(logger Logger) Configurator {
+     self.logger = logger;    	
+     return self;
 }
 
 //
