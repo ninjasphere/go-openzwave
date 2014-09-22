@@ -29,3 +29,5 @@ deps:	libs
 	scripts/GenerateLOG_LEVEL.sh
 	scripts/GenerateVT.sh
 
+control-panel:
+	@echo "run 'scripts/start-ozwcp.sh', configure the device as /dev/cu.SLAB_USBtoUART, then hit initialize."
