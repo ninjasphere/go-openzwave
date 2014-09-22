@@ -4,7 +4,7 @@ typedef struct Notification {
   uint8_t   notificationCode;
   NodeId    nodeId;
   Node      *node; //owned
-  ValueID	*valueId; //owned
+  ValueID   *valueId; //owned
   Value     *value; // owned
 } Notification;
 
