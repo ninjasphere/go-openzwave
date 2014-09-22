@@ -19,6 +19,9 @@ clean: clean-src
 	go clean -i
 	rm -rf $(GENERATED) 
 
+fmt:
+	gofmt -s -w *.go
+
 clean-src:
 	find . -name '*~' -exec rm {} \;
 
