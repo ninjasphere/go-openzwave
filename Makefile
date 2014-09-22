@@ -14,10 +14,13 @@ here: deps
 libs:
 	cd openzwave && make
 
-clean:
+clean: clean-src
 	cd openzwave && make clean 
 	go clean -i
 	rm -rf $(GENERATED) 
+
+clean-src:
+	find . -name '*~' -exec rm {} \;
 
 deps:	libs
 	scripts/GenerateNT.sh
