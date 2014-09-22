@@ -23,7 +23,7 @@ type Notification struct {
 func (self Notification) String() string {
 	return fmt.Sprintf(
 		"Notification["+
-			"node=0x%08x:0x%02x"+
+			"node=0x%08x:0x%02x, "+
 			"notificationType=%s/%s, "+
 			"valueType=%s, "+
 			"valueId=0x%08x]",
