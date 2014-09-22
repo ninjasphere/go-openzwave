@@ -7,10 +7,10 @@ package openzwave
 import "C"
 
 import (
-       "fmt"
+	"fmt"
 
-       "github.com/ninjasphere/go-openzwave/CC"
-       "github.com/ninjasphere/go-openzwave/VT"
+	"github.com/ninjasphere/go-openzwave/CC"
+	"github.com/ninjasphere/go-openzwave/VT"
 )
 
 type ValueID struct {
