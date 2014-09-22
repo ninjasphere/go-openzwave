@@ -7,7 +7,7 @@ all: build
 
 build: here
 
-here: deps
+here: deps fmt
 	mkdir -p NT
 	go install
 
