@@ -1,11 +1,11 @@
 #include "api.h"
 
 // forwards the notification from the C++ API to the Go layer - caller must free.
-static void OnNotification (OpenZWave::Notification const* notification, void* context)
+static void OnNotification (OpenZWave::Notification const* notification, API * api)
 {
-  Manager * manager = asManager(context);
+  Manager * manager = asManager(api);
   Notification * exported = exportNotification(manager, notification);
-  onNotificationWrapper(exported, context);
+  onNotificationWrapper(exported, api);
 }
 
 static Manager * newManager(OpenZWave::Manager * cppObj) {
@@ -20,16 +20,16 @@ static void freeManager(Manager * manager)
   free(manager);
 }
 
-Manager * startManager(void * context)
+Manager * startManager(API * api)
 {
   Manager * manager = newManager(OpenZWave::Manager::Create());
-  manager->manager->AddWatcher( OnNotification, context );
+  manager->manager->AddWatcher( OnNotification, api );
   return manager;
 }
 
-void stopManager(Manager * manager, void *context)
+void stopManager(Manager * manager, API * api)
 {
-  manager->manager->RemoveWatcher(OnNotification, context);
+  manager->manager->RemoveWatcher(OnNotification, api);
   freeManager(manager);
 }
 

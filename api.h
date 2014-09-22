@@ -42,6 +42,8 @@ extern "C" {
 
 #endif
 
+typedef void API;
+
 #include "api/manager.h"
 #include "api/node.h"
 #include "api/value.h"
