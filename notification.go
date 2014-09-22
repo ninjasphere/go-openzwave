@@ -16,7 +16,7 @@ import (
 
 // The type of notifications received via the API's Notifications() channel.
 type Notification struct {
-	notification *C.Notification
+	inC *C.Notification
 }
 
 // Converts the notification into a string representation.
@@ -27,15 +27,17 @@ func (self Notification) String() string {
 			"notificationType=%s/%s, "+
 			"valueType=%s, "+
 			"valueId=0x%08x]",
-		self.notification.nodeId.homeId,
-		self.notification.nodeId.nodeId,
-		NT.ToEnum(int(self.notification.notificationType)),
-		CODE.ToEnum(int(self.notification.notificationCode)),
-		VT.ToEnum(int(self.notification.valueId.valueType)),
-		self.notification.valueId.id)
+		self.inC.nodeId.homeId,
+		self.inC.nodeId.nodeId,
+		NT.ToEnum(int(self.inC.notificationType)),
+		CODE.ToEnum(int(self.inC.notificationCode)),
+		VT.ToEnum(int(self.inC.valueId.valueType)),
+		self.inC.valueId.id)
 }
 
 func (self api) FreeNotification(apiNotification Notification) {
-	C.freeNotification(apiNotification.notification)
+	C.freeNotification(apiNotification.inC)
+}
+
 }
 
