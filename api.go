@@ -100,9 +100,6 @@ type API interface {
 	// notifications are received on this channel
 	Notifications() chan Notification
 
-	// free a notification after use.
-	FreeNotification(Notification)
-
 	// The EventLoop should return from the function when a signal is received on this channel
 	QuitSignal() chan Signal
 }

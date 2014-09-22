@@ -35,7 +35,7 @@ func (self Notification) String() string {
 		self.inC.valueId.id)
 }
 
-func (self api) FreeNotification(apiNotification Notification) {
+func (apiNotification *Notification) Free() {
 	C.freeNotification(apiNotification.inC)
 }
 
