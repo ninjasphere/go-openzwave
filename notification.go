@@ -11,7 +11,6 @@ import (
 
 	"github.com/ninjasphere/go-openzwave/CODE"
 	"github.com/ninjasphere/go-openzwave/NT"
-	"github.com/ninjasphere/go-openzwave/VT"
 )
 
 // The type of notifications received via the API's Notifications() channel.
@@ -25,14 +24,14 @@ func (self Notification) String() string {
 		"Notification["+
 			"node=0x%08x:0x%02x, "+
 			"notificationType=%s/%s, "+
-			"valueType=%s, "+
-			"valueId=0x%08x]",
+			"valueId=%s, "+
+			"value=%s]",
 		self.inC.nodeId.homeId,
 		self.inC.nodeId.nodeId,
 		NT.ToEnum(int(self.inC.notificationType)),
 		CODE.ToEnum(int(self.inC.notificationCode)),
-		VT.ToEnum(int(self.inC.valueId.valueType)),
-		self.inC.valueId.id)
+		self.GetValueID(),
+		self.GetValue())
 }
 
 func (apiNotification *Notification) Free() {
@@ -40,10 +39,9 @@ func (apiNotification *Notification) Free() {
 }
 
 func (notification *Notification) GetValueID() *ValueID {
-	return &ValueID{notification.inC.valueId};
+	return &ValueID{notification.inC.valueId}
 }
 
 func (notification *Notification) GetValue() *Value {
-	return &Value{notification.inC.value};
+	return &Value{notification.inC.value}
 }
-
