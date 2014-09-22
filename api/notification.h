@@ -11,5 +11,5 @@ typedef struct Notification {
 extern void freeNotification(Notification *);
 
 #ifdef __cplusplus
-extern Notification * exportNotification(Manager * manager, OpenZWave::Notification const* notification);
+extern Notification * exportNotification(API * manager, OpenZWave::Notification const* notification);
 #endif

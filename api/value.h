@@ -23,6 +23,6 @@ typedef struct Value {
 extern void freeValue(Value *);
 
 #ifdef __cplusplus
-extern ValueID * exportValueID(Manager *, OpenZWave::ValueID const &);
-extern Value * exportValue(Manager *, OpenZWave::ValueID const &);
+extern ValueID * exportValueID(API *, OpenZWave::ValueID const &);
+extern Value * exportValue(API *, OpenZWave::ValueID const &);
 #endif

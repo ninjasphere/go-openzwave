@@ -50,6 +50,9 @@ typedef void API;
 #include "api/notification.h"
 #include "api/options.h"
 
+extern Manager * startManager(API * api);
+extern void stopManager(API * api);
+
 #ifdef __cplusplus
 #include "_cgo_export.h"
 }

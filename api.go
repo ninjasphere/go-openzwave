@@ -217,7 +217,7 @@ func (self api) Run(loop EventLoop) int {
 		cSelf := unsafe.Pointer(&self) // a reference to self
 
 		self.manager = C.startManager(cSelf) // start the manager
-		defer C.stopManager(self.manager, cSelf)
+		defer C.stopManager(cSelf)
 
 		cDevice := C.CString(self.device) // allocate a C string for device
 		defer C.free(unsafe.Pointer(cDevice))
