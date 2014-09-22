@@ -14,7 +14,7 @@ import (
 )
 
 type ValueID struct {
-	inC *C.ValueID
+	cRef *C.ValueID
 }
 
 func (self ValueID) String() string {
@@ -24,14 +24,14 @@ func (self ValueID) String() string {
 			"commandClassId=%s, "+
 			"instance=%d, "+
 			"index=%d]",
-		VT.ToEnum(int(self.inC.valueType)),
-		CC.ToEnum(int(self.inC.commandClassId)),
-		uint(self.inC.instance),
-		uint(self.inC.index))
+		VT.ToEnum(int(self.cRef.valueType)),
+		CC.ToEnum(int(self.cRef.commandClassId)),
+		uint(self.cRef.instance),
+		uint(self.cRef.index))
 }
 
 type Value struct {
-	inC *C.Value
+	cRef *C.Value
 }
 
 func (self Value) String() string {
@@ -44,11 +44,11 @@ func (self Value) String() string {
 			"min=%d "+
 			"max=%d "+
 			"isSet=%v]",
-		C.GoString(self.inC.value),
-		C.GoString(self.inC.label),
-		C.GoString(self.inC.units),
-		C.GoString(self.inC.help),
-		self.inC.min,
-		self.inC.max,
-		self.inC.isSet)
+		C.GoString(self.cRef.value),
+		C.GoString(self.cRef.label),
+		C.GoString(self.cRef.units),
+		C.GoString(self.cRef.help),
+		self.cRef.min,
+		self.cRef.max,
+		self.cRef.isSet)
 }
