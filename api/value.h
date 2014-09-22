@@ -24,5 +24,5 @@ extern void freeValue(Value *);
 
 #ifdef __cplusplus
 extern ValueID * exportValueID(Manager *, OpenZWave::ValueID const &);
-extern Value * newValue(OpenZWave::Value const &);
+extern Value * exportValue(Manager *, OpenZWave::ValueID const &);
 #endif

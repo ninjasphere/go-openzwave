@@ -351,5 +351,5 @@ func onNotificationWrapper(notification *C.Notification, context unsafe.Pointer)
 //export asManager
 func asManager(context unsafe.Pointer) C.Manager {
 	self := (*api)(context)
-	return self.manager;
+	return self.manager
 }

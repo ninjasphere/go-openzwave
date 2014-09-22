@@ -19,6 +19,7 @@ Notification * exportNotification(Manager * manager, OpenZWave::Notification con
 	    ? notification->GetNotification()
 	    : -1;
 	  result->valueId = exportValueID(manager, notification->GetValueID());
+	  result->value = exportValue(manager, notification->GetValueID());
 	  return result;
 }
 
@@ -30,6 +31,9 @@ void freeNotification(Notification * notification)
 	}
 	if (notification->valueId) {
 		freeValueID(notification->valueId);
+	}
+	if (notification->value) {
+		freeValue(notification->value);
 	}
 	free(notification);
 }

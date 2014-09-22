@@ -5,6 +5,7 @@ typedef struct Notification {
   NodeId    nodeId;
   Node      *node; //owned
   ValueID	*valueId; //owned
+  Value     *value; // owned
 } Notification;
 
 extern void freeNotification(Notification *);
