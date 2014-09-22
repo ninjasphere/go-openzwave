@@ -39,5 +39,11 @@ func (self api) FreeNotification(apiNotification Notification) {
 	C.freeNotification(apiNotification.inC)
 }
 
+func (notification *Notification) GetValueID() *ValueID {
+	return &ValueID{notification.inC.valueId};
+}
+
+func (notification *Notification) GetValue() *Value {
+	return &Value{notification.inC.value};
 }
 
