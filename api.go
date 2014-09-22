@@ -216,7 +216,7 @@ func (self api) Run(loop EventLoop) int {
 	go func() {
 		cSelf := unsafe.Pointer(&self) // a reference to self
 
-		self.manager = C.startManager(cSelf) // start the manager
+		C.startManager(cSelf) // start the manager
 		defer C.stopManager(cSelf)
 
 		cDevice := C.CString(self.device) // allocate a C string for device
@@ -317,4 +317,10 @@ func onNotificationWrapper(notification *C.Notification, context unsafe.Pointer)
 func asManager(context unsafe.Pointer) *C.Manager {
 	self := (*api)(context)
 	return self.manager
+}
+
+//export setManager
+func setManager(context unsafe.Pointer, manager *C.Manager) {
+     api := (*api)(context);
+     api.manager = manager;
 }
