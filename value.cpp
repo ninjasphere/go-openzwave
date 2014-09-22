@@ -28,18 +28,18 @@ void freeValue(Value * valueObj)
 
 Value * exportValue(API * api, OpenZWave::ValueID const &valueId)
 {
-  Manager * manager = asManager(api);
   Value * const tmp = newValue();
 
   std::string value;
 
-  if (manager->manager->GetValueAsString(valueId, &value)) {
+  OpenZWave::Manager * const zwManager = OpenZWave::Manager::Get();
+
+  if (zwManager->GetValueAsString(valueId, &value)) {
     tmp->value = strdup(value.c_str());
   } else {
     tmp->value = strdup("");
   }
 
-  OpenZWave::Manager * const zwManager = manager->manager;
 
   tmp->valueId.id = valueId.GetId();
   tmp->valueId.valueType = valueId.GetType();

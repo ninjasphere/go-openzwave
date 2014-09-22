@@ -32,11 +32,9 @@ import (
 type Signal struct{}
 
 type api struct {
-	options       C.Options // an opaque reference to C++ Options object
 	notifications chan *Notification
 	device        string
 	quit          chan Signal
-	manager       *C.Manager
 	logger        Logger
 }
 
@@ -59,13 +57,12 @@ func BuildAPI(configPath string, userPath string, overrides string) Configurator
 	)
 	//defer C.free(unsafe.Pointer(cConfigPath))
 	//defer C.free(unsafe.Pointer(cUserPath))
-	//defer C.free(unsafe.Pointer(cOverrides))
+	//defer C.free(unsafe.Pointer(cOverrides)
+	C.startOptions(cConfigPath, cUserPath, cOverrides)
 	return api{
-		C.startOptions(cConfigPath, cUserPath, cOverrides),
 		make(chan *Notification),
 		defaultDriverName,
 		make(chan Signal, 0),
-		nil,
 		defaultLogger{}}
 }
 
@@ -116,7 +113,7 @@ func (self api) AddIntOption(option string, value int) Configurator {
 	var cOption *C.char = C.CString(option)
 	//defer C.free(unsafe.Pointer(cOption))
 
-	C.addIntOption(self.options, cOption, C.int(value))
+	C.addIntOption(cOption, C.int(value))
 	return self
 }
 
@@ -125,7 +122,7 @@ func (self api) AddBoolOption(option string, value bool) Configurator {
 	var cOption *C.char = C.CString(option)
 
 	//defer C.free(unsafe.Pointer(cOption))
-	C.addBoolOption(self.options, cOption, C._Bool(value))
+	C.addBoolOption(cOption, C._Bool(value))
 	return self
 }
 
@@ -156,7 +153,7 @@ func (self api) Run(loop EventLoop) int {
 
 	// lock the options object, now we are done configuring it
 
-	C.endOptions(self.options)
+	C.endOptions()
 
 	// allocate various channels we need
 
@@ -269,7 +266,7 @@ func (self api) Run(loop EventLoop) int {
 					startQuit <- Signal{}
 				}()
 
-				C.addDriver(self.manager, cDevice)
+				C.addDriver(cDevice)
 
 				go func() {
 					// wait until something (OS signal handler or device existence monitor) decides we need to terminate
@@ -283,7 +280,7 @@ func (self api) Run(loop EventLoop) int {
 					})
 
 					// try to remove the driver
-					if C.removeDriver(self.manager, cDevice) {
+					if C.removeDriver(cDevice) {
 						self.quit <- Signal{}
 						abortTimer.Stop() // if we get to here in a timely fashion we can stop the abort timer
 					} else {
@@ -318,16 +315,4 @@ func (self api) Logger() Logger {
 func onNotificationWrapper(notification *C.Notification, context unsafe.Pointer) {
 	self := (*api)(context)
 	self.notifications <- (*Notification)(notification.goRef)
-}
-
-//export asManager
-func asManager(context unsafe.Pointer) *C.Manager {
-	self := (*api)(context)
-	return self.manager
-}
-
-//export setManager
-func setManager(context unsafe.Pointer, manager *C.Manager) {
-	api := (*api)(context)
-	api.manager = manager
 }

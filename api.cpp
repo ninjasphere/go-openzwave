@@ -15,16 +15,13 @@ static void OnNotification (OpenZWave::Notification const* notification, API * a
 
 void startManager(API * api)
 {
-  Manager * manager = newManager(OpenZWave::Manager::Create());
-  manager->manager->AddWatcher( OnNotification, api );
-  setManager(api, manager);
+  OpenZWave::Manager::Create();
+  OpenZWave::Manager::Get()->AddWatcher( OnNotification, api );
 }
 
 void stopManager(API * api)
 {
-  Manager * manager = asManager(api);
-  manager->manager->RemoveWatcher(OnNotification, api);
-  freeManager(manager);
-  setManager(api, 0);
+  OpenZWave::Manager::Get()->RemoveWatcher(OnNotification, api);
+  OpenZWave::Manager::Destroy();
 }
 

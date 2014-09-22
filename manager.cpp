@@ -1,23 +1,11 @@
 #include "api.h"
 
-Manager * newManager(OpenZWave::Manager * cppObj) {
-  Manager * manager = (Manager *)malloc((sizeof *manager));
-  *manager = (struct Manager){ cppObj };
-  return manager;
+bool addDriver(char * device)
+{
+  return OpenZWave::Manager::Get()->AddDriver(device);
 }
 
-void freeManager(Manager * manager)
+bool removeDriver(char * device)
 {
-  OpenZWave::Manager::Destroy();
-  free(manager);
-}
-
-bool addDriver(Manager * manager, char * device)
-{
-  return manager->manager->AddDriver(device);
-}
-
-bool removeDriver(Manager * manager, char * device)
-{
-  return manager->manager->RemoveDriver(device);
+  return OpenZWave::Manager::Get()->RemoveDriver(device);
 }

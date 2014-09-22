@@ -27,8 +27,6 @@
 #include "Options.h"
 #include "platform/Log.h"
 
-#define OPENZWAVE_MANAGER OpenZWave::Manager
-
 //
 // The following ifdef magic is absolutely required to ensure that #cgo that doesn't understand how to parse C++ headers doesn't
 // see the extern "C" declaration during the C parse of these headers. Failure to include this magic will result in link error
@@ -37,9 +35,6 @@
 //
 extern "C" {
 #else
-
-#define OPENZWAVE_MANAGER void
-
 #endif
 
 typedef void API;

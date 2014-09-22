@@ -25,8 +25,7 @@ void freeNode(Node * node)
 Node * exportNode(API * api, uint32_t homeId, uint8_t nodeId)
 {
   Node * result = newNode(homeId, nodeId);
-  Manager * manager = asManager(api);
-  OpenZWave::Manager * cppRef = manager->manager;
+  OpenZWave::Manager * cppRef = OpenZWave::Manager::Get();
 
   result->basicType = cppRef->GetNodeBasic(homeId, nodeId);
   result->genericType = cppRef->GetNodeGeneric(homeId, nodeId);
