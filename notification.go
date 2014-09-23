@@ -49,6 +49,10 @@ func asNotification(cRef *C.Notification) *Notification {
 	return (*Notification)(unsafe.Pointer(cRef.goRef))
 }
 
+func (self *Notification) GetNotificationType() *NT.Enum {
+	return NT.ToEnum(int(self.cRef.notificationType))
+}
+
 //export newGoNotification
 func newGoNotification(cRef *C.Notification) unsafe.Pointer {
 	goRef := &Notification{cRef}

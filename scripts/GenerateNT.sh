@@ -37,14 +37,14 @@ type Enum struct {
      Name string
 }
 
-func ToEnum(code int) Enum {	
+func ToEnum(code int) *Enum {	
      var x int;
      if code < 0 || code >= UNKNOWN {
      	x = UNKNOWN-1
      } else {
 	x = code
      }	
-     return Enum{code,names[x]}
+     return &Enum{code,names[x]}
 }
 
 func (val Enum) IsValid() bool {
