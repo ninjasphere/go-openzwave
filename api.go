@@ -80,8 +80,10 @@ type Configurator interface {
 	SetLogger(Logger) Configurator
 	// Add an integer option.
 	AddIntOption(option string, value int) Configurator
-	// Add a boolean ``option.
+	// Add a boolean option.
 	AddBoolOption(option string, value bool) Configurator
+	// Add a string option.
+	AddStringOption(option string, value string, append bool) Configurator
 	// Set the device name used by the driver.
 	SetDeviceName(device string) Configurator
 	// Conclude the configuration and start running the supplied event loop. The
@@ -123,6 +125,15 @@ func (self api) AddBoolOption(option string, value bool) Configurator {
 
 	//defer C.free(unsafe.Pointer(cOption))
 	C.addBoolOption(cOption, C._Bool(value))
+	return self
+}
+
+// configure the C++ Options object with a boolean value
+func (self api) AddStringOption(option string, value string, append bool) Configurator {
+	var cOption *C.char = C.CString(option)
+
+	//defer C.free(unsafe.Pointer(cOption))
+	C.addStringOption(cOption, C.CString(value), C._Bool(append))
 	return self
 }
 

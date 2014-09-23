@@ -15,6 +15,11 @@ void addBoolOption(char * option, bool flag)
   OpenZWave::Options::Get()->AddOptionBool(option, flag);
 }
 
+void addStringOption(char * option, char * value, bool append)
+{
+  OpenZWave::Options::Get()->AddOptionString(option, value, append);
+}
+
 void endOptions()
 {
   OpenZWave::Options::Get()->Lock();
