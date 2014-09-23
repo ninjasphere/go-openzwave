@@ -19,11 +19,11 @@ clean: clean-src
 	go clean -i
 	rm -rf $(GENERATED) 
 
-fmt:
-	gofmt -s -w *.go
-
 clean-src:
 	find . -name '*~' -exec rm {} \;
+
+fmt:
+	gofmt -s -w *.go
 
 deps:	libs
 	scripts/GenerateNT.sh
