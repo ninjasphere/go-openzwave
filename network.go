@@ -43,8 +43,6 @@ func (self *network) Notify(api API, notification Notification) {
 	case NT.GROUP:
 		// not much to do here unless we end up needing to configure group configurations
 		// in order to rescue a broken ninja device.
-		unhandled(api, notification)
-		break
 
 	case NT.AWAKE_NODES_QUERIED:
 	case NT.ALL_NODES_QUERIED_SOME_DEAD:
@@ -53,36 +51,48 @@ func (self *network) Notify(api API, notification Notification) {
 		break
 		// move network into running state
 
+	// notifications
+	case NT.NOTIFICATION:
 	default:
 		node := notification.GetNode()
 		if node.GetId() < MAX_NODES {
-			self.handleNodeEvent(api, notification, self.takeNode(notification))
+			self.handleNodeEvent(api, notification, self, self.takeNode(notification))
 		} else {
 			unexpected(api, notification)
 		}
 	}
 }
 
-func (self *network) handleNodeEvent(api API, notification Notification, node Node) {
+func (self *network) handleNodeEvent(api API, notification Notification, net *network, nodeV Node) {
 
 	notificationType := notification.GetNotificationType()
+	n, ok := net.nodes[nodeV.GetId()]
+
 	switch notificationType.Code {
+	case NT.NODE_REMOVED:
+		if ok {
+			n.Notify(api, notification)
+			delete(net.nodes, nodeV.GetId())
+		}
+		break
+
 	case NT.NODE_NEW:
 	case NT.NODE_ADDED:
-	case NT.NODE_REMOVED:
+		if !ok {
+			net.nodes[nodeV.GetId()] = nodeV.(*node)
+		}
+
 	//
 	// node level events
 	//
 	case NT.NODE_NAMING:
 	case NT.NODE_PROTOCOL_INFO:
 		// log the related information for diagnostics purposes
-		break
 
 	case NT.ESSENTIAL_NODE_QUERIES_COMPLETE:
 	case NT.NODE_QUERIES_COMPLETE:
 		// move the node into the initialized state
 		// begin admission processing for the node
-		break
 
 	case NT.VALUE_ADDED:
 	case NT.VALUE_REMOVED:
@@ -90,14 +100,11 @@ func (self *network) handleNodeEvent(api API, notification Notification, node No
 	case NT.VALUE_REFRESHED:
 		// update node state
 		// generate a node changed event
-		break
-
-	// notifications
-	case NT.NOTIFICATION:
-		// network or node level events
-		break
 
 	default:
+		// network or node level events
+		n.Notify(api, notification)
+		break
 
 	}
 }

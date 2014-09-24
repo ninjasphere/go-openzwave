@@ -12,6 +12,7 @@ import (
 )
 
 type Node interface {
+	Notifiable
 	GetHomeId() uint32
 	GetId() uint8
 }
@@ -69,4 +70,8 @@ func (self *node) GetHomeId() uint32 {
 
 func (self *node) GetId() uint8 {
 	return uint8(self.cRef.nodeId.nodeId)
+}
+
+func (self *node) Notify(api API, notification Notification) {
+	// TODO
 }
