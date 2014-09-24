@@ -32,7 +32,7 @@ func (self Notification) String() string {
 		self.GetValue())
 }
 
-func (apiNotification *Notification) Free() {
+func (apiNotification *Notification) free() {
 	C.freeNotification(apiNotification.cRef)
 }
 
