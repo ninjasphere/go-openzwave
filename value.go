@@ -15,6 +15,7 @@ import (
 )
 
 type Value interface {
+	Notifiable
 }
 
 type value struct {
@@ -58,4 +59,8 @@ func newGoValue(cRef *C.Value) unsafe.Pointer {
 	goRef := &value{cRef}
 	cRef.goRef = unsafe.Pointer(goRef)
 	return cRef.goRef
+}
+
+func (self *value) Notify(api API, notification Notification) {
+	// TODO
 }

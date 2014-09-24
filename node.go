@@ -18,7 +18,18 @@ type Node interface {
 }
 
 type node struct {
-	cRef *C.Node
+	cRef    *C.Node
+	classes map[uint8]*valueClass
+}
+
+type valueClass struct {
+	commandClass uint8
+	instances    map[uint8]*valueInstance
+}
+
+type valueInstance struct {
+	instance uint8
+	values   map[uint8]*value
 }
 
 func (self *node) String() string {
@@ -59,7 +70,7 @@ func asNode(cRef *C.Node) Node {
 
 //export newGoNode
 func newGoNode(cRef *C.Node) unsafe.Pointer {
-	goRef := &node{cRef}
+	goRef := &node{cRef, make(map[uint8]*valueClass)}
 	cRef.goRef = unsafe.Pointer(goRef)
 	return cRef.goRef
 }
