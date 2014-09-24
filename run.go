@@ -13,10 +13,10 @@ import (
 )
 
 const (
-	EXIT_REMOVE_DRIVER_BLOCKED = 127
-	EXIT_DEVICE_MONITOR_QUIT   = 126
-	EXIT_INTERRUPT             = 125
-	EXIT_EVENT_LOOP_BLOCKED    = 124
+	EXIT_QUIT_FAILED       = 127 // the event loop did not exit
+	EXIT_INTERRUPTED       = 126 // something interrupted the current process
+	EXIT_INTERRUPTED_AGAIN = 125 // something interrupted the current process (twice)
+	EXIT_INTERRUPT_FAILED  = 124 // something interrupted the current process, but something took too long to clean up
 )
 
 var defaultEventLoop = func(api API) int {
@@ -71,13 +71,13 @@ func (self api) Run() int {
 		// but, just in case this doesn't happen, set up an abort timer.
 		time.AfterFunc(time.Second*5, func() {
 			self.logger.Errorf("timed out while waiting for event loop to quit - aborting now\n")
-			exit <- EXIT_EVENT_LOOP_BLOCKED
+			exit <- EXIT_INTERRUPT_FAILED
 		})
 
 		// the user is impatient - just die now
 		signal = <-signals
 		self.logger.Errorf("received 2nd %v signal - aborting now\n", signal)
-		exit <- EXIT_INTERRUPT
+		exit <- EXIT_INTERRUPTED_AGAIN
 	}()
 
 	//
@@ -167,7 +167,7 @@ func (self api) Run() int {
 					// to guarantee successful operation.
 					abortTimer := time.AfterFunc(5*time.Second, func() {
 						self.logger.Errorf("failed to remove driver - exiting driver process\n")
-						exit <- EXIT_REMOVE_DRIVER_BLOCKED
+						exit <- EXIT_QUIT_FAILED
 					})
 
 					// try to remove the driver
@@ -188,7 +188,7 @@ func (self api) Run() int {
 			}
 		}
 
-		exit <- EXIT_DEVICE_MONITOR_QUIT
+		exit <- EXIT_INTERRUPTED
 	}()
 
 	return <-exit
