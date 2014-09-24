@@ -20,6 +20,11 @@ type Notification interface {
 	GetNotificationType() *NT.Enum
 }
 
+// Implemented by things that can receive notifications.
+type Notifiable interface {
+	Notify(API, Notification)
+}
+
 // The type of notifications received via the API's Notifications() channel.
 type notification struct {
 	cRef *C.Notification
@@ -64,4 +69,46 @@ func newGoNotification(cRef *C.Notification) unsafe.Pointer {
 	goRef := &notification{cRef}
 	cRef.goRef = unsafe.Pointer(goRef)
 	return cRef.goRef
+}
+
+//
+// Swap the cRef of the receiver's node with cRef of the specified node.
+//
+// The intent is to update an existing go representation of a node with
+// the latest *C.Node from the notification and then recycle
+// the old *C.Node by attaching it to the notification where it will then
+// be freed.
+//
+func (self *notification) swapNodeImpl(existing Node) Node {
+	if existing != nil {
+		existingGoNode := existing.(*node)
+
+		// swap the go pointers first
+		swapGo := self.cRef.node.goRef
+		self.cRef.node.goRef = existingGoNode.cRef.goRef
+		existingGoNode.cRef.goRef = swapGo
+
+		// then swap the cRef pointers
+		swap := self.cRef.node
+		self.cRef.node = existingGoNode.cRef
+		existingGoNode.cRef = swap
+	} else {
+		existing = Node((*node)(self.cRef.node.goRef))
+		self.cRef.node = nil
+	}
+	return existing
+}
+
+//
+// called for unexpected notifications.
+//
+func unexpected(api API, notification Notification) {
+	api.Logger().Warningf("unexpected notification received %v]\n", notification)
+}
+
+//
+// called for expected notifications that are not handled
+//
+func unhandled(api API, notification Notification) {
+	api.Logger().Debugf("unhandled notification received %v]\n", notification)
 }

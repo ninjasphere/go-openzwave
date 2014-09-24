@@ -64,7 +64,8 @@ func BuildAPI(configPath string, userPath string, overrides string) Configurator
 		nil,
 		defaultDriverName,
 		make(chan Signal, 0),
-		&defaultLogger{}}
+		&defaultLogger{},
+		make(map[uint32]*network)}
 }
 
 // configure the C++ Options object with an integer value

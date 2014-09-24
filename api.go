@@ -30,6 +30,7 @@ type api struct {
 	device        string
 	quitEventLoop chan Signal
 	logger        Logger
+	networks      map[uint32]*network
 }
 
 //
@@ -50,4 +51,13 @@ func (self *api) QuitSignal() chan Signal {
 
 func (self *api) Logger() Logger {
 	return self.logger
+}
+
+func (self *api) getNetwork(homeId uint32) Network {
+	net, ok := self.networks[homeId]
+	if !ok {
+		net = newNetwork(homeId)
+		self.networks[homeId] = net
+	}
+	return net
 }
