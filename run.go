@@ -198,9 +198,9 @@ func (self api) Run() int {
 //export onNotificationWrapper
 func onNotificationWrapper(cNotification *C.Notification, context unsafe.Pointer) {
 	self := (*api)(context)
-	goNotification := (*Notification)(cNotification.goRef)
+	goNotification := (*notification)(cNotification.goRef)
 	if self.callback != nil {
-		self.callback(self, goNotification)
+		self.callback(self, Notification(*goNotification))
 	}
 	goNotification.free()
 }

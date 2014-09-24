@@ -14,11 +14,14 @@ import (
 	"github.com/ninjasphere/go-openzwave/VT"
 )
 
-type Value struct {
+type Value interface {
+}
+
+type value struct {
 	cRef *C.Value
 }
 
-func (self Value) String() string {
+func (self value) String() string {
 	return fmt.Sprintf(
 		"Value["+
 			"type=%v, "+
@@ -46,13 +49,13 @@ func (self Value) String() string {
 }
 
 // convert a reference from the C Value to the Go Value
-func asValue(cRef *C.Value) *Value {
-	return (*Value)(unsafe.Pointer(cRef.goRef))
+func asValue(cRef *C.Value) Value {
+	return Value(*(*value)(unsafe.Pointer(cRef.goRef)))
 }
 
 //export newGoValue
 func newGoValue(cRef *C.Value) unsafe.Pointer {
-	goRef := &Value{cRef}
+	goRef := &value{cRef}
 	cRef.goRef = unsafe.Pointer(goRef)
 	return cRef.goRef
 }

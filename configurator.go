@@ -128,7 +128,7 @@ func (self api) SetEventLoop(loop EventLoop) Configurator {
 // MUST NOT block; MUST NOT hand the reference to the notification to a goroutine which lives beyond
 // the callback call; MUST NOT store the reference to the notification in a structure that lives beyond
 // the duration of the callback call.
-type Callback func(API, *Notification)
+type Callback func(API, Notification)
 
 // set the synchronous call back
 func (self api) SetCallback(callback Callback) Configurator {

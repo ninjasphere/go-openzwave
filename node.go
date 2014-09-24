@@ -11,11 +11,14 @@ import (
 	"unsafe"
 )
 
-type Node struct {
+type Node interface {
+}
+
+type node struct {
 	cRef *C.Node
 }
 
-func (self Node) String() string {
+func (self node) String() string {
 	cRef := self.cRef
 
 	return fmt.Sprintf(
@@ -47,13 +50,13 @@ func (self Node) String() string {
 }
 
 // convert a reference from the C Node to the Go Node
-func asNode(cRef *C.Node) *Node {
-	return (*Node)(unsafe.Pointer(cRef.goRef))
+func asNode(cRef *C.Node) Node {
+	return Node(*(*node)(unsafe.Pointer(cRef.goRef)))
 }
 
 //export newGoNode
 func newGoNode(cRef *C.Node) unsafe.Pointer {
-	goRef := &Node{cRef}
+	goRef := &node{cRef}
 	cRef.goRef = unsafe.Pointer(goRef)
 	return cRef.goRef
 }

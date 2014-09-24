@@ -6,7 +6,7 @@ import (
 
 // handles notifications from OpenZWAVE and updates the network and node object models
 // intent is to export a much simpler event model to the ninja driver itself.
-func notificationHandler(notification *Notification) {
+func notificationHandler(notification Notification) {
 	notificationType := notification.GetNotificationType()
 	switch notificationType.Code {
 
