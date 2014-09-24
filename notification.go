@@ -14,6 +14,7 @@ import (
 	"github.com/ninjasphere/go-openzwave/NT"
 )
 
+// The type of notifications received from the API
 type Notification interface {
 	GetNode() Node
 	GetNotificationType() *NT.Enum
@@ -25,7 +26,7 @@ type notification struct {
 }
 
 // Converts the notification into a string representation.
-func (self notification) String() string {
+func (self *notification) String() string {
 	return fmt.Sprintf(
 		"Notification["+
 			"notificationType=%v/%v, "+
@@ -37,24 +38,24 @@ func (self notification) String() string {
 		self.GetValue())
 }
 
-func (apiNotification notification) free() {
+func (apiNotification *notification) free() {
 	C.freeNotification(apiNotification.cRef)
 }
 
-func (self notification) GetValue() Value {
+func (self *notification) GetValue() Value {
 	return asValue(self.cRef.value)
 }
 
-func (self notification) GetNode() Node {
+func (self *notification) GetNode() Node {
 	return asNode(self.cRef.node)
 }
 
 // given a C notification, return the equivalent Go notification
-func asNotification(cRef *C.Notification) *Notification {
-	return (*Notification)(unsafe.Pointer(cRef.goRef))
+func asNotification(cRef *C.Notification) Notification {
+	return Notification((*notification)(cRef.goRef))
 }
 
-func (self notification) GetNotificationType() *NT.Enum {
+func (self *notification) GetNotificationType() *NT.Enum {
 	return NT.ToEnum(int(self.cRef.notificationType))
 }
 

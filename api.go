@@ -44,10 +44,10 @@ type API interface {
 	Logger() Logger
 }
 
-func (self api) QuitSignal() chan Signal {
+func (self *api) QuitSignal() chan Signal {
 	return self.quitEventLoop
 }
 
-func (self api) Logger() Logger {
+func (self *api) Logger() Logger {
 	return self.logger
 }

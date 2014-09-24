@@ -40,7 +40,7 @@ var defaultEventLoop = func(api API) int {
 // lockup during driver removal processing. The exit code identifies which path
 // caused the exit to occur.
 //
-func (self api) Run() int {
+func (self *api) Run() int {
 
 	// lock the options object, now we are done configuring it
 
@@ -105,7 +105,7 @@ func (self api) Run() int {
 	//
 
 	go func() {
-		cSelf := unsafe.Pointer(&self) // a reference to self
+		cSelf := unsafe.Pointer(self) // a reference to self
 
 		C.startManager(cSelf) // start the manager
 		defer C.stopManager(cSelf)
@@ -197,10 +197,13 @@ func (self api) Run() int {
 
 //export onNotificationWrapper
 func onNotificationWrapper(cNotification *C.Notification, context unsafe.Pointer) {
+	// marshal from C to Go
 	self := (*api)(context)
 	goNotification := (*notification)(cNotification.goRef)
 	if self.callback != nil {
-		self.callback(self, Notification(*goNotification))
+		self.callback(self, Notification(goNotification))
 	}
+
+	// release the notification
 	goNotification.free()
 }

@@ -12,13 +12,15 @@ import (
 )
 
 type Node interface {
+	GetHomeId() uint32
+	GetId() uint8
 }
 
 type node struct {
 	cRef *C.Node
 }
 
-func (self node) String() string {
+func (self *node) String() string {
 	cRef := self.cRef
 
 	return fmt.Sprintf(
@@ -51,7 +53,7 @@ func (self node) String() string {
 
 // convert a reference from the C Node to the Go Node
 func asNode(cRef *C.Node) Node {
-	return Node(*(*node)(unsafe.Pointer(cRef.goRef)))
+	return Node((*node)(cRef.goRef))
 }
 
 //export newGoNode
@@ -59,4 +61,12 @@ func newGoNode(cRef *C.Node) unsafe.Pointer {
 	goRef := &node{cRef}
 	cRef.goRef = unsafe.Pointer(goRef)
 	return cRef.goRef
+}
+
+func (self *node) GetHomeId() uint32 {
+	return uint32(self.cRef.nodeId.homeId)
+}
+
+func (self *node) GetId() uint8 {
+	return uint8(self.cRef.nodeId.nodeId)
 }

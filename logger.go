@@ -19,22 +19,22 @@ type Logger interface {
 type defaultLogger struct {
 }
 
-func (defaultLogger) Infof(message string, args ...interface{}) {
+func (*defaultLogger) Infof(message string, args ...interface{}) {
 	log.Printf(message, args...)
 }
 
-func (defaultLogger) Warningf(message string, args ...interface{}) {
+func (*defaultLogger) Warningf(message string, args ...interface{}) {
 	log.Printf(message, args...)
 }
 
-func (defaultLogger) Errorf(message string, args ...interface{}) {
+func (*defaultLogger) Errorf(message string, args ...interface{}) {
 	log.Printf(message, args...)
 }
 
-func (defaultLogger) Debugf(message string, args ...interface{}) {
+func (*defaultLogger) Debugf(message string, args ...interface{}) {
 	log.Printf(message, args...)
 }
 
-func (defaultLogger) Tracef(message string, args ...interface{}) {
+func (*defaultLogger) Tracef(message string, args ...interface{}) {
 	log.Printf(message, args...)
 }

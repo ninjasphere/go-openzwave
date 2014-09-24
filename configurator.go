@@ -59,16 +59,16 @@ func BuildAPI(configPath string, userPath string, overrides string) Configurator
 	//defer C.free(unsafe.Pointer(cUserPath))
 	//defer C.free(unsafe.Pointer(cOverrides)
 	C.startOptions(cConfigPath, cUserPath, cOverrides)
-	return api{
+	return &api{
 		defaultEventLoop,
 		nil,
 		defaultDriverName,
 		make(chan Signal, 0),
-		defaultLogger{}}
+		&defaultLogger{}}
 }
 
 // configure the C++ Options object with an integer value
-func (self api) AddIntOption(option string, value int) Configurator {
+func (self *api) AddIntOption(option string, value int) Configurator {
 	var cOption *C.char = C.CString(option)
 	//defer C.free(unsafe.Pointer(cOption))
 
@@ -77,7 +77,7 @@ func (self api) AddIntOption(option string, value int) Configurator {
 }
 
 // configure the C++ Options object with a boolean value
-func (self api) AddBoolOption(option string, value bool) Configurator {
+func (self *api) AddBoolOption(option string, value bool) Configurator {
 	var cOption *C.char = C.CString(option)
 
 	//defer C.free(unsafe.Pointer(cOption))
@@ -86,7 +86,7 @@ func (self api) AddBoolOption(option string, value bool) Configurator {
 }
 
 // configure the C++ Options object with a string value
-func (self api) AddStringOption(option string, value string, append bool) Configurator {
+func (self *api) AddStringOption(option string, value string, append bool) Configurator {
 	var cOption *C.char = C.CString(option)
 
 	//defer C.free(unsafe.Pointer(cOption))
@@ -95,7 +95,7 @@ func (self api) AddStringOption(option string, value string, append bool) Config
 }
 
 // set the device name
-func (self api) SetDeviceName(device string) Configurator {
+func (self *api) SetDeviceName(device string) Configurator {
 	if device != "" {
 		self.device = device
 	}
@@ -103,7 +103,7 @@ func (self api) SetDeviceName(device string) Configurator {
 }
 
 // set the logger
-func (self api) SetLogger(logger Logger) Configurator {
+func (self *api) SetLogger(logger Logger) Configurator {
 	self.logger = logger
 	return self
 }
@@ -117,7 +117,7 @@ func (self api) SetLogger(logger Logger) Configurator {
 type EventLoop func(API) int
 
 // set the event loop
-func (self api) SetEventLoop(loop EventLoop) Configurator {
+func (self *api) SetEventLoop(loop EventLoop) Configurator {
 	self.loop = loop
 	return self
 }
@@ -131,7 +131,7 @@ func (self api) SetEventLoop(loop EventLoop) Configurator {
 type Callback func(API, Notification)
 
 // set the synchronous call back
-func (self api) SetCallback(callback Callback) Configurator {
+func (self *api) SetCallback(callback Callback) Configurator {
 	self.callback = callback
 	return self
 }

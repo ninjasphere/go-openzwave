@@ -50,7 +50,7 @@ func (self value) String() string {
 
 // convert a reference from the C Value to the Go Value
 func asValue(cRef *C.Value) Value {
-	return Value(*(*value)(unsafe.Pointer(cRef.goRef)))
+	return Value((*value)(cRef.goRef))
 }
 
 //export newGoValue
