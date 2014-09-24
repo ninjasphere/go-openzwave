@@ -25,11 +25,11 @@ import "C"
 type Signal struct{}
 
 type api struct {
-	loop     EventLoop
-	callback Callback
-	device   string
-	quit     chan Signal
-	logger   Logger
+	loop          EventLoop
+	callback      Callback
+	device        string
+	quitEventLoop chan Signal
+	logger        Logger
 }
 
 //
@@ -45,7 +45,7 @@ type API interface {
 }
 
 func (self api) QuitSignal() chan Signal {
-	return self.quit
+	return self.quitEventLoop
 }
 
 func (self api) Logger() Logger {

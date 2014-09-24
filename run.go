@@ -49,7 +49,7 @@ func (self api) Run() int {
 	// allocate various channels we need
 
 	signals := make(chan os.Signal, 1)        // used to receive OS signals
-	startQuit := make(chan Signal, 2)         // used to indicate we need to quit the event loop
+	shutdownDriver := make(chan Signal, 2)    // used to indicate we need to quit the event loop
 	quitDeviceMonitor := make(chan Signal, 1) // used to indicate to outer loop that it should exit
 	exit := make(chan int, 1)                 // used to indicate we are ready to exit
 
@@ -64,7 +64,7 @@ func (self api) Run() int {
 		self.logger.Infof("received %v signal - commencing shutdown\n", signal)
 
 		// try a graceful shutdown of the event loop
-		startQuit <- Signal{}
+		shutdownDriver <- Signal{}
 		// and the device monitor loop
 		quitDeviceMonitor <- Signal{}
 
@@ -85,21 +85,21 @@ func (self api) Run() int {
 	//    starts the manager
 	//    starts a device monitoroing loop which
 	//       waits for the device to be available
-	// 	 starts a device removal goroutine which raises a startQuit signal when removal of the device is detected
+	// 	 starts a device removal goroutine which raises a shutdownDriver signal when removal of the device is detected
 	//   	 starts the driver
-	//	 starts a go routine that that waits until a startQuit is signaled, then initiates the removal of the driver and quit of the event loop
+	//	 starts a go routine that that waits until a shutdownDriver is signaled, then initiates the removal of the driver and quit of the event loop
 	//	 runs the event loop
 	//
 	// It does not exit until either an OS Interrupt or Kill signal is received or driver removal or event loop blocks for some reason.
 	//
-	// If the device is removed, the monitoring go routine will send a signal via the startQuit channel. The intent is to allow the
+	// If the device is removed, the monitoring go routine will send a signal via the shutdownDriver channel. The intent is to allow the
 	// event loop to exit and have the driver removed.
 	//
-	// The driver removal goroutine waits for the startQuit signal, then attempts to remove the driver. If this completes successfully
+	// The driver removal goroutine waits for the shutdownDriver signal, then attempts to remove the driver. If this completes successfully
 	// it propagates a quit signal to the event loop. It also sets up an abort timer which will exit the process if either
 	// the driver removal or quit signal propagation blocks for some reason.
 	//
-	// If an OS signal is received, the main go routine will send signals to the startQuit and to the quitDeviceMonitor channels.
+	// If an OS signal is received, the main go routine will send signals to the shutdownDriver and to the quitDeviceMonitor channels.
 	// It then waits for another signal, for the outer loop to exit or for a 5 second timeout. When one of these occurs, the
 	// process will exit.
 	//
@@ -154,14 +154,14 @@ func (self api) Run() int {
 					self.logger.Infof("device %s removed\n", self.device)
 
 					// start the removal of the driver
-					startQuit <- Signal{}
+					shutdownDriver <- Signal{}
 				}()
 
 				C.addDriver(cDevice)
 
 				go func() {
 					// wait until something (OS signal handler or device existence monitor) decides we need to terminate
-					<-startQuit
+					<-shutdownDriver
 
 					// we start an abort timer, because if the driver blocks, we need to restart the driver process
 					// to guarantee successful operation.
@@ -172,7 +172,7 @@ func (self api) Run() int {
 
 					// try to remove the driver
 					if C.removeDriver(cDevice) {
-						self.quit <- Signal{}
+						self.quitEventLoop <- Signal{}
 						abortTimer.Stop() // if we get to here in a timely fashion we can stop the abort timer
 					} else {
 						// this is unexpected, if we get to here, let the abort timer do its thing
@@ -184,6 +184,7 @@ func (self api) Run() int {
 				if rc != 0 {
 					done = true
 					exit <- rc
+					return
 				}
 			}
 		}
