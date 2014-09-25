@@ -53,7 +53,7 @@ func (self *api) Logger() Logger {
 	return self.logger
 }
 
-func (self *api) getNetwork(homeId uint32) Network {
+func (self *api) getNetwork(homeId uint32) *network {
 	net, ok := self.networks[homeId]
 	if !ok {
 		net = newNetwork(homeId)

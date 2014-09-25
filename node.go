@@ -84,17 +84,17 @@ func (self *node) GetId() uint8 {
 	return uint8(self.cRef.nodeId.nodeId)
 }
 
-func (self *node) Notify(api API, nt Notification) {
-	notificationType := nt.GetNotificationType()
-	switch notificationType.Code {
+func (self *node) notify(api *api, nt *notification) {
+	notificationType := nt.cRef.notificationType
+	switch notificationType {
 	case NT.VALUE_REMOVED:
-		self.removeValue(nt.(*notification))
+		self.removeValue(nt)
 		break
 
 	case NT.VALUE_ADDED:
 	case NT.VALUE_CHANGED:
 	case NT.VALUE_REFRESHED:
-		self.takeValue(nt.(*notification))
+		self.takeValue(nt)
 		break
 
 	case NT.NODE_NAMING:

@@ -27,7 +27,7 @@ func (self *network) GetHomeId() uint32 {
 	return self.homeId
 }
 
-func (self *network) Notify(api API, nt Notification) {
+func (self *network) notify(api *api, nt *notification) {
 	notificationType := nt.GetNotificationType()
 	switch notificationType.Code {
 
@@ -55,14 +55,14 @@ func (self *network) Notify(api API, nt Notification) {
 	default:
 		node := nt.GetNode()
 		if node.GetId() < MAX_NODES {
-			self.handleNodeEvent(api, nt.(*notification), self, self.takeNode(nt.(*notification)))
+			self.handleNodeEvent(api, nt, self, self.takeNode(nt))
 		} else {
 			unexpected(api, nt)
 		}
 	}
 }
 
-func (self *network) handleNodeEvent(api API, nt *notification, net *network, nodeV *node) {
+func (self *network) handleNodeEvent(api *api, nt *notification, net *network, nodeV *node) {
 
 	notificationType := nt.cRef.notificationType
 	id := (uint8)(nodeV.cRef.nodeId.nodeId)
@@ -72,7 +72,7 @@ func (self *network) handleNodeEvent(api API, nt *notification, net *network, no
 	switch notificationType {
 	case NT.NODE_REMOVED:
 		if ok {
-			n.Notify(api, Notification(nt))
+			n.notify(api, nt)
 			delete(net.nodes, id)
 		}
 		break
@@ -104,7 +104,7 @@ func (self *network) handleNodeEvent(api API, nt *notification, net *network, no
 
 	default:
 		// network or node level events
-		n.Notify(api, Notification(nt))
+		n.notify(api, nt)
 		break
 
 	}

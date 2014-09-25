@@ -60,6 +60,6 @@ func newGoValue(cRef *C.Value) unsafe.Pointer {
 	return cRef.goRef
 }
 
-func (self *value) Notify(api API, notification Notification) {
+func (self *value) notify(api *api, nt *notification) {
 	// TODO
 }
