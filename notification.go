@@ -79,9 +79,9 @@ func newGoNotification(cRef *C.Notification) unsafe.Pointer {
 // the old *C.Node by attaching it to the notification where it will then
 // be freed.
 //
-func (self *notification) swapNodeImpl(existing Node) Node {
+func (self *notification) swapNodeImpl(existing *node) *node {
 	if existing != nil {
-		existingGoNode := existing.(*node)
+		existingGoNode := existing
 
 		// swap the go pointers first
 		swapGo := self.cRef.node.goRef
@@ -93,8 +93,36 @@ func (self *notification) swapNodeImpl(existing Node) Node {
 		self.cRef.node = existingGoNode.cRef
 		existingGoNode.cRef = swap
 	} else {
-		existing = Node((*node)(self.cRef.node.goRef))
+		existing = (*node)(self.cRef.node.goRef)
 		self.cRef.node = nil
+	}
+	return existing
+}
+
+//
+// Swap the cRef of the receiver's node with cRef of the specified node.
+//
+// The intent is to update an existing go representation of a node with
+// the latest *C.Value from the notification and then recycle
+// the old *C.Value by attaching it to the notification where it will then
+// be freed.
+//
+func (self *notification) swapValueImpl(existing *value) *value {
+	if existing != nil {
+		existingGoValue := existing
+
+		// swap the go pointers first
+		swapGo := self.cRef.value.goRef
+		self.cRef.value.goRef = existingGoValue.cRef.goRef
+		existingGoValue.cRef.goRef = swapGo
+
+		// then swap the cRef pointers
+		swap := self.cRef.value
+		self.cRef.value = existingGoValue.cRef
+		existingGoValue.cRef = swap
+	} else {
+		existing = (*value)(self.cRef.value.goRef)
+		self.cRef.value = nil
 	}
 	return existing
 }

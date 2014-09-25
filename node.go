@@ -9,6 +9,8 @@ import "C"
 import (
 	"fmt"
 	"unsafe"
+
+	"github.com/ninjasphere/go-openzwave/NT"
 )
 
 type Node interface {
@@ -83,6 +85,90 @@ func (self *node) GetId() uint8 {
 	return uint8(self.cRef.nodeId.nodeId)
 }
 
-func (self *node) Notify(api API, notification Notification) {
-	// TODO
+func (self *node) Notify(api API, nt Notification) {
+	notificationType := nt.GetNotificationType()
+	switch notificationType.Code {
+	case NT.VALUE_REMOVED:
+		self.removeValue(nt.(*notification))
+		break
+
+	case NT.VALUE_ADDED:
+	case NT.VALUE_CHANGED:
+	case NT.VALUE_REFRESHED:
+		self.takeValue(nt.(*notification))
+		break
+
+	case NT.NODE_NAMING:
+	case NT.NODE_PROTOCOL_INFO:
+		// log the related information for diagnostics purposes
+
+	case NT.ESSENTIAL_NODE_QUERIES_COMPLETE:
+	case NT.NODE_QUERIES_COMPLETE:
+		// move the node into the initialized state
+		// begin admission processing for the node
+		break
+	}
+}
+
+// take the value structure from the notification
+func (self *node) takeValue(nt *notification) *value {
+	commandClassId := (uint8)(nt.cRef.value.valueId.commandClassId)
+	instanceId := (uint8)(nt.cRef.value.valueId.instance)
+	index := (uint8)(nt.cRef.value.valueId.index)
+
+	instance := self.createOrGetInstance(commandClassId, instanceId)
+	v, ok := instance.values[index]
+	if !ok {
+		v = nt.swapValueImpl(nil)
+		instance.values[index] = v
+	} else {
+		nt.swapValueImpl(v)
+	}
+	return v
+}
+
+func (self *node) createOrGetInstance(commandClassId uint8, instanceId uint8) *valueInstance {
+	class, ok := self.classes[commandClassId]
+	if !ok {
+		class = &valueClass{commandClassId, make(map[uint8]*valueInstance)}
+		self.classes[commandClassId] = class
+	}
+	instance, ok := class.instances[instanceId]
+	if !ok {
+		instance = &valueInstance{instanceId, make(map[uint8]*value)}
+		class.instances[instanceId] = instance
+	}
+	return instance
+}
+
+func (self *node) removeValue(nt *notification) {
+	commandClassId := (uint8)(nt.cRef.value.valueId.commandClassId)
+	instanceId := (uint8)(nt.cRef.value.valueId.instance)
+	index := (uint8)(nt.cRef.value.valueId.index)
+
+	class, ok := self.classes[commandClassId]
+	if !ok {
+		return
+	}
+
+	instance, ok := class.instances[instanceId]
+	if !ok {
+		return
+	}
+
+	value, ok := instance.values[index]
+	_ = value
+
+	if !ok {
+		return
+	} else {
+		delete(instance.values, index)
+		if len(instance.values) == 0 {
+			delete(class.instances, instanceId)
+			if len(class.instances) == 0 {
+				delete(self.classes, commandClassId)
+			}
+		}
+	}
+
 }
