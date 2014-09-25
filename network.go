@@ -28,8 +28,8 @@ func (self *network) GetHomeId() uint32 {
 	return self.homeId
 }
 
-func (self *network) Notify(api API, notification Notification) {
-	notificationType := notification.GetNotificationType()
+func (self *network) Notify(api API, nt Notification) {
+	notificationType := nt.GetNotificationType()
 	switch notificationType.Code {
 
 	// network level events
@@ -47,39 +47,41 @@ func (self *network) Notify(api API, notification Notification) {
 	case NT.AWAKE_NODES_QUERIED:
 	case NT.ALL_NODES_QUERIED_SOME_DEAD:
 	case NT.ALL_NODES_QUERIED:
-		unhandled(api, notification)
+		unhandled(api, nt)
 		break
 		// move network into running state
 
 	// notifications
 	case NT.NOTIFICATION:
 	default:
-		node := notification.GetNode()
+		node := nt.GetNode()
 		if node.GetId() < MAX_NODES {
-			self.handleNodeEvent(api, notification, self, self.takeNode(notification))
+			self.handleNodeEvent(api, nt.(*notification), self, self.takeNode(nt.(*notification)))
 		} else {
-			unexpected(api, notification)
+			unexpected(api, nt)
 		}
 	}
 }
 
-func (self *network) handleNodeEvent(api API, notification Notification, net *network, nodeV Node) {
+func (self *network) handleNodeEvent(api API, nt *notification, net *network, nodeV *node) {
 
-	notificationType := notification.GetNotificationType()
-	n, ok := net.nodes[nodeV.GetId()]
+	notificationType := nt.cRef.notificationType
+	id := (uint8)(nodeV.cRef.nodeId.nodeId)
 
-	switch notificationType.Code {
+	n, ok := net.nodes[id]
+
+	switch notificationType {
 	case NT.NODE_REMOVED:
 		if ok {
-			n.Notify(api, notification)
-			delete(net.nodes, nodeV.GetId())
+			n.Notify(api, Notification(nt))
+			delete(net.nodes, id)
 		}
 		break
 
 	case NT.NODE_NEW:
 	case NT.NODE_ADDED:
 		if !ok {
-			net.nodes[nodeV.GetId()] = nodeV.(*node)
+			net.nodes[id] = nodeV
 		}
 
 	//
@@ -103,7 +105,7 @@ func (self *network) handleNodeEvent(api API, notification Notification, net *ne
 
 	default:
 		// network or node level events
-		n.Notify(api, notification)
+		n.Notify(api, Notification(nt))
 		break
 
 	}
@@ -113,14 +115,14 @@ func (self *network) reset() {
 	self.nodes = make(map[uint8]*node)
 }
 
-func (self *network) takeNode(tmp Notification) Node {
-	id := tmp.GetNode().GetId()
+func (self *network) takeNode(nt *notification) *node {
+	id := uint8(nt.cRef.node.nodeId.nodeId)
 	n, ok := self.nodes[id]
 	if !ok {
-		n = tmp.(*notification).swapNodeImpl(nil).(*node)
+		n = nt.swapNodeImpl(nil)
 		self.nodes[id] = n
 	} else {
-		tmp.(*notification).swapNodeImpl(n)
+		nt.swapNodeImpl(n)
 	}
 	return n
 }
