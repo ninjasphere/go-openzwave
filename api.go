@@ -23,7 +23,6 @@ import "C"
 // ask an EventLoop to quit.
 
 type Signal struct{}
-type Event interface{}
 
 type api struct {
 	loop          EventLoop

@@ -18,8 +18,11 @@ type Configurator interface {
 	//Configure the logger implementation.
 	SetLogger(Logger) Configurator
 
-	//Configure the synchronous callback.
+	//Configure the synchronous notification callback.
 	SetNotificationCallback(NotificationCallback) Configurator
+
+	//Configure the synchronous events callback
+	SetEventsCallback(eventCallback EventCallback) Configurator
 
 	//Configure the event loop function
 	SetEventLoop(EventLoop) Configurator
@@ -141,7 +144,7 @@ func (self *api) SetNotificationCallback(callback NotificationCallback) Configur
 type EventCallback func(API, Event)
 
 // set the synchronous call back
-func (self *api) SetEventCallback(eventCallback EventCallback) Configurator {
+func (self *api) SetEventsCallback(eventCallback EventCallback) Configurator {
 	self.eventCallback = eventCallback
 	return self
 }
