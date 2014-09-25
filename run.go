@@ -8,6 +8,7 @@ import "C"
 import (
 	"os"
 	"os/signal"
+	"reflect"
 	"time"
 	"unsafe"
 )
@@ -22,6 +23,9 @@ const (
 var defaultEventLoop = func(api API) int {
 	for {
 		select {
+		case event := <-api.Events():
+			api.Logger().Infof("event received %v %v\n", reflect.TypeOf(event), event)
+			break
 		case quitNow := <-api.QuitSignal():
 			_ = quitNow
 			api.Logger().Debugf("terminating event loop in response to quit.\n")

@@ -23,6 +23,7 @@ import "C"
 // ask an EventLoop to quit.
 
 type Signal struct{}
+type Event interface{}
 
 type api struct {
 	loop          EventLoop
@@ -31,6 +32,7 @@ type api struct {
 	quitEventLoop chan Signal
 	logger        Logger
 	networks      map[uint32]*network
+	events        chan Event
 }
 
 //
@@ -40,6 +42,9 @@ type api struct {
 type API interface {
 	// The EventLoop should return from the function when a signal is received on this channel
 	QuitSignal() chan Signal
+
+	// A channel by which events are delivered to the event loop
+	Events() chan Event
 
 	// the API logger
 	Logger() Logger
@@ -51,6 +56,10 @@ func (self *api) QuitSignal() chan Signal {
 
 func (self *api) Logger() Logger {
 	return self.logger
+}
+
+func (self *api) Events() chan Event {
+	return self.events
 }
 
 func (self *api) getNetwork(homeId uint32) *network {

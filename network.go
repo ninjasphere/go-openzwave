@@ -54,54 +54,53 @@ func (self *network) notify(api *api, nt *notification) {
 	case NT.NOTIFICATION:
 	default:
 		node := nt.GetNode()
-		if node.GetId() < MAX_NODES {
-			self.handleNodeEvent(api, nt, self, self.takeNode(nt))
+		if node.GetId() <= MAX_NODES {
+			self.handleNodeEvent(api, nt, self.takeNode(nt))
 		} else {
 			unexpected(api, nt)
 		}
 	}
 }
 
-func (self *network) handleNodeEvent(api *api, nt *notification, net *network, nodeV *node) {
+func (self *network) handleNodeEvent(api *api, nt *notification, nodeV *node) {
 
 	notificationType := nt.cRef.notificationType
 	id := (uint8)(nodeV.cRef.nodeId.nodeId)
 
-	n, ok := net.nodes[id]
+	n, ok := self.nodes[id]
 
 	switch notificationType {
 	case NT.NODE_REMOVED:
 		if ok {
+			delete(self.nodes, id)
 			n.notify(api, nt)
-			delete(net.nodes, id)
 		}
+		break
+
+	case NT.ESSENTIAL_NODE_QUERIES_COMPLETE:
+	case NT.NODE_QUERIES_COMPLETE:
+		// move the node into the initialized state
+		// begin admission processing for the node
+		// network or node level events
+		n.notify(api, nt)
 		break
 
 	case NT.NODE_NEW:
 	case NT.NODE_ADDED:
 		if !ok {
-			net.nodes[id] = nodeV
+			self.nodes[id] = nodeV
 		}
+		fallthrough
 
 	//
 	// node level events
 	//
 	case NT.NODE_NAMING:
 	case NT.NODE_PROTOCOL_INFO:
-		// log the related information for diagnostics purposes
-
-	case NT.ESSENTIAL_NODE_QUERIES_COMPLETE:
-	case NT.NODE_QUERIES_COMPLETE:
-		// move the node into the initialized state
-		// begin admission processing for the node
-
 	case NT.VALUE_ADDED:
 	case NT.VALUE_REMOVED:
 	case NT.VALUE_CHANGED:
 	case NT.VALUE_REFRESHED:
-		// update node state
-		// generate a node changed event
-
 	default:
 		// network or node level events
 		n.notify(api, nt)

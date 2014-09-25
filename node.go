@@ -13,6 +13,20 @@ import (
 	"github.com/ninjasphere/go-openzwave/NT"
 )
 
+type state int
+
+const (
+	STATE_INIT  state = iota
+	STATE_READY       = iota
+)
+
+//export newGoNode
+func newGoNode(cRef *C.Node) unsafe.Pointer {
+	goRef := &node{cRef, make(map[uint8]*valueClass), STATE_INIT}
+	cRef.goRef = unsafe.Pointer(goRef)
+	return cRef.goRef
+}
+
 type Node interface {
 	GetHomeId() uint32
 	GetId() uint8
@@ -21,6 +35,7 @@ type Node interface {
 type node struct {
 	cRef    *C.Node
 	classes map[uint8]*valueClass
+	state
 }
 
 type valueClass struct {
@@ -69,13 +84,6 @@ func asNode(cRef *C.Node) Node {
 	return Node((*node)(cRef.goRef))
 }
 
-//export newGoNode
-func newGoNode(cRef *C.Node) unsafe.Pointer {
-	goRef := &node{cRef, make(map[uint8]*valueClass)}
-	cRef.goRef = unsafe.Pointer(goRef)
-	return cRef.goRef
-}
-
 func (self *node) GetHomeId() uint32 {
 	return uint32(self.cRef.nodeId.homeId)
 }
@@ -85,10 +93,35 @@ func (self *node) GetId() uint8 {
 }
 
 func (self *node) notify(api *api, nt *notification) {
+
+	api.logger.Infof("in notify %v\n", nt)
+
+	var event Event
+
 	notificationType := nt.cRef.notificationType
 	switch notificationType {
+	case NT.NODE_REMOVED:
+		event = &NodeUnavailable{nodeEvent{self}}
+		api.events <- event
+		break
+
 	case NT.VALUE_REMOVED:
 		self.removeValue(nt)
+		break
+
+	case NT.ESSENTIAL_NODE_QUERIES_COMPLETE:
+	case NT.NODE_QUERIES_COMPLETE:
+		// move the node into the initialized state
+		// begin admission processing for the node
+
+		switch self.state {
+		case STATE_INIT:
+			self.state = STATE_READY
+			event = &NodeAvailable{nodeEvent{self}}
+		default:
+			event = &NodeChanged{nodeEvent{self}}
+		}
+		api.events <- event
 		break
 
 	case NT.VALUE_ADDED:
@@ -101,11 +134,6 @@ func (self *node) notify(api *api, nt *notification) {
 	case NT.NODE_PROTOCOL_INFO:
 		// log the related information for diagnostics purposes
 
-	case NT.ESSENTIAL_NODE_QUERIES_COMPLETE:
-	case NT.NODE_QUERIES_COMPLETE:
-		// move the node into the initialized state
-		// begin admission processing for the node
-		break
 	}
 }
 
