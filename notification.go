@@ -20,11 +20,6 @@ type Notification interface {
 	GetNotificationType() *NT.Enum
 }
 
-// Implemented by things that can receive notifications.
-type Notifiable interface {
-	Notify(API, Notification)
-}
-
 // The type of notifications received via the API's Notifications() channel.
 type notification struct {
 	cRef *C.Notification

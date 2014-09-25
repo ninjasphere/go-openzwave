@@ -10,7 +10,6 @@ const (
 
 // represents a single Zwave network
 type Network interface {
-	Notifiable
 	// the identifier of the home network
 	GetHomeId() uint32
 }

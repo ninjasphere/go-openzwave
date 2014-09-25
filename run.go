@@ -205,7 +205,7 @@ func onNotificationWrapper(cNotification *C.Notification, context unsafe.Pointer
 	}
 
 	// forward the notification to the network
-	Network(self.getNetwork(goNotification.GetNode().GetHomeId())).Notify(self, goNotification)
+	self.getNetwork(goNotification.GetNode().GetHomeId()).(*network).Notify(self, goNotification)
 
 	// release the notification
 	goNotification.free()

@@ -14,7 +14,6 @@ import (
 )
 
 type Node interface {
-	Notifiable
 	GetHomeId() uint32
 	GetId() uint8
 }
