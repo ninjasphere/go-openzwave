@@ -94,15 +94,12 @@ func (self *node) GetId() uint8 {
 
 func (self *node) notify(api *api, nt *notification) {
 
-	api.logger.Infof("in notify %v\n", nt)
-
 	var event Event
 
 	notificationType := nt.cRef.notificationType
 	switch notificationType {
 	case NT.NODE_REMOVED:
-		event = &NodeUnavailable{nodeEvent{self}}
-		api.events <- event
+		api.notifyEvent(&NodeUnavailable{nodeEvent{self}})
 		break
 
 	case NT.VALUE_REMOVED:
@@ -121,7 +118,7 @@ func (self *node) notify(api *api, nt *notification) {
 		default:
 			event = &NodeChanged{nodeEvent{self}}
 		}
-		api.events <- event
+		api.notifyEvent(event)
 		break
 
 	case NT.VALUE_ADDED:

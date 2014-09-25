@@ -19,7 +19,7 @@ type Configurator interface {
 	SetLogger(Logger) Configurator
 
 	//Configure the synchronous callback.
-	SetCallback(Callback) Configurator
+	SetNotificationCallback(NotificationCallback) Configurator
 
 	//Configure the event loop function
 	SetEventLoop(EventLoop) Configurator
@@ -62,11 +62,11 @@ func BuildAPI(configPath string, userPath string, overrides string) Configurator
 	return &api{
 		defaultEventLoop,
 		nil,
+		defaultEventCallback,
 		defaultDriverName,
 		make(chan Signal, 0),
 		&defaultLogger{},
-		make(map[uint32]*network),
-		make(chan Event, 0)}
+		make(map[uint32]*network)}
 }
 
 // configure the C++ Options object with an integer value
@@ -130,10 +130,18 @@ func (self *api) SetEventLoop(loop EventLoop) Configurator {
 // MUST NOT block; MUST NOT hand the reference to the notification to a goroutine which lives beyond
 // the callback call; MUST NOT store the reference to the notification in a structure that lives beyond
 // the duration of the callback call.
-type Callback func(API, Notification)
+type NotificationCallback func(API, Notification)
 
 // set the synchronous call back
-func (self *api) SetCallback(callback Callback) Configurator {
+func (self *api) SetNotificationCallback(callback NotificationCallback) Configurator {
 	self.callback = callback
+	return self
+}
+
+type EventCallback func(API, Event)
+
+// set the synchronous call back
+func (self *api) SetEventCallback(eventCallback EventCallback) Configurator {
+	self.eventCallback = eventCallback
 	return self
 }
