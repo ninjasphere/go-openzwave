@@ -28,7 +28,8 @@ func newGoNode(cRef *C.Node) unsafe.Pointer {
 }
 
 // A device is an abstraction used by higher-level parts of the system for the underlying ZWave node.
-type Device interface {}
+type Device interface{}
+type DeviceFactory (func(Node) Device)
 
 type Node interface {
 	GetHomeId() uint32
@@ -36,13 +37,20 @@ type Node interface {
 
 	GetDevice() Device
 	SetDevice(device Device)
+
+	GetProductId() ProductId
+}
+
+type ProductId struct {
+	ManufacturerId string
+	ProductId      string
 }
 
 type node struct {
 	cRef    *C.Node
 	classes map[uint8]*valueClass
-	state	state
-	device	Device
+	state   state
+	device  Device
 }
 
 type valueClass struct {
@@ -212,3 +220,6 @@ func (self *node) SetDevice(device Device) {
 	self.device = device
 }
 
+func (self *node) GetProductId() ProductId {
+	return ProductId{C.GoString(self.cRef.manufacturerId), C.GoString(self.cRef.productId)}
+}

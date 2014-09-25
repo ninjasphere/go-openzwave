@@ -1,7 +1,7 @@
 package openzwave
 
 type Event interface {
-     GetNode() Node
+	GetNode() Node
 }
 
 type nodeEvent struct {
@@ -27,4 +27,3 @@ func (event nodeEvent) String() string {
 func (event nodeEvent) GetNode() Node {
 	return event.node.(*node)
 }
-
