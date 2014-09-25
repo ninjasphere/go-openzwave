@@ -1,7 +1,7 @@
 #
 # Makefile that builds the required library dependency, then installs the go module
 #
-GENERATED=NT/NT.go CC/CC.go LOG_LEVEL/LOG_LEVEL.go CODE/CODE.go VT/VT.go
+GENERATED=NT/NT.go CC/CC.go LOG_LEVEL/LOG_LEVEL.go CODE/CODE.go VT/VT.go MF/MF.go
 
 all: build
 
@@ -31,6 +31,7 @@ deps:	libs
 	scripts/GenerateCC.sh
 	scripts/GenerateLOG_LEVEL.sh
 	scripts/GenerateVT.sh
+	scripts/GenerateMF.sh
 
 control-panel:
 	@echo "run 'scripts/start-ozwcp.sh', configure the device as /dev/cu.SLAB_USBtoUART, then hit initialize."
