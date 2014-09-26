@@ -130,8 +130,8 @@ func (self *node) notify(api *api, nt *notification) {
 		self.removeValue(nt)
 		break
 
-	case NT.ESSENTIAL_NODE_QUERIES_COMPLETE:
-	case NT.NODE_QUERIES_COMPLETE:
+	case NT.ESSENTIAL_NODE_QUERIES_COMPLETE,
+		NT.NODE_QUERIES_COMPLETE:
 		// move the node into the initialized state
 		// begin admission processing for the node
 
@@ -139,20 +139,21 @@ func (self *node) notify(api *api, nt *notification) {
 		case STATE_INIT:
 			self.state = STATE_READY
 			event = &NodeAvailable{nodeEvent{self}}
+			break
 		default:
 			event = &NodeChanged{nodeEvent{self}}
 		}
 		api.notifyEvent(event)
 		break
 
-	case NT.VALUE_ADDED:
-	case NT.VALUE_CHANGED:
-	case NT.VALUE_REFRESHED:
+	case NT.VALUE_ADDED,
+		NT.VALUE_CHANGED,
+		NT.VALUE_REFRESHED:
 		self.takeValue(nt)
 		break
 
-	case NT.NODE_NAMING:
-	case NT.NODE_PROTOCOL_INFO:
+	case NT.NODE_NAMING,
+		NT.NODE_PROTOCOL_INFO:
 		// log the related information for diagnostics purposes
 
 	}
@@ -169,6 +170,7 @@ func (self *node) takeValue(nt *notification) *value {
 	if !ok {
 		v = nt.swapValueImpl(nil)
 		instance.values[index] = v
+
 	} else {
 		nt.swapValueImpl(v)
 	}

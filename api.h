@@ -13,6 +13,7 @@
 #include <stdbool.h>
 
 #ifdef __cplusplus
+#include <iostream>
 
 //
 // __cplusplus will be true only in code that is part of the implementation (C++ code)

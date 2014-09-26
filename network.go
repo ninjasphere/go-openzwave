@@ -32,8 +32,8 @@ func (self *network) notify(api *api, nt *notification) {
 	switch notificationType.Code {
 
 	// network level events
-	case NT.DRIVER_READY:
-	case NT.DRIVER_RESET:
+	case NT.DRIVER_READY,
+		NT.DRIVER_RESET:
 		// reset network object to reset state
 		self.reset()
 		break
@@ -43,15 +43,16 @@ func (self *network) notify(api *api, nt *notification) {
 		// not much to do here unless we end up needing to configure group configurations
 		// in order to rescue a broken ninja device.
 
-	case NT.AWAKE_NODES_QUERIED:
-	case NT.ALL_NODES_QUERIED_SOME_DEAD:
-	case NT.ALL_NODES_QUERIED:
+	case NT.AWAKE_NODES_QUERIED,
+		NT.ALL_NODES_QUERIED_SOME_DEAD,
+		NT.ALL_NODES_QUERIED:
 		unhandled(api, nt)
 		break
 		// move network into running state
 
 	// notifications
 	case NT.NOTIFICATION:
+		fallthrough
 	default:
 		node := nt.GetNode()
 		if node.GetId() <= MAX_NODES {
@@ -85,8 +86,8 @@ func (self *network) handleNodeEvent(api *api, nt *notification, nodeV *node) {
 		n.notify(api, nt)
 		break
 
-	case NT.NODE_NEW:
-	case NT.NODE_ADDED:
+	case NT.NODE_NEW,
+		NT.NODE_ADDED:
 		if !ok {
 			self.nodes[id] = nodeV
 		}
@@ -95,12 +96,13 @@ func (self *network) handleNodeEvent(api *api, nt *notification, nodeV *node) {
 	//
 	// node level events
 	//
-	case NT.NODE_NAMING:
-	case NT.NODE_PROTOCOL_INFO:
-	case NT.VALUE_ADDED:
-	case NT.VALUE_REMOVED:
-	case NT.VALUE_CHANGED:
-	case NT.VALUE_REFRESHED:
+	case NT.NODE_NAMING,
+		NT.NODE_PROTOCOL_INFO,
+		NT.VALUE_ADDED,
+		NT.VALUE_REMOVED,
+		NT.VALUE_CHANGED,
+		NT.VALUE_REFRESHED:
+		fallthrough
 	default:
 		// network or node level events
 		n.notify(api, nt)
