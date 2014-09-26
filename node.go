@@ -40,6 +40,8 @@ type Node interface {
 	GetProductId() *ProductId
 	GetProductDescription() *ProductDescription
 	GetNodeName() string
+
+	SetUint8Value(commandClassId uint8, instanceId uint8, index uint8, value uint8) bool
 }
 
 type ProductId struct {
@@ -187,6 +189,18 @@ func (self *node) createOrGetInstance(commandClassId uint8, instanceId uint8) *v
 	return instance
 }
 
+func (self *node) getValue(commandClassId uint8, instanceId uint8, index uint8) (*value, bool) {
+	var v *value
+	class, ok := self.classes[commandClassId]
+	if ok {
+		instance, ok := class.instances[instanceId]
+		if ok {
+			v, ok = instance.values[index]
+		}
+	}
+	return v, ok
+}
+
 func (self *node) removeValue(nt *notification) {
 	commandClassId := (uint8)(nt.cRef.value.valueId.commandClassId)
 	instanceId := (uint8)(nt.cRef.value.valueId.instance)
@@ -242,3 +256,10 @@ func (self *node) GetNodeName() string {
 	return C.GoString(self.cRef.nodeName)
 }
 
+func (self *node) SetUint8Value(commandClassId uint8, instanceId uint8, index uint8, value uint8) bool {
+	valueO, ok := self.getValue(commandClassId, instanceId, index)
+	if ok {
+		ok = (bool)(C.setUint8Value(C.uint32_t(self.cRef.nodeId.homeId), C.uint64_t(valueO.cRef.valueId.id), C.uint8_t(value)))
+	}
+	return ok
+}

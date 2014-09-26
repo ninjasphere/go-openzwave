@@ -56,3 +56,8 @@ Value * exportValue(API * api, OpenZWave::ValueID const &valueId)
   
   return tmp;
 }
+
+bool setUint8Value(uint32_t homeId, uint64_t id, uint8_t value)
+{
+  return OpenZWave::Manager::Get()->SetValue(OpenZWave::ValueID(homeId, id), value);
+}

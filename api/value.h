@@ -22,6 +22,7 @@ typedef struct Value {
 } Value;
 
 extern void freeValue(Value *);
+extern bool setUint8Value(uint32_t homeId, uint64_t id, uint8_t value);
 
 #ifdef __cplusplus
 extern Value * exportValue(API *, OpenZWave::ValueID const &);
