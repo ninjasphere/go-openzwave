@@ -48,9 +48,9 @@ type ProductId struct {
 }
 
 type ProductDescription struct {
-     ManufacturerName string
-     ProductName      string
-     ProductType      string
+	ManufacturerName string
+	ProductName      string
+	ProductType      string
 }
 
 type node struct {
@@ -233,11 +233,12 @@ func (self *node) GetProductId() *ProductId {
 
 func (self *node) GetProductDescription() *ProductDescription {
 	return &ProductDescription{
-	       C.GoString(self.cRef.manufacturerName), 
-	       C.GoString(self.cRef.productName),
-	       C.GoString(self.cRef.productType)}
+		C.GoString(self.cRef.manufacturerName),
+		C.GoString(self.cRef.productName),
+		C.GoString(self.cRef.productType)}
 }
 
 func (self *node) GetNodeName() string {
-     return C.GoString(self.cRef.nodeName)
+	return C.GoString(self.cRef.nodeName)
 }
+
