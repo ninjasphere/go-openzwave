@@ -42,6 +42,7 @@ type Node interface {
 	GetNodeName() string
 
 	SetUint8Value(commandClassId uint8, instanceId uint8, index uint8, value uint8) bool
+	GetUint8Value(commandClassId uint8, instanceId uint8, index uint8) (uint8, bool)
 }
 
 type ProductId struct {
@@ -264,4 +265,13 @@ func (self *node) SetUint8Value(commandClassId uint8, instanceId uint8, index ui
 		ok = (bool)(C.setUint8Value(C.uint32_t(self.cRef.nodeId.homeId), C.uint64_t(valueO.cRef.valueId.id), C.uint8_t(value)))
 	}
 	return ok
+}
+
+func (self *node) GetUint8Value(commandClassId uint8, instanceId uint8, index uint8) (uint8, bool) {
+	var value uint8
+	valueO, ok := self.getValue(commandClassId, instanceId, index)
+	if ok {
+		ok = (bool)(C.getUint8Value(C.uint32_t(self.cRef.nodeId.homeId), C.uint64_t(valueO.cRef.valueId.id), (*C.uint8_t)(&value)))
+	}
+	return value, ok
 }
