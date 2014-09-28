@@ -121,7 +121,7 @@ func (self *node) notify(api *api, nt *notification) {
 	switch notificationType {
 	case NT.NODE_REMOVED:
 		event = &NodeUnavailable{nodeEvent{self}}
-		self.device.Notify(api, event)
+		self.device.NodeRemoved()
 		api.notifyEvent(event)
 		break
 
@@ -145,12 +145,12 @@ func (self *node) notify(api *api, nt *notification) {
 			//
 
 			self.device = api.deviceFactory(api, self)
-			self.device.Notify(api, event)
+			self.device.NodeAdded()
 
 			break
 		default:
 			event = &NodeChanged{nodeEvent{self}}
-			self.device.Notify(api, event)
+			self.device.NodeChanged()
 			//
 			// Pass the event to the node.
 			//
