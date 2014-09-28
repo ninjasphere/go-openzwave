@@ -122,6 +122,7 @@ func (self *node) notify(api *api, nt *notification) {
 		event = &NodeUnavailable{nodeEvent{self}}
 		self.device.NodeRemoved()
 		api.notifyEvent(event)
+		// TODO: free the C structure.
 		break
 
 	case NT.VALUE_REMOVED:
@@ -240,6 +241,7 @@ func (self *node) removeValue(nt *notification) {
 	if !ok {
 		return
 	} else {
+		// TODO: free the C structure
 		delete(instance.values, index)
 		if len(instance.values) == 0 {
 			delete(class.instances, instanceId)
