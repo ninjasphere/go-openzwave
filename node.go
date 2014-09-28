@@ -27,15 +27,11 @@ func newGoNode(cRef *C.Node) unsafe.Pointer {
 	return cRef.goRef
 }
 
-// A device is an abstraction used by higher-level parts of the system for the underlying ZWave node.
-type Device interface{}
-
 type Node interface {
 	GetHomeId() uint32
 	GetId() uint8
 
 	GetDevice() Device
-	SetDevice(device Device)
 
 	GetProductId() *ProductId
 	GetProductDescription() *ProductDescription
@@ -124,7 +120,9 @@ func (self *node) notify(api *api, nt *notification) {
 	notificationType := nt.cRef.notificationType
 	switch notificationType {
 	case NT.NODE_REMOVED:
-		api.notifyEvent(&NodeUnavailable{nodeEvent{self}})
+		event = &NodeUnavailable{nodeEvent{self}}
+		self.device.Notify(api, event)
+		api.notifyEvent(event)
 		break
 
 	case NT.VALUE_REMOVED:
@@ -139,10 +137,23 @@ func (self *node) notify(api *api, nt *notification) {
 		switch self.state {
 		case STATE_INIT:
 			self.state = STATE_READY
+
 			event = &NodeAvailable{nodeEvent{self}}
+			//
+			// Use a callback to construct the device for this node, then
+			// pass the event to the device.
+			//
+
+			self.device = api.deviceFactory(api, self)
+			self.device.Notify(api, event)
+
 			break
 		default:
 			event = &NodeChanged{nodeEvent{self}}
+			self.device.Notify(api, event)
+			//
+			// Pass the event to the node.
+			//
 		}
 		api.notifyEvent(event)
 		break
@@ -238,10 +249,6 @@ func (self *node) removeValue(nt *notification) {
 
 func (self *node) GetDevice() Device {
 	return self.device
-}
-
-func (self *node) SetDevice(device Device) {
-	self.device = device
 }
 
 func (self *node) GetProductId() *ProductId {

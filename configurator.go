@@ -24,6 +24,9 @@ type Configurator interface {
 	//Configure the synchronous events callback
 	SetEventsCallback(eventCallback EventCallback) Configurator
 
+	//Configure the synchronous events callback
+	SetDeviceFactory(deviceFactory DeviceFactory) Configurator
+
 	//Configure the event loop function
 	SetEventLoop(EventLoop) Configurator
 
@@ -69,6 +72,7 @@ func BuildAPI(configPath string, userPath string, overrides string) Configurator
 		defaultEventLoop,
 		nil,
 		defaultEventCallback,
+		defaultDeviceFactory,
 		defaultDriverName,
 		make(chan Signal, 0),
 		&defaultLogger{},
@@ -149,6 +153,12 @@ type EventCallback func(API, Event)
 // set the synchronous call back
 func (self *api) SetEventsCallback(eventCallback EventCallback) Configurator {
 	self.eventCallback = eventCallback
+	return self
+}
+
+// set the device factory
+func (self *api) SetDeviceFactory(deviceFactory DeviceFactory) Configurator {
+	self.deviceFactory = deviceFactory
 	return self
 }
 

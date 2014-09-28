@@ -28,6 +28,7 @@ type api struct {
 	loop          EventLoop
 	callback      NotificationCallback
 	eventCallback EventCallback
+	deviceFactory DeviceFactory
 	device        string
 	quitEventLoop chan Signal
 	logger        Logger
