@@ -15,10 +15,15 @@ import (
 )
 
 type Value interface {
+	SetUint8(value uint8) bool
+	GetUint8() (uint8, bool)
 }
 
 type value struct {
 	cRef *C.Value
+}
+
+type missingValue struct {
 }
 
 func (self value) String() string {
@@ -62,4 +67,24 @@ func newGoValue(cRef *C.Value) unsafe.Pointer {
 
 func (self *value) notify(api *api, nt *notification) {
 	// TODO
+}
+
+func (self *value) SetUint8(value uint8) bool {
+	return (bool)(C.setUint8Value(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), C.uint8_t(value)))
+}
+
+func (self *value) GetUint8() (uint8, bool) {
+	var value uint8
+	ok := (bool)(C.getUint8Value(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), (*C.uint8_t)(&value)))
+	return value, ok
+}
+
+// for a missing value, the set operation always fails
+func (self *missingValue) SetUint8(value uint8) bool {
+	return false
+}
+
+// for a missing value, the get operation always fails
+func (self *missingValue) GetUint8() (uint8, bool) {
+	return 0, false
 }

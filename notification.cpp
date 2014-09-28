@@ -19,7 +19,7 @@ Notification * exportNotification(API * api, OpenZWave::Notification const* noti
     notification->GetType() == OpenZWave::Notification::Type_Notification
     ? notification->GetNotification()
     : -1;
-  result->value = exportValue(api, notification->GetValueID());
+  result->value = exportValue(api, notification->GetHomeId(), notification->GetValueID());
   return result;
 }
 

@@ -20,13 +20,6 @@ const (
 	STATE_READY       = iota
 )
 
-//export newGoNode
-func newGoNode(cRef *C.Node) unsafe.Pointer {
-	goRef := &node{cRef, make(map[uint8]*valueClass), STATE_INIT, nil}
-	cRef.goRef = unsafe.Pointer(goRef)
-	return cRef.goRef
-}
-
 type Node interface {
 	GetHomeId() uint32
 	GetId() uint8
@@ -37,8 +30,7 @@ type Node interface {
 	GetProductDescription() *ProductDescription
 	GetNodeName() string
 
-	SetUint8Value(commandClassId uint8, instanceId uint8, index uint8, value uint8) bool
-	GetUint8Value(commandClassId uint8, instanceId uint8, index uint8) (uint8, bool)
+	GetValue(commandClassId uint8, instanceId uint8, index uint8) Value
 }
 
 type ProductId struct {
@@ -67,6 +59,13 @@ type valueClass struct {
 type valueInstance struct {
 	instance uint8
 	values   map[uint8]*value
+}
+
+//export newGoNode
+func newGoNode(cRef *C.Node) unsafe.Pointer {
+	goRef := &node{cRef, make(map[uint8]*valueClass), STATE_INIT, nil}
+	cRef.goRef = unsafe.Pointer(goRef)
+	return cRef.goRef
 }
 
 func (self *node) String() string {
@@ -203,7 +202,7 @@ func (self *node) createOrGetInstance(commandClassId uint8, instanceId uint8) *v
 	return instance
 }
 
-func (self *node) getValue(commandClassId uint8, instanceId uint8, index uint8) (*value, bool) {
+func (self *node) GetValue(commandClassId uint8, instanceId uint8, index uint8) Value {
 	var v *value
 	class, ok := self.classes[commandClassId]
 	if ok {
@@ -212,7 +211,12 @@ func (self *node) getValue(commandClassId uint8, instanceId uint8, index uint8) 
 			v, ok = instance.values[index]
 		}
 	}
-	return v, ok
+	if ok {
+		return v
+	} else {
+		return &missingValue{} // accessor that does nothing
+	}
+	return v
 }
 
 func (self *node) removeValue(nt *notification) {
@@ -264,21 +268,4 @@ func (self *node) GetProductDescription() *ProductDescription {
 
 func (self *node) GetNodeName() string {
 	return C.GoString(self.cRef.nodeName)
-}
-
-func (self *node) SetUint8Value(commandClassId uint8, instanceId uint8, index uint8, value uint8) bool {
-	valueO, ok := self.getValue(commandClassId, instanceId, index)
-	if ok {
-		ok = (bool)(C.setUint8Value(C.uint32_t(self.cRef.nodeId.homeId), C.uint64_t(valueO.cRef.valueId.id), C.uint8_t(value)))
-	}
-	return ok
-}
-
-func (self *node) GetUint8Value(commandClassId uint8, instanceId uint8, index uint8) (uint8, bool) {
-	var value uint8
-	valueO, ok := self.getValue(commandClassId, instanceId, index)
-	if ok {
-		ok = (bool)(C.getUint8Value(C.uint32_t(self.cRef.nodeId.homeId), C.uint64_t(valueO.cRef.valueId.id), (*C.uint8_t)(&value)))
-	}
-	return value, ok
 }

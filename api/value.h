@@ -11,6 +11,7 @@ typedef struct ValueID {
 
 typedef struct Value {
   GoValue * goRef;
+  uint32_t  homeId;
   ValueID   valueId;
   char    * value;
   char    * label;
@@ -26,5 +27,5 @@ extern bool  setUint8Value(uint32_t homeId, uint64_t id, uint8_t value);
 extern bool  getUint8Value(uint32_t homeId, uint64_t id, uint8_t *value);
 
 #ifdef __cplusplus
-extern Value * exportValue(API *, OpenZWave::ValueID const &);
+extern Value * exportValue(API *, uint32_t homeId, OpenZWave::ValueID const &);
 #endif
