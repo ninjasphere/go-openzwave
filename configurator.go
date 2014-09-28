@@ -36,6 +36,9 @@ type Configurator interface {
 	// Add a string option.
 	AddStringOption(option string, value string, append bool) Configurator
 
+	// Get the value of a boolean option
+	GetBoolOption(option string, defaultValue bool) bool
+
 	// Set the device name used by the driver.
 	SetDeviceName(device string) Configurator
 
@@ -147,4 +150,17 @@ type EventCallback func(API, Event)
 func (self *api) SetEventsCallback(eventCallback EventCallback) Configurator {
 	self.eventCallback = eventCallback
 	return self
+}
+
+func (self *api) GetBoolOption(option string, defaultValue bool) bool {
+	var (
+		cOption *C.char = C.CString(option)
+		value   C._Bool
+	)
+	ok := C.getBoolOption(cOption, (*C._Bool)(&value))
+	if ok {
+		return (bool)(value)
+	} else {
+		return defaultValue
+	}
 }
