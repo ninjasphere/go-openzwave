@@ -264,3 +264,7 @@ func (self *node) GetProductDescription() *ProductDescription {
 func (self *node) GetNodeName() string {
 	return C.GoString(self.cRef.nodeName)
 }
+
+func (self *node) free() {
+	C.freeNode(self.cRef)
+}

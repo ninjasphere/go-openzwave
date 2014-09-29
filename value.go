@@ -70,6 +70,10 @@ func (self *value) GetUint8() (uint8, bool) {
 	return value, ok
 }
 
+func (self *value) free() {
+	C.freeValue(self.cRef)
+}
+
 // for a missing value, the set operation always fails
 func (self *missingValue) SetUint8(value uint8) bool {
 	return false

@@ -22,8 +22,8 @@ type Notification interface {
 // The type of notifications received via the API's Notifications() channel.
 type notification struct {
 	cRef  *C.Notification
-	node  *node
-	value *value
+	node  *node  // should be freed by the receiver, iff it is not null
+	value *value // should be freed by the receiver, iff it is not null
 }
 
 // Converts the notification into a string representation.
@@ -39,8 +39,14 @@ func (self *notification) String() string {
 		self.GetValue())
 }
 
-func (apiNotification *notification) free() {
-	C.freeNotification(apiNotification.cRef)
+func (self *notification) free() {
+	C.freeNotification(self.cRef)
+	if self.node != nil {
+		self.node.free()
+	}
+	if self.value != nil {
+		self.value.free()
+	}
 }
 
 func (self *notification) GetValue() Value {
@@ -56,28 +62,32 @@ func (self *notification) GetNotificationType() *NT.Enum {
 }
 
 func newGoNotification(cRef *C.Notification) *notification {
-	return &notification{cRef, newGoNode(cRef.node), newGoValue(cRef.value)}
+	result := &notification{cRef, newGoNode(cRef.node), newGoValue(cRef.value)}
+
+	// transfer ownership of C structure to the go object
+	result.cRef.value = nil
+	result.cRef.node = nil
+	return result
 }
 
 //
 // Swap the cRef of the receiver's node with cRef of the specified node.
 //
-// The intent is to update an existing go representation of a node with
-// the latest *C.Node from the notification and then recycle
-// the old *C.Node by attaching it to the notification where it will then
-// be freed.
+// The intent is to swap the *C.Node reachable from 'existing' with the *C.Node
+// reachable from the receiver so that existing gets the fresh object.
+//
+// If there is no existing object then we steal the whole go object from the
+// receiver.
 //
 func (self *notification) swapNodeImpl(existing *node) *node {
 	if existing != nil {
-		existingGoNode := existing
-
 		// then swap the cRef pointers
-		swap := self.cRef.node
-		self.cRef.node = existingGoNode.cRef
-		existingGoNode.cRef = swap
+		swap := self.node.cRef
+		self.node.cRef = existing.cRef
+		existing.cRef = swap
 	} else {
 		existing = self.node
-		self.cRef.node = nil
+		self.node = nil
 	}
 	return existing
 }
@@ -92,15 +102,13 @@ func (self *notification) swapNodeImpl(existing *node) *node {
 //
 func (self *notification) swapValueImpl(existing *value) *value {
 	if existing != nil {
-		existingGoValue := existing
-
 		// then swap the cRef pointers
-		swap := self.cRef.value
-		self.cRef.value = existingGoValue.cRef
-		existingGoValue.cRef = swap
+		swap := self.value.cRef
+		self.value.cRef = existing.cRef
+		existing.cRef = swap
 	} else {
 		existing = self.value
-		self.cRef.value = nil
+		self.value = nil
 	}
 	return existing
 }
