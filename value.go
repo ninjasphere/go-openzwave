@@ -16,6 +16,7 @@ import (
 type Value interface {
 	SetUint8(value uint8) bool
 	GetUint8() (uint8, bool)
+	Refresh() bool
 }
 
 type value struct {
@@ -70,6 +71,10 @@ func (self *value) GetUint8() (uint8, bool) {
 	return value, ok
 }
 
+func (self *value) Refresh() (bool) {
+	return (bool)(C.refreshValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id)))
+}
+
 func (self *value) free() {
 	C.freeValue(self.cRef)
 }
@@ -82,4 +87,9 @@ func (self *missingValue) SetUint8(value uint8) bool {
 // for a missing value, the get operation always fails
 func (self *missingValue) GetUint8() (uint8, bool) {
 	return 0, false
+}
+
+// for a missing value, the get operation always fails
+func (self *missingValue) Refresh() (bool) {
+	return false
 }
