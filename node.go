@@ -154,7 +154,10 @@ func (self *node) notify(api *api, nt *notification) {
 	case NT.VALUE_ADDED,
 		NT.VALUE_CHANGED,
 		NT.VALUE_REFRESHED:
-		self.takeValue(nt)
+		v := self.takeValue(nt)
+		if self.device != nil {
+			self.device.ValueChanged(v)
+		}
 		break
 
 	case NT.NODE_NAMING,
