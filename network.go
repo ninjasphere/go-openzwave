@@ -116,7 +116,7 @@ func (self *network) reset() {
 }
 
 func (self *network) takeNode(nt *notification) *node {
-	id := uint8(nt.cRef.node.nodeId.nodeId)
+	id := uint8(nt.node.cRef.nodeId.nodeId)
 	n, ok := self.nodes[id]
 	if !ok {
 		n = nt.swapNodeImpl(nil)

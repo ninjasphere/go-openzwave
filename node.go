@@ -166,9 +166,9 @@ func (self *node) notify(api *api, nt *notification) {
 
 // take the value structure from the notification
 func (self *node) takeValue(nt *notification) *value {
-	commandClassId := (uint8)(nt.cRef.value.valueId.commandClassId)
-	instanceId := (uint8)(nt.cRef.value.valueId.instance)
-	index := (uint8)(nt.cRef.value.valueId.index)
+	commandClassId := (uint8)(nt.value.cRef.valueId.commandClassId)
+	instanceId := (uint8)(nt.value.cRef.valueId.instance)
+	index := (uint8)(nt.value.cRef.valueId.index)
 
 	instance := self.createOrGetInstance(commandClassId, instanceId)
 	v, ok := instance.values[index]
@@ -214,9 +214,9 @@ func (self *node) GetValue(commandClassId uint8, instanceId uint8, index uint8) 
 }
 
 func (self *node) removeValue(nt *notification) {
-	commandClassId := (uint8)(nt.cRef.value.valueId.commandClassId)
-	instanceId := (uint8)(nt.cRef.value.valueId.instance)
-	index := (uint8)(nt.cRef.value.valueId.index)
+	commandClassId := (uint8)(nt.value.cRef.valueId.commandClassId)
+	instanceId := (uint8)(nt.value.cRef.valueId.instance)
+	index := (uint8)(nt.value.cRef.valueId.index)
 
 	class, ok := self.classes[commandClassId]
 	if !ok {
