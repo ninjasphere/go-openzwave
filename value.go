@@ -37,8 +37,8 @@ func (self value) String() string {
 			"label='%s', "+
 			"units='%s', "+
 			"help='%s', "+
-			"min=%d "+
-			"max=%d "+
+			"min=%d, "+
+			"max=%d, "+
 			"isSet=%v]",
 		VT.ToEnum(int(self.cRef.valueId.valueType)),
 		CC.ToEnum(int(self.cRef.valueId.commandClassId)),
@@ -48,9 +48,9 @@ func (self value) String() string {
 		C.GoString(self.cRef.label),
 		C.GoString(self.cRef.units),
 		C.GoString(self.cRef.help),
-		self.cRef.min,
-		self.cRef.max,
-		self.cRef.isSet)
+		(int32)(self.cRef.min),
+		(int32)(self.cRef.max),
+		(bool)(self.cRef.isSet))
 }
 
 // convert a reference from the C Value to the Go Value
