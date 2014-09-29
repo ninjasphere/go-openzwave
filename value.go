@@ -8,7 +8,6 @@ import "C"
 
 import (
 	"fmt"
-	"unsafe"
 
 	"github.com/ninjasphere/go-openzwave/CC"
 	"github.com/ninjasphere/go-openzwave/VT"
@@ -53,16 +52,8 @@ func (self value) String() string {
 		(bool)(self.cRef.isSet))
 }
 
-// convert a reference from the C Value to the Go Value
-func asValue(cRef *C.Value) Value {
-	return Value((*value)(cRef.goRef))
-}
-
-//export newGoValue
-func newGoValue(cRef *C.Value) unsafe.Pointer {
-	goRef := &value{cRef}
-	cRef.goRef = unsafe.Pointer(goRef)
-	return cRef.goRef
+func newGoValue(cRef *C.Value) *value {
+	return &value{cRef}
 }
 
 func (self *value) notify(api *api, nt *notification) {

@@ -5,7 +5,6 @@ static Notification * newNotification(uint8_t notificationType)
   Notification * tmp = (Notification *)malloc(sizeof(Notification));
   *tmp = (Notification){0};
   tmp->notificationType = notificationType;
-  tmp->goRef = newGoNotification(tmp);
   return tmp;
 }
 

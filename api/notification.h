@@ -1,7 +1,6 @@
 typedef void GoNotification;
 
 typedef struct Notification {
-  GoNotification * goRef;
   uint8_t          notificationType;
   uint8_t          notificationCode;
   Node           * node; //owned

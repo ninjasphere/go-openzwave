@@ -6,7 +6,6 @@ typedef struct NodeId {
 } NodeId;
 
 typedef struct Node {
-	GoNode * goRef;
 	struct NodeId nodeId;
 	uint8_t basicType;
 	uint8_t genericType;

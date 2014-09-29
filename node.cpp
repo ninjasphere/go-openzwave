@@ -6,7 +6,6 @@ static Node * newNode(uint32_t homeId, uint8_t nodeId)
   *tmp = (Node){0};
   tmp->nodeId.homeId = homeId;
   tmp->nodeId.nodeId = nodeId;
-  tmp->goRef = newGoNode(tmp);
   return tmp;
 }
 

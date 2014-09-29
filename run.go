@@ -204,9 +204,9 @@ func (self *api) Run() int {
 func onNotificationWrapper(cNotification *C.Notification, context unsafe.Pointer) {
 	// marshal from C to Go
 	self := (*api)(context)
-	goNotification := (*notification)(cNotification.goRef)
+	goNotification := newGoNotification(cNotification)
 	if self.callback != nil {
-		self.callback(self, Notification(goNotification))
+		self.callback(self, goNotification)
 	}
 
 	// forward the notification to the network

@@ -12,7 +12,6 @@ static Value * newValue(uint32_t homeId, OpenZWave::ValueID const &valueId)
   tmp->valueId.instance = valueId.GetInstance();
   tmp->valueId.index = valueId.GetIndex();
   
-  tmp->goRef = newGoValue(tmp);
   return tmp;
 }
 

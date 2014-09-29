@@ -8,7 +8,6 @@ import "C"
 
 import (
 	"fmt"
-	"unsafe"
 
 	"github.com/ninjasphere/go-openzwave/NT"
 )
@@ -61,11 +60,8 @@ type valueInstance struct {
 	values   map[uint8]*value
 }
 
-//export newGoNode
-func newGoNode(cRef *C.Node) unsafe.Pointer {
-	goRef := &node{cRef, make(map[uint8]*valueClass), STATE_INIT, nil}
-	cRef.goRef = unsafe.Pointer(goRef)
-	return cRef.goRef
+func newGoNode(cRef *C.Node) *node {
+	return &node{cRef, make(map[uint8]*valueClass), STATE_INIT, nil}
 }
 
 func (self *node) String() string {
@@ -97,11 +93,6 @@ func (self *node) String() string {
 		C.GoString(cRef.manufacturerId),
 		C.GoString(cRef.productType),
 		C.GoString(cRef.productId))
-}
-
-// convert a reference from the C Node to the Go Node
-func asNode(cRef *C.Node) Node {
-	return Node((*node)(cRef.goRef))
 }
 
 func (self *node) GetHomeId() uint32 {

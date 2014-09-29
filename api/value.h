@@ -10,7 +10,6 @@ typedef struct ValueID {
 } ValueID;
 
 typedef struct Value {
-  GoValue * goRef;
   uint32_t  homeId;
   ValueID   valueId;
   char    * value;

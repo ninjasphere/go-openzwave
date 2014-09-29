@@ -8,7 +8,6 @@ import "C"
 
 import (
 	"fmt"
-	"unsafe"
 
 	"github.com/ninjasphere/go-openzwave/CODE"
 	"github.com/ninjasphere/go-openzwave/NT"
@@ -22,7 +21,9 @@ type Notification interface {
 
 // The type of notifications received via the API's Notifications() channel.
 type notification struct {
-	cRef *C.Notification
+	cRef  *C.Notification
+	node  *node
+	value *value
 }
 
 // Converts the notification into a string representation.
@@ -43,27 +44,19 @@ func (apiNotification *notification) free() {
 }
 
 func (self *notification) GetValue() Value {
-	return asValue(self.cRef.value)
+	return self.value
 }
 
 func (self *notification) GetNode() Node {
-	return asNode(self.cRef.node)
-}
-
-// given a C notification, return the equivalent Go notification
-func asNotification(cRef *C.Notification) Notification {
-	return Notification((*notification)(cRef.goRef))
+	return self.node
 }
 
 func (self *notification) GetNotificationType() *NT.Enum {
 	return NT.ToEnum(int(self.cRef.notificationType))
 }
 
-//export newGoNotification
-func newGoNotification(cRef *C.Notification) unsafe.Pointer {
-	goRef := &notification{cRef}
-	cRef.goRef = unsafe.Pointer(goRef)
-	return cRef.goRef
+func newGoNotification(cRef *C.Notification) *notification {
+	return &notification{cRef, newGoNode(cRef.node), newGoValue(cRef.value)}
 }
 
 //
@@ -78,17 +71,12 @@ func (self *notification) swapNodeImpl(existing *node) *node {
 	if existing != nil {
 		existingGoNode := existing
 
-		// swap the go pointers first
-		swapGo := self.cRef.node.goRef
-		self.cRef.node.goRef = existingGoNode.cRef.goRef
-		existingGoNode.cRef.goRef = swapGo
-
 		// then swap the cRef pointers
 		swap := self.cRef.node
 		self.cRef.node = existingGoNode.cRef
 		existingGoNode.cRef = swap
 	} else {
-		existing = (*node)(self.cRef.node.goRef)
+		existing = self.node
 		self.cRef.node = nil
 	}
 	return existing
@@ -106,17 +94,12 @@ func (self *notification) swapValueImpl(existing *value) *value {
 	if existing != nil {
 		existingGoValue := existing
 
-		// swap the go pointers first
-		swapGo := self.cRef.value.goRef
-		self.cRef.value.goRef = existingGoValue.cRef.goRef
-		existingGoValue.cRef.goRef = swapGo
-
 		// then swap the cRef pointers
 		swap := self.cRef.value
 		self.cRef.value = existingGoValue.cRef
 		existingGoValue.cRef = swap
 	} else {
-		existing = (*value)(self.cRef.value.goRef)
+		existing = self.value
 		self.cRef.value = nil
 	}
 	return existing
