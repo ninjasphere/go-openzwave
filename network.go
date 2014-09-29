@@ -39,11 +39,8 @@ func (self *network) notify(api *api, nt *notification) {
 		break
 
 	// group associations
-	case NT.GROUP:
-		// not much to do here unless we end up needing to configure group configurations
-		// in order to rescue a broken ninja device.
-
-	case NT.AWAKE_NODES_QUERIED,
+	case NT.GROUP,
+		NT.AWAKE_NODES_QUERIED,
 		NT.ALL_NODES_QUERIED_SOME_DEAD,
 		NT.ALL_NODES_QUERIED:
 		unhandled(api, nt)
@@ -58,7 +55,7 @@ func (self *network) notify(api *api, nt *notification) {
 		if node.GetId() <= MAX_NODES {
 			self.handleNodeEvent(api, nt, self.takeNode(nt))
 		} else {
-			unexpected(api, nt)
+			unhandled(api, nt)
 		}
 	}
 }
