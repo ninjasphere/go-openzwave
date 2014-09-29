@@ -120,7 +120,9 @@ func (self *node) notify(api *api, nt *notification) {
 	switch notificationType {
 	case NT.NODE_REMOVED:
 		event = &NodeUnavailable{nodeEvent{self}}
-		self.device.NodeRemoved()
+		if self.device != nil {
+			self.device.NodeRemoved()
+		}
 		api.notifyEvent(event)
 		// TODO: free the C structure.
 		break
