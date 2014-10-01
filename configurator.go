@@ -46,36 +46,6 @@ type Configurator interface {
 	Run() int
 }
 
-//
-// Begin the construction of the API by returning a Configurator
-//
-// configPath is the name of the directory containing openzwave configuration files;
-// userPath is the name of the directory containing user specific openzwave configuration files;
-// overrides are command line options (uptto --) that can overide the configuration provided by the previous two options.
-//
-// For more information about these parameters, refer to the documentation for the C++ OpenZWave::Options class.
-//
-func BuildAPI(configPath string, userPath string, overrides string) Configurator {
-	var (
-		cConfigPath *C.char = C.CString(configPath)
-		cUserPath   *C.char = C.CString(userPath)
-		cOverrides  *C.char = C.CString(overrides)
-	)
-	//defer C.free(unsafe.Pointer(cConfigPath))
-	//defer C.free(unsafe.Pointer(cUserPath))
-	//defer C.free(unsafe.Pointer(cOverrides)
-	C.startOptions(cConfigPath, cUserPath, cOverrides)
-	return &api{
-		defaultEventLoop,
-		nil,
-		defaultEventCallback,
-		defaultDeviceFactory,
-		defaultDriverName,
-		make(chan Signal, 0),
-		&defaultLogger{},
-		make(map[uint32]*network)}
-}
-
 // configure the C++ Options object with an integer value
 func (self *api) AddIntOption(option string, value int) Configurator {
 	var cOption *C.char = C.CString(option)

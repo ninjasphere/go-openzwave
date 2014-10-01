@@ -18,15 +18,15 @@ const (
 	EXIT_INTERRUPTED       = 126 // something interrupted the current process
 	EXIT_INTERRUPTED_AGAIN = 125 // something interrupted the current process (twice)
 	EXIT_INTERRUPT_FAILED  = 124 // something interrupted the current process, but something took too long to clean up
+	EXIT_NODE_REMOVED      = 123
 )
 
 var defaultEventLoop = func(api API) int {
 	for {
 		select {
 		case quitNow := <-api.QuitSignal():
-			_ = quitNow
 			api.Logger().Debugf("terminating event loop in response to quit.\n")
-			return 0
+			return quitNow
 		}
 	}
 }
@@ -54,7 +54,6 @@ func (self *api) Run() int {
 	// allocate various channels we need
 
 	signals := make(chan os.Signal, 1)        // used to receive OS signals
-	shutdownDriver := make(chan Signal, 2)    // used to indicate we need to quit the event loop
 	quitDeviceMonitor := make(chan Signal, 1) // used to indicate to outer loop that it should exit
 	exit := make(chan int, 1)                 // used to indicate we are ready to exit
 
@@ -69,7 +68,7 @@ func (self *api) Run() int {
 		self.logger.Infof("received %v signal - commencing shutdown\n", signal)
 
 		// try a graceful shutdown of the event loop
-		shutdownDriver <- Signal{}
+		self.shutdownDriver <- EXIT_INTERRUPTED
 		// and the device monitor loop
 		quitDeviceMonitor <- Signal{}
 
@@ -159,14 +158,14 @@ func (self *api) Run() int {
 					self.logger.Infof("device %s removed\n", self.device)
 
 					// start the removal of the driver
-					shutdownDriver <- Signal{}
+					self.shutdownDriver <- 0
 				}()
 
 				C.addDriver(cDevice)
 
 				go func() {
 					// wait until something (OS signal handler or device existence monitor) decides we need to terminate
-					<-shutdownDriver
+					rc := <-self.shutdownDriver
 
 					// we start an abort timer, because if the driver blocks, we need to restart the driver process
 					// to guarantee successful operation.
@@ -177,7 +176,7 @@ func (self *api) Run() int {
 
 					// try to remove the driver
 					if C.removeDriver(cDevice) {
-						self.quitEventLoop <- Signal{}
+						self.quitEventLoop <- rc
 						abortTimer.Stop() // if we get to here in a timely fashion we can stop the abort timer
 					} else {
 						// this is unexpected, if we get to here, let the abort timer do its thing
@@ -198,6 +197,14 @@ func (self *api) Run() int {
 	}()
 
 	return <-exit
+}
+
+func (self *api) Shutdown(exit int) {
+	select {
+	case self.shutdownDriver <- exit:
+		break
+	default:
+	}
 }
 
 //export onNotificationWrapper

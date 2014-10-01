@@ -25,14 +25,15 @@ import "C"
 type Signal struct{}
 
 type api struct {
-	loop          EventLoop
-	callback      NotificationCallback
-	eventCallback EventCallback
-	deviceFactory DeviceFactory
-	device        string
-	quitEventLoop chan Signal
-	logger        Logger
-	networks      map[uint32]*network
+	loop           EventLoop
+	callback       NotificationCallback
+	eventCallback  EventCallback
+	deviceFactory  DeviceFactory
+	device         string
+	quitEventLoop  chan int
+	shutdownDriver chan int
+	logger         Logger
+	networks       map[uint32]*network
 }
 
 //
@@ -41,13 +42,47 @@ type api struct {
 //
 type API interface {
 	// The EventLoop should return from the function when a signal is received on this channel
-	QuitSignal() chan Signal
+	QuitSignal() chan int
 
 	// the API logger
 	Logger() Logger
+
+	// Shutdown the event loop
+	Shutdown(exit int)
 }
 
-func (self *api) QuitSignal() chan Signal {
+//
+// Begin the construction of the API by returning a Configurator
+//
+// configPath is the name of the directory containing openzwave configuration files;
+// userPath is the name of the directory containing user specific openzwave configuration files;
+// overrides are command line options (uptto --) that can overide the configuration provided by the previous two options.
+//
+// For more information about these parameters, refer to the documentation for the C++ OpenZWave::Options class.
+//
+func BuildAPI(configPath string, userPath string, overrides string) Configurator {
+	var (
+		cConfigPath *C.char = C.CString(configPath)
+		cUserPath   *C.char = C.CString(userPath)
+		cOverrides  *C.char = C.CString(overrides)
+	)
+	//defer C.free(unsafe.Pointer(cConfigPath))
+	//defer C.free(unsafe.Pointer(cUserPath))
+	//defer C.free(unsafe.Pointer(cOverrides)
+	C.startOptions(cConfigPath, cUserPath, cOverrides)
+	return &api{
+		loop:           defaultEventLoop,
+		callback:       nil,
+		eventCallback:  defaultEventCallback,
+		deviceFactory:  defaultDeviceFactory,
+		device:         defaultDriverName,
+		quitEventLoop:  make(chan int, 0),
+		shutdownDriver: make(chan int, 2),
+		logger:         &defaultLogger{},
+		networks:       make(map[uint32]*network)}
+}
+
+func (self *api) QuitSignal() chan int {
 	return self.quitEventLoop
 }
 
