@@ -72,7 +72,7 @@ func (self *value) GetUint8() (uint8, bool) {
 	return value, ok
 }
 
-func (self *value) Refresh() (bool) {
+func (self *value) Refresh() bool {
 	return (bool)(C.refreshValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id)))
 }
 
@@ -95,11 +95,10 @@ func (self *missingValue) GetUint8() (uint8, bool) {
 }
 
 // for a missing value, the get operation always fails
-func (self *missingValue) Refresh() (bool) {
+func (self *missingValue) Refresh() bool {
 	return false
 }
 
 func (self *missingValue) SetPollingState(state bool) bool {
-        return false
+	return false
 }
-
