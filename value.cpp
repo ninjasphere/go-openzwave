@@ -72,3 +72,11 @@ bool refreshValue(uint32_t homeId, uint64_t id)
   return OpenZWave::Manager::Get()->RefreshValue(OpenZWave::ValueID(homeId, id));
 }
 
+bool  setPollingState(uint32_t homeId, uint64_t id, bool state)
+{
+  if (state) {
+    return OpenZWave::Manager::Get()->EnablePoll(OpenZWave::ValueID(homeId, id));
+  } else {
+    return OpenZWave::Manager::Get()->DisablePoll(OpenZWave::ValueID(homeId, id));
+  }
+}

@@ -24,7 +24,8 @@ typedef struct Value {
 extern void  freeValue(Value *);
 extern bool  setUint8Value(uint32_t homeId, uint64_t id, uint8_t value);
 extern bool  getUint8Value(uint32_t homeId, uint64_t id, uint8_t *value);
-extern bool refreshValue(uint32_t homeId, uint64_t id);
+extern bool  refreshValue(uint32_t homeId, uint64_t id);
+extern bool  setPollingState(uint32_t homeId, uint64_t id, bool state);
 
 #ifdef __cplusplus
 extern Value * exportValue(API *, uint32_t homeId, OpenZWave::ValueID const &);

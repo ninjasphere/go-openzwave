@@ -17,6 +17,7 @@ type Value interface {
 	SetUint8(value uint8) bool
 	GetUint8() (uint8, bool)
 	Refresh() bool
+	SetPollingState(bool) bool
 }
 
 type value struct {
@@ -79,6 +80,10 @@ func (self *value) free() {
 	C.freeValue(self.cRef)
 }
 
+func (self *value) SetPollingState(state bool) bool {
+	return (bool)(C.setPollingState(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), C._Bool(state)))
+}
+
 // for a missing value, the set operation always fails
 func (self *missingValue) SetUint8(value uint8) bool {
 	return false
@@ -93,3 +98,8 @@ func (self *missingValue) GetUint8() (uint8, bool) {
 func (self *missingValue) Refresh() (bool) {
 	return false
 }
+
+func (self *missingValue) SetPollingState(state bool) bool {
+        return false
+}
+
