@@ -53,9 +53,8 @@ func (self *api) Run() int {
 
 	// allocate various channels we need
 
-	signals := make(chan os.Signal, 1)        // used to receive OS signals
-	quitDeviceMonitor := make(chan Signal, 1) // used to indicate to outer loop that it should exit
-	exit := make(chan int, 1)                 // used to indicate we are ready to exit
+	signals := make(chan os.Signal, 1) // used to receive OS signals
+	exit := make(chan int, 1)          // used to indicate we are ready to exit
 
 	// indicate that we want to wait for these signals
 
@@ -70,7 +69,7 @@ func (self *api) Run() int {
 		// try a graceful shutdown of the event loop
 		self.shutdownDriver <- EXIT_INTERRUPTED
 		// and the device monitor loop
-		quitDeviceMonitor <- Signal{}
+		self.quitDeviceMonitor <- EXIT_INTERRUPTED
 
 		// but, just in case this doesn't happen, set up an abort timer.
 		time.AfterFunc(time.Second*5, func() {
@@ -139,10 +138,10 @@ func (self *api) Run() int {
 
 		// there is one iteration of this loop for each device insertion/removal cycle
 		done := false
+		doneExit := 0
 		for !done {
 			select {
-			case doneSignal := <-quitDeviceMonitor: // we received a signal, allow us to quit
-				_ = doneSignal
+			case doneExit = <-self.quitDeviceMonitor: // we received a signal, allow us to quit
 				done = true
 			default:
 				// one iteration of a device insert/removal cycle
@@ -150,12 +149,13 @@ func (self *api) Run() int {
 				// wait until device present
 				self.logger.Infof("waiting until %s is available\n", self.device)
 				pollUntilDeviceExistsStateEquals(true)
+				self.logger.Infof("device %s is available\n", self.device)
 
 				go func() {
 
 					// wait until device absent
 					pollUntilDeviceExistsStateEquals(false)
-					self.logger.Infof("device %s removed\n", self.device)
+					self.logger.Infof("device %s has been removed.\n", self.device)
 
 					// start the removal of the driver
 					self.shutdownDriver <- 0
@@ -185,6 +185,7 @@ func (self *api) Run() int {
 				}()
 
 				rc := self.loop(self) // run the event loop
+
 				if rc != 0 {
 					done = true
 					exit <- rc
@@ -193,18 +194,26 @@ func (self *api) Run() int {
 			}
 		}
 
-		exit <- EXIT_INTERRUPTED
+		exit <- doneExit
 	}()
 
 	return <-exit
 }
 
 func (self *api) Shutdown(exit int) {
+
+	select {
+	case self.quitDeviceMonitor <- exit:
+		break
+	default:
+	}
+
 	select {
 	case self.shutdownDriver <- exit:
 		break
 	default:
 	}
+
 }
 
 //export onNotificationWrapper
