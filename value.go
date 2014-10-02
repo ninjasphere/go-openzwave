@@ -13,7 +13,14 @@ import (
 	"github.com/ninjasphere/go-openzwave/VT"
 )
 
+type ValueID struct {
+	CommandClassId uint8
+	Instance       uint8
+	Index          uint8
+}
+
 type Value interface {
+	Id() ValueID
 	SetUint8(value uint8) bool
 	GetUint8() (uint8, bool)
 	Refresh() bool
@@ -62,6 +69,14 @@ func (self *value) notify(api *api, nt *notification) {
 	// TODO
 }
 
+func (self *value) Id() ValueID {
+	return ValueID{
+		CommandClassId: uint8(self.cRef.valueId.commandClassId),
+		Instance:       uint8(self.cRef.valueId.instance),
+		Index:          uint8(self.cRef.valueId.index),
+	}
+}
+
 func (self *value) SetUint8(value uint8) bool {
 	return (bool)(C.setUint8Value(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), C.uint8_t(value)))
 }
@@ -101,4 +116,8 @@ func (self *missingValue) Refresh() bool {
 
 func (self *missingValue) SetPollingState(state bool) bool {
 	return false
+}
+
+func (self *missingValue) Id() ValueID {
+	return ValueID{0, 0, 0}
 }
