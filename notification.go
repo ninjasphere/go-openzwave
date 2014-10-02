@@ -124,5 +124,5 @@ func unexpected(api API, notification Notification) {
 // called for expected notifications that are not handled
 //
 func unhandled(api API, notification Notification) {
-	api.Logger().Debugf("unhandled notification received %v]\n", notification)
+	// api.Logger().Debugf("unhandled notification received %v]\n", notification)
 }
