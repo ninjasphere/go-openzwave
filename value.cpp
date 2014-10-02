@@ -77,6 +77,46 @@ bool getBoolValue(uint32_t homeId, uint64_t id, bool *value)
   return OpenZWave::Manager::Get()->GetValueAsBool(OpenZWave::ValueID(homeId, id), value);
 }
 
+bool  setFloatValue(uint32_t homeId, uint64_t id, float value)
+{
+	return OpenZWave::Manager::Get()->SetValue(OpenZWave::ValueID(homeId, id), value);
+}
+
+bool  getFloatValue(uint32_t homeId, uint64_t id, float *value)
+{
+	  return OpenZWave::Manager::Get()->GetValueAsFloat(OpenZWave::ValueID(homeId, id), value);
+}
+
+bool  setIntValue(uint32_t homeId, uint64_t id, int value)
+{
+	return OpenZWave::Manager::Get()->SetValue(OpenZWave::ValueID(homeId, id), value);
+}
+
+bool  getIntValue(uint32_t homeId, uint64_t id, int *value)
+{
+	  return OpenZWave::Manager::Get()->GetValueAsInt(OpenZWave::ValueID(homeId, id), value);
+}
+
+bool  setStringValue(uint32_t homeId, uint64_t id, char * value)
+{
+	bool result = OpenZWave::Manager::Get()->SetValue(OpenZWave::ValueID(homeId, id), std::string(value));
+	free(value);
+	return result;
+}
+
+bool  getStringValue(uint32_t homeId, uint64_t id, char ** value)
+{
+	  std::string tmp;
+	  if (OpenZWave::Manager::Get()->GetValueAsString(OpenZWave::ValueID(homeId, id), &tmp)) {
+		*value = strdup(tmp.c_str());
+		return true;
+	  } else {
+		*value = NULL;
+		return false;
+	  }
+}
+
+
 bool refreshValue(uint32_t homeId, uint64_t id)
 {
   return OpenZWave::Manager::Get()->RefreshValue(OpenZWave::ValueID(homeId, id));

@@ -26,6 +26,12 @@ extern bool  setUint8Value(uint32_t homeId, uint64_t id, uint8_t value);
 extern bool  getUint8Value(uint32_t homeId, uint64_t id, uint8_t *value);
 extern bool  setBoolValue(uint32_t homeId, uint64_t id, bool value);
 extern bool  getBoolValue(uint32_t homeId, uint64_t id, bool *value);
+extern bool  setFloatValue(uint32_t homeId, uint64_t id, float value);
+extern bool  getFloatValue(uint32_t homeId, uint64_t id, float *value);
+extern bool  setIntValue(uint32_t homeId, uint64_t id, int value);
+extern bool  getIntValue(uint32_t homeId, uint64_t id, int *value);
+extern bool  setStringValue(uint32_t homeId, uint64_t id, char * value);
+extern bool  getStringValue(uint32_t homeId, uint64_t id, char ** value);
 extern bool  refreshValue(uint32_t homeId, uint64_t id);
 extern bool  setPollingState(uint32_t homeId, uint64_t id, bool state);
 

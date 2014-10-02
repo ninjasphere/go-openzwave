@@ -8,6 +8,7 @@ import "C"
 
 import (
 	"fmt"
+	"unsafe"
 
 	"github.com/ninjasphere/go-openzwave/CC"
 	"github.com/ninjasphere/go-openzwave/VT"
@@ -25,6 +26,12 @@ type Value interface {
 	GetUint8() (uint8, bool)
 	SetBool(value bool) bool
 	GetBool() (bool, bool)
+	SetInt(value int) bool
+	GetInt() (int, bool)
+	SetFloat(value float64) bool
+	GetFloat() (float64, bool)
+	SetString(value string) bool
+	GetString() (string, bool)
 	Refresh() bool
 	SetPollingState(bool) bool
 }
@@ -99,6 +106,45 @@ func (self *value) GetBool() (bool, bool) {
 	return (bool)(value), ok
 }
 
+func (self *value) SetInt(value int) bool {
+	return (bool)(C.setIntValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), C.int(value)))
+}
+
+func (self *value) GetInt() (int, bool) {
+	var value C.int
+	ok := (bool)(C.getIntValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), (*C.int)(&value)))
+	return (int)(value), ok
+}
+
+func (self *value) SetFloat(value float64) bool {
+	return (bool)(C.setFloatValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), C.float(value)))
+}
+
+func (self *value) GetFloat() (float64, bool) {
+	var value C.float
+	ok := (bool)(C.getFloatValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), (*C.float)(&value)))
+	return (float64)(value), ok
+}
+
+// for a missing value, the get operation always fails
+func (self *value) GetString() (string, bool) {
+	var value *C.char
+	ok := (bool)(C.getStringValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), (**C.char)(&value)))
+	if ok && value != nil {
+		result := C.GoString(value)
+		C.free(unsafe.Pointer(value))
+		return result, true
+	} else {
+		return "", false
+	}
+}
+
+// for a missing value, the set operation always fails
+func (self *value) SetString(value string) bool {
+	tmp := C.CString(value)
+	return (bool)(C.setStringValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), tmp))
+}
+
 func (self *value) Refresh() bool {
 	return (bool)(C.refreshValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id)))
 }
@@ -129,6 +175,36 @@ func (self *missingValue) SetBool(value bool) bool {
 // for a missing value, the get operation always fails
 func (self *missingValue) GetBool() (bool, bool) {
 	return false, false
+}
+
+// for a missing value, the get operation always fails
+func (self *missingValue) GetInt() (int, bool) {
+	return 0, false
+}
+
+// for a missing value, the set operation always fails
+func (self *missingValue) SetInt(value int) bool {
+	return false
+}
+
+// for a missing value, the get operation always fails
+func (self *missingValue) GetFloat() (float64, bool) {
+	return 0.0, false
+}
+
+// for a missing value, the set operation always fails
+func (self *missingValue) SetFloat(value float64) bool {
+	return false
+}
+
+// for a missing value, the get operation always fails
+func (self *missingValue) GetString() (string, bool) {
+	return "", false
+}
+
+// for a missing value, the set operation always fails
+func (self *missingValue) SetString(value string) bool {
+	return false
 }
 
 // for a missing value, the get operation always fails
