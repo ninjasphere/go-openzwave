@@ -67,6 +67,16 @@ bool getUint8Value(uint32_t homeId, uint64_t id, uint8_t *value)
   return OpenZWave::Manager::Get()->GetValueAsByte(OpenZWave::ValueID(homeId, id), value);
 }
 
+bool setBoolValue(uint32_t homeId, uint64_t id, bool value)
+{
+  return OpenZWave::Manager::Get()->SetValue(OpenZWave::ValueID(homeId, id), value);
+}
+
+bool getBoolValue(uint32_t homeId, uint64_t id, bool *value)
+{
+  return OpenZWave::Manager::Get()->GetValueAsBool(OpenZWave::ValueID(homeId, id), value);
+}
+
 bool refreshValue(uint32_t homeId, uint64_t id)
 {
   return OpenZWave::Manager::Get()->RefreshValue(OpenZWave::ValueID(homeId, id));

@@ -24,6 +24,8 @@ typedef struct Value {
 extern void  freeValue(Value *);
 extern bool  setUint8Value(uint32_t homeId, uint64_t id, uint8_t value);
 extern bool  getUint8Value(uint32_t homeId, uint64_t id, uint8_t *value);
+extern bool  setBoolValue(uint32_t homeId, uint64_t id, bool value);
+extern bool  getBoolValue(uint32_t homeId, uint64_t id, bool *value);
 extern bool  refreshValue(uint32_t homeId, uint64_t id);
 extern bool  setPollingState(uint32_t homeId, uint64_t id, bool state);
 

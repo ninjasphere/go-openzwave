@@ -23,6 +23,8 @@ type Value interface {
 	Id() ValueID
 	SetUint8(value uint8) bool
 	GetUint8() (uint8, bool)
+	SetBool(value bool) bool
+	GetBool() (bool, bool)
 	Refresh() bool
 	SetPollingState(bool) bool
 }
@@ -82,9 +84,19 @@ func (self *value) SetUint8(value uint8) bool {
 }
 
 func (self *value) GetUint8() (uint8, bool) {
-	var value uint8
+	var value C.uint8_t
 	ok := (bool)(C.getUint8Value(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), (*C.uint8_t)(&value)))
-	return value, ok
+	return (uint8)(value), ok
+}
+
+func (self *value) SetBool(value bool) bool {
+	return (bool)(C.setBoolValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), C._Bool(value)))
+}
+
+func (self *value) GetBool() (bool, bool) {
+	var value C._Bool
+	ok := (bool)(C.getBoolValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), (*C._Bool)(&value)))
+	return (bool)(value), ok
 }
 
 func (self *value) Refresh() bool {
@@ -107,6 +119,16 @@ func (self *missingValue) SetUint8(value uint8) bool {
 // for a missing value, the get operation always fails
 func (self *missingValue) GetUint8() (uint8, bool) {
 	return 0, false
+}
+
+// for a missing value, the set operation always fails
+func (self *missingValue) SetBool(value bool) bool {
+	return false
+}
+
+// for a missing value, the get operation always fails
+func (self *missingValue) GetBool() (bool, bool) {
+	return false, false
 }
 
 // for a missing value, the get operation always fails
