@@ -31,28 +31,44 @@ const (
 $(x=0; enumerate | while read code value; do echo "   $code = $value"; let x=x+1; done)
 )
 
-var enums = [...]Enum{
+var (
+    enums = [...]Enum{
 $(x=0; enumerate | while read code value; do echo "      { $code, \"$PREFIX.$code\" },"; let x=x+1; done)
 		UNKNOWN_ENUM }
+
+    fromName = make(map[string]*Enum)
+    fromCode = make(map[int]*Enum)
+)
 
 type Enum struct {
      Code int
      Name string
 }
 
+func init() {
+     for _, e := range enums {
+        fromName[e.Name] = &e
+        fromCode[e.Code] = &e
+     }
+}
+
 
 func ToEnum(code int) *Enum {	
-     var needle *Enum = nil;
-     for _, e := range enums {
-       if code == e.Code {
-         needle = &e
-         break;
-       }
+     e,ok := fromCode[code]
+     if ok {
+        return e
+     } else {
+        return &UNKNOWN_ENUM
      }
-     if needle == nil {
-        needle = &UNKNOWN_ENUM
-     } 
-     return needle
+}
+
+func FromName(name string) *Enum {	
+     e,ok := fromName[name]
+     if ok {
+        return e
+     } else {
+        return &UNKNOWN_ENUM
+     }
 }
 
 func (val Enum) IsValid() bool {
