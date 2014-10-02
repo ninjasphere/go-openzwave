@@ -30,6 +30,7 @@ type Node interface {
 	GetNodeName() string
 
 	GetValue(commandClassId uint8, instanceId uint8, index uint8) Value
+	GetValueWithId(valueId ValueID) Value
 }
 
 type ProductId struct {
@@ -214,6 +215,10 @@ func (self *node) GetValue(commandClassId uint8, instanceId uint8, index uint8) 
 		return &missingValue{} // accessor that does nothing
 	}
 	return v
+}
+
+func (self *node) GetValueWithId(valueId ValueID) Value {
+	return self.GetValue(valueId.CommandClassId, valueId.Instance, valueId.Index)
 }
 
 func (self *node) removeValue(nt *notification) {
