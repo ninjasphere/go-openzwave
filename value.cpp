@@ -59,7 +59,9 @@ Value * exportValue(API * api, uint32_t homeId, OpenZWave::ValueID const &valueI
 
 bool setUint8Value(uint32_t homeId, uint64_t id, uint8_t value)
 {
-  return OpenZWave::Manager::Get()->SetValue(OpenZWave::ValueID(homeId, id), value);
+	OpenZWave::ValueID valueId = OpenZWave::ValueID(homeId, id);
+	OpenZWave::Manager::Get()->SetChangeVerified(valueId, true);
+	return OpenZWave::Manager::Get()->SetValue(valueId, value);
 }
 
 bool getUint8Value(uint32_t homeId, uint64_t id, uint8_t *value)
