@@ -1,0 +1,326 @@
+2014-09-23 15:17:45.041 mgr,     Added driver for controller /dev/cu.SLAB_USBtoUART
+2014-09-23 15:17:45.042   Opening controller /dev/cu.SLAB_USBtoUART
+2014-09-23 15:17:45.043 Trying to open serial port /dev/cu.SLAB_USBtoUART (attempt 1)
+2014-09-23 15:17:45.048 Serial port /dev/cu.SLAB_USBtoUART opened (attempt 1)
+2014-09-23 15:17:45.048 contrlr, Queuing (Command) FUNC_ID_ZW_GET_VERSION: 0x01, 0x03, 0x00, 0x15, 0xe9
+2014-09-23 15:17:45.049 contrlr, Queuing (Command) FUNC_ID_ZW_MEMORY_GET_ID: 0x01, 0x03, 0x00, 0x20, 0xdc
+2014-09-23 15:17:45.049 contrlr, Queuing (Command) FUNC_ID_ZW_GET_CONTROLLER_CAPABILITIES: 0x01, 0x03, 0x00, 0x05, 0xf9
+2014-09-23 15:17:45.049 contrlr, Queuing (Command) FUNC_ID_SERIAL_API_GET_CAPABILITIES: 0x01, 0x03, 0x00, 0x07, 0xfb
+2014-09-23 15:17:45.049 contrlr, Queuing (Command) FUNC_ID_ZW_GET_SUC_NODE_ID: 0x01, 0x03, 0x00, 0x56, 0xaa
+2014-09-23 15:17:45.049 Specified option [RetryTimeout] was not found.
+2014-09-23 15:17:45.049 
+2014-09-23 15:17:45.049 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x15) - FUNC_ID_ZW_GET_VERSION: 0x01, 0x03, 0x00, 0x15, 0xe9
+2014-09-23 15:17:45.052 contrlr,   Received: 0x01, 0x10, 0x01, 0x15, 0x5a, 0x2d, 0x57, 0x61, 0x76, 0x65, 0x20, 0x32, 0x2e, 0x37, 0x38, 0x00, 0x01, 0x9b
+2014-09-23 15:17:45.052 
+2014-09-23 15:17:45.052 contrlr, Received reply to FUNC_ID_ZW_GET_VERSION:
+2014-09-23 15:17:45.052 contrlr,     Static Controller library, version Z-Wave 2.78
+2014-09-23 15:17:45.052 contrlr,   Expected reply was received
+2014-09-23 15:17:45.052 contrlr,   Message transaction complete
+2014-09-23 15:17:45.053 
+2014-09-23 15:17:45.053 contrlr, Removing current message
+2014-09-23 15:17:45.053 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.053 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.053 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.053 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.053 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.053 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.054 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.054 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.054 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.054 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.054 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.054 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.054 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.054 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.054 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.054 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.055 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.055 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 15:17:45.055 
+2014-09-23 15:17:45.055 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x20) - FUNC_ID_ZW_MEMORY_GET_ID: 0x01, 0x03, 0x00, 0x20, 0xdc
+2014-09-23 15:17:45.057 contrlr,   Received: 0x01, 0x08, 0x01, 0x20, 0x01, 0x61, 0xd3, 0x66, 0x01, 0x02
+2014-09-23 15:17:45.057 
+2014-09-23 15:17:45.057 contrlr, Received reply to FUNC_ID_ZW_MEMORY_GET_ID. Home ID = 0x0161d366.  Our node ID = 1
+2014-09-23 15:17:45.057 contrlr,   Expected reply was received
+2014-09-23 15:17:45.057 contrlr,   Message transaction complete
+2014-09-23 15:17:45.058 
+2014-09-23 15:17:45.058 contrlr, Removing current message
+2014-09-23 15:17:45.058 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.058 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.058 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.058 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.058 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.058 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.058 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.058 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.058 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.058 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.059 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.059 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.059 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.059 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.059 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.059 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.059 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.059 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.059 
+2014-09-23 15:17:45.059 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x05) - FUNC_ID_ZW_GET_CONTROLLER_CAPABILITIES: 0x01, 0x03, 0x00, 0x05, 0xf9
+2014-09-23 15:17:45.061 contrlr,   Received: 0x01, 0x04, 0x01, 0x05, 0x1c, 0xe3
+2014-09-23 15:17:45.061 
+2014-09-23 15:17:45.061 contrlr, Received reply to FUNC_ID_ZW_GET_CONTROLLER_CAPABILITIES:
+2014-09-23 15:17:45.061 contrlr,     There is a SUC ID Server (SIS) in this network.
+2014-09-23 15:17:45.061 contrlr,     The PC controller is an inclusion static update controller (SUC) and was the original primary before the SIS was added.
+2014-09-23 15:17:45.061 contrlr,   Expected reply was received
+2014-09-23 15:17:45.061 contrlr,   Message transaction complete
+2014-09-23 15:17:45.061 
+2014-09-23 15:17:45.061 contrlr, Removing current message
+2014-09-23 15:17:45.062 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.062 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.062 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.062 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.062 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.062 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.062 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.062 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.062 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.062 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.062 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.062 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.062 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.063 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.063 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.063 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.063 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.063 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.063 
+2014-09-23 15:17:45.063 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x07) - FUNC_ID_SERIAL_API_GET_CAPABILITIES: 0x01, 0x03, 0x00, 0x07, 0xfb
+2014-09-23 15:17:45.068 contrlr,   Received: 0x01, 0x2b, 0x01, 0x07, 0x03, 0x07, 0x00, 0x86, 0x00, 0x02, 0x00, 0x01, 0xfe, 0x80, 0xfe, 0x88, 0x0f, 0x00, 0x00, 0x00, 0xfb, 0x97, 0x7f, 0x82, 0x07, 0x00, 0x00, 0x80, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc2
+2014-09-23 15:17:45.068 
+2014-09-23 15:17:45.069 contrlr,  Received reply to FUNC_ID_SERIAL_API_GET_CAPABILITIES
+2014-09-23 15:17:45.069 contrlr,     Serial API Version:   3.7
+2014-09-23 15:17:45.069 contrlr,     Manufacturer ID:      0x0086
+2014-09-23 15:17:45.069 contrlr,     Product Type:         0x0002
+2014-09-23 15:17:45.069 contrlr,     Product ID:           0x0001
+2014-09-23 15:17:45.069 contrlr, Queuing (Command) FUNC_ID_ZW_GET_RANDOM: 0x01, 0x04, 0x00, 0x1c, 0x20, 0xc7
+2014-09-23 15:17:45.069 contrlr, Queuing (Command) FUNC_ID_SERIAL_API_GET_INIT_DATA: 0x01, 0x03, 0x00, 0x02, 0xfe
+2014-09-23 15:17:45.069 contrlr, Queuing (Command) FUNC_ID_SERIAL_API_SET_TIMEOUTS: 0x01, 0x05, 0x00, 0x06, 0x64, 0x0f, 0x97
+2014-09-23 15:17:45.070 contrlr, Queuing (Command) FUNC_ID_SERIAL_API_APPL_NODE_INFORMATION: 0x01, 0x07, 0x00, 0x03, 0x01, 0x02, 0x01, 0x00, 0xf9
+2014-09-23 15:17:45.070 contrlr,   Expected reply was received
+2014-09-23 15:17:45.070 contrlr,   Message transaction complete
+2014-09-23 15:17:45.070 
+2014-09-23 15:17:45.070 contrlr, Removing current message
+2014-09-23 15:17:45.070 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.070 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.070 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.070 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.070 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.071 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.071 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.071 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.071 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.071 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.071 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.071 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.071 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.071 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.071 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.071 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.071 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.071 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.072 
+2014-09-23 15:17:45.072 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x56) - FUNC_ID_ZW_GET_SUC_NODE_ID: 0x01, 0x03, 0x00, 0x56, 0xaa
+2014-09-23 15:17:45.073 contrlr,   Received: 0x01, 0x04, 0x01, 0x56, 0x01, 0xad
+2014-09-23 15:17:45.073 
+2014-09-23 15:17:45.074 contrlr, Received reply to GET_SUC_NODE_ID.  Node ID = 1
+2014-09-23 15:17:45.074 contrlr,   Expected reply was received
+2014-09-23 15:17:45.074 contrlr,   Message transaction complete
+2014-09-23 15:17:45.074 
+2014-09-23 15:17:45.074 contrlr, Removing current message
+2014-09-23 15:17:45.074 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.074 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.074 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.074 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.074 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.075 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.075 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.075 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.075 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.075 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.075 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.075 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.075 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.075 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.075 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.075 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.076 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.076 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.076 
+2014-09-23 15:17:45.076 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x1c) - FUNC_ID_ZW_GET_RANDOM: 0x01, 0x04, 0x00, 0x1c, 0x20, 0xc7
+2014-09-23 15:17:45.129 contrlr,   Received: 0x01, 0x25, 0x01, 0x1c, 0x01, 0x20, 0x88, 0xb7, 0x6e, 0x03, 0x0b, 0xf7, 0x06, 0x0d, 0x0b, 0xf4, 0xa2, 0xb7, 0x50, 0xfa, 0xa3, 0xc5, 0x15, 0x29, 0x33, 0x2e, 0xc9, 0xa9, 0xcf, 0x72, 0x3c, 0xa6, 0xec, 0xfe, 0x3d, 0x20, 0xbb, 0x70, 0xc7
+2014-09-23 15:17:45.129 
+2014-09-23 15:17:45.129 contrlr, Received reply to FUNC_ID_ZW_GET_RANDOM: true
+2014-09-23 15:17:45.129 contrlr,   Expected reply was received
+2014-09-23 15:17:45.130 contrlr,   Message transaction complete
+2014-09-23 15:17:45.130 
+2014-09-23 15:17:45.130 contrlr, Removing current message
+2014-09-23 15:17:45.130 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.130 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.130 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.130 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.131 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.131 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.131 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.131 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.131 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.131 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.131 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.131 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.131 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.131 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.132 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.132 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.132 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.132 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 15:17:45.132 
+2014-09-23 15:17:45.132 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x02) - FUNC_ID_SERIAL_API_GET_INIT_DATA: 0x01, 0x03, 0x00, 0x02, 0xfe
+2014-09-23 15:17:45.181 contrlr,   Received: 0x01, 0x25, 0x01, 0x02, 0x05, 0x08, 0x1d, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x01, 0xca
+2014-09-23 15:17:45.181 
+2014-09-23 15:17:45.181 mgr,     Driver with Home ID of 0x0161d366 is now ready.
+2014-09-23 15:17:45.181 
+2014-09-23 15:17:45.181 contrlr, Received reply to FUNC_ID_SERIAL_API_GET_INIT_DATA:
+2014-09-23 15:17:45.181 contrlr,     Node 001 - New
+2014-09-23 15:17:45.181 Node001, AdvanceQueries queryPending=0 queryRetries=0 queryStage=ProtocolInfo live=1
+2014-09-23 15:17:45.181 Node001, QueryStage_ProtocolInfo
+2014-09-23 15:17:45.182 Node001, Queuing (Query) Get Node Protocol Info (Node=1): 0x01, 0x04, 0x00, 0x41, 0x01, 0xbb
+2014-09-23 15:17:45.182 Node001, Queuing (Query) Query Stage Complete (ProtocolInfo)
+2014-09-23 15:17:45.182 contrlr,   Expected reply was received
+2014-09-23 15:17:45.182 contrlr,   Message transaction complete
+2014-09-23 15:17:45.182 
+2014-09-23 15:17:45.182 contrlr, Removing current message
+2014-09-23 15:17:45.183 
+2014-09-23 15:17:45.183 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x06) - FUNC_ID_SERIAL_API_SET_TIMEOUTS: 0x01, 0x05, 0x00, 0x06, 0x64, 0x0f, 0x97
+2014-09-23 15:17:45.185 contrlr,   Received: 0x01, 0x05, 0x01, 0x06, 0x96, 0x0f, 0x64
+2014-09-23 15:17:45.185 
+2014-09-23 15:17:45.185 contrlr, Received reply to FUNC_ID_SERIAL_API_SET_TIMEOUTS
+2014-09-23 15:17:45.185 contrlr,   Expected reply was received
+2014-09-23 15:17:45.186 contrlr,   Message transaction complete
+2014-09-23 15:17:45.186 
+2014-09-23 15:17:45.186 contrlr, Removing current message
+2014-09-23 15:17:45.186 
+2014-09-23 15:17:45.186 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x00) - FUNC_ID_SERIAL_API_APPL_NODE_INFORMATION: 0x01, 0x07, 0x00, 0x03, 0x01, 0x02, 0x01, 0x00, 0xf9
+2014-09-23 15:17:45.187 contrlr, Removing current message
+2014-09-23 15:17:45.188 
+2014-09-23 15:17:45.188 Node001, Sending (Query) message (Callback ID=0x00, Expected Reply=0x41) - Get Node Protocol Info (Node=1): 0x01, 0x04, 0x00, 0x41, 0x01, 0xbb
+2014-09-23 15:17:45.190 Node001,   Received: 0x01, 0x09, 0x01, 0x41, 0x92, 0x16, 0x00, 0x02, 0x02, 0x00, 0x32
+2014-09-23 15:17:45.190 
+2014-09-23 15:17:45.191 Node001, Received reply to FUNC_ID_ZW_GET_NODE_PROTOCOL_INFO
+2014-09-23 15:17:45.191 Node001,   Protocol Info for Node 1:
+2014-09-23 15:17:45.191 Node001,     Listening     = true
+2014-09-23 15:17:45.191 Node001,     Beaming       = true
+2014-09-23 15:17:45.191 Node001,     Routing       = false
+2014-09-23 15:17:45.191 Node001,     Max Baud Rate = 40000
+2014-09-23 15:17:45.191 Node001,     Version       = 3
+2014-09-23 15:17:45.191 Node001,     Security      = false
+2014-09-23 15:17:45.192 Node001,   Basic device class    (0x02) - Static Controller
+2014-09-23 15:17:45.192 Node001,   Generic device Class  (0x02) - Static Controller
+2014-09-23 15:17:45.192 Node001,   No specific device class defined
+2014-09-23 15:17:45.192 Node001,     COMMAND_CLASS_BASIC is not mapped
+2014-09-23 15:17:45.193 Node001,   Mandatory Command Classes for Node 1:
+2014-09-23 15:17:45.193 Node001,     None
+2014-09-23 15:17:45.193 Node001,   Mandatory Command Classes controlled by Node 1:
+2014-09-23 15:17:45.193 Node001,     COMMAND_CLASS_BASIC
+2014-09-23 15:17:45.193 Driver::ReadButtons - zwbutton.xml file not found.
+2014-09-23 15:17:45.193 Node001,   Expected reply was received
+2014-09-23 15:17:45.193 Node001,   Message transaction complete
+2014-09-23 15:17:45.193 
+2014-09-23 15:17:45.193 Node001, Removing current message
+2014-09-23 15:17:45.194 Node001, Query Stage Complete (ProtocolInfo)
+2014-09-23 15:17:45.194 Node001, AdvanceQueries queryPending=0 queryRetries=0 queryStage=Probe live=1
+2014-09-23 15:17:45.194 Node001, QueryStage_Probe
+2014-09-23 15:17:45.194 Node001, QueryStage_WakeUp
+2014-09-23 15:17:45.194 Node001, QueryStage_ManufacturerSpecific1
+2014-09-23 15:17:45.196 Node001, QueryStage_NodeInfo
+2014-09-23 15:17:45.196 Node001, Queuing (Query) Request Node Info (Node=1): 0x01, 0x04, 0x00, 0x60, 0x01, 0x9a
+2014-09-23 15:17:45.196 Node001, Queuing (Query) Query Stage Complete (NodeInfo)
+2014-09-23 15:17:45.197 
+2014-09-23 15:17:45.197 Node001, Sending (Query) message (Callback ID=0x00, Expected Reply=0x49) - Request Node Info (Node=1): 0x01, 0x04, 0x00, 0x60, 0x01, 0x9a
+2014-09-23 15:17:45.201 Node001,   Received: 0x01, 0x04, 0x01, 0x60, 0x01, 0x9b
+2014-09-23 15:17:45.201 
+2014-09-23 15:17:45.201 Node001, FUNC_ID_ZW_REQUEST_NODE_INFO Request successful.
+2014-09-23 15:17:45.500 Node001,   Received: 0x01, 0x06, 0x00, 0x49, 0x81, 0x00, 0x00, 0x31
+2014-09-23 15:17:45.500 
+2014-09-23 15:17:45.501 WARNING: FUNC_ID_ZW_APPLICATION_UPDATE: UPDATE_STATE_NODE_INFO_REQ_FAILED received
+2014-09-23 15:17:45.501 Node001, QueryStageRetry stage NodeInfo requested stage NodeInfo max 2 retries 0 pending 1
+2014-09-23 15:17:45.501 Node001,   Expected reply was received
+2014-09-23 15:17:45.501 Node001,   Message transaction complete
+2014-09-23 15:17:45.502 
+2014-09-23 15:17:45.502 Node001, Removing current message
+2014-09-23 15:17:45.502 Node001, Query Stage Complete (NodeInfo)
+2014-09-23 15:17:45.502 Node001, AdvanceQueries queryPending=0 queryRetries=1 queryStage=NodeInfo live=1
+2014-09-23 15:17:45.502 Node001, QueryStage_NodeInfo
+2014-09-23 15:17:45.502 Node001, Queuing (Query) Request Node Info (Node=1): 0x01, 0x04, 0x00, 0x60, 0x01, 0x9a
+2014-09-23 15:17:45.502 Node001, Queuing (Query) Query Stage Complete (NodeInfo)
+2014-09-23 15:17:45.502 
+2014-09-23 15:17:45.502 Node001, Sending (Query) message (Callback ID=0x00, Expected Reply=0x49) - Request Node Info (Node=1): 0x01, 0x04, 0x00, 0x60, 0x01, 0x9a
+2014-09-23 15:17:45.507 Node001,   Received: 0x01, 0x04, 0x01, 0x60, 0x01, 0x9b
+2014-09-23 15:17:45.507 
+2014-09-23 15:17:45.507 Node001, FUNC_ID_ZW_REQUEST_NODE_INFO Request successful.
+2014-09-23 15:17:45.926 Node001,   Received: 0x01, 0x06, 0x00, 0x49, 0x81, 0x00, 0x00, 0x31
+2014-09-23 15:17:45.926 
+2014-09-23 15:17:45.927 WARNING: FUNC_ID_ZW_APPLICATION_UPDATE: UPDATE_STATE_NODE_INFO_REQ_FAILED received
+2014-09-23 15:17:45.927 Node001, QueryStageRetry stage NodeInfo requested stage NodeInfo max 2 retries 1 pending 1
+2014-09-23 15:17:45.928 Node001,   Expected reply was received
+2014-09-23 15:17:45.928 Node001,   Message transaction complete
+2014-09-23 15:17:45.928 
+2014-09-23 15:17:45.928 Node001, Removing current message
+2014-09-23 15:17:45.928 Node001, Query Stage Complete (NodeInfo)
+2014-09-23 15:17:45.928 Node001, AdvanceQueries queryPending=0 queryRetries=0 queryStage=ManufacturerSpecific2 live=1
+2014-09-23 15:17:45.928 Node001, QueryStage_ManufacturerSpecific2
+2014-09-23 15:17:45.928 Node001, QueryStage_Versions
+2014-09-23 15:17:45.929 Node001, QueryStage_Instances
+2014-09-23 15:17:45.929 Node001, Essential node queries are complete
+2014-09-23 15:17:45.929 Node001, QueryStage_Static
+2014-09-23 15:17:45.929 Node001, QueryStage_Associations
+2014-09-23 15:17:45.929 Node001, QueryStage_Neighbors
+2014-09-23 15:17:45.929 Requesting routing info (neighbor list) for Node 1
+2014-09-23 15:17:45.929 Node001, Queuing (Command) Get Routing Info (Node=1): 0x01, 0x07, 0x00, 0x80, 0x01, 0x00, 0x00, 0x03, 0x7a
+2014-09-23 15:17:45.929 Node001, Queuing (Query) Query Stage Complete (Neighbors)
+2014-09-23 15:17:45.930 
+2014-09-23 15:17:45.930 Node001, Sending (Command) message (Callback ID=0x00, Expected Reply=0x80) - Get Routing Info (Node=1): 0x01, 0x07, 0x00, 0x80, 0x01, 0x00, 0x00, 0x03, 0x7a
+2014-09-23 15:17:45.935 Node001,   Received: 0x01, 0x20, 0x01, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x5e
+2014-09-23 15:17:45.935 
+2014-09-23 15:17:45.935 Node001, Received reply to FUNC_ID_ZW_GET_ROUTING_INFO
+2014-09-23 15:17:45.935 Node001,     Neighbors of this node are:
+2014-09-23 15:17:45.936 Node001,  (none reported)
+2014-09-23 15:17:45.936 Node001,   Expected reply was received
+2014-09-23 15:17:45.936 Node001,   Message transaction complete
+2014-09-23 15:17:45.936 
+2014-09-23 15:17:45.936 Node001, Removing current message
+2014-09-23 15:17:45.936 Node001, Query Stage Complete (Neighbors)
+2014-09-23 15:17:45.936 Node001, AdvanceQueries queryPending=0 queryRetries=0 queryStage=Session live=1
+2014-09-23 15:17:45.936 Node001, QueryStage_Session
+2014-09-23 15:17:45.936 Node001, QueryStage_Dynamic
+2014-09-23 15:17:45.936 Node001, QueryStage_Configuration
+2014-09-23 15:17:45.937 Node001, QueryStage_Complete
+2014-09-23 15:17:45.937 CheckCompletedNodeQueries m_allNodesQueried=0 m_awakeNodesQueried=0
+2014-09-23 15:17:45.937 CheckCompletedNodeQueries all=1, deadFound=0 sleepingOnly=1
+2014-09-23 15:17:45.937          Node query processing complete.
+2014-09-23 15:17:53.464 ***************************************************************************
+2014-09-23 15:17:53.464 *********************  Cumulative Network Statistics  *********************
+2014-09-23 15:17:53.465 *** General
+2014-09-23 15:17:53.465 Driver run time: . .  . 0 days, 0 hours, 0 minutes
+2014-09-23 15:17:53.465 Frames processed: . . . . . . . . . . . . . . . . . . . . 14
+2014-09-23 15:17:53.465 Total messages successfully received: . . . . . . . . . . 14
+2014-09-23 15:17:53.465 Total Messages successfully sent: . . . . . . . . . . . . 13
+2014-09-23 15:17:53.465 ACKs received from controller:  . . . . . . . . . . . . . 13
+2014-09-23 15:17:53.465 *** Errors
+2014-09-23 15:17:53.465 Unsolicited messages received while waiting for ACK:  . . 0
+2014-09-23 15:17:53.466 Reads aborted due to timeouts:  . . . . . . . . . . . . . 0
+2014-09-23 15:17:53.466 Bad checksum errors:  . . . . . . . . . . . . . . . . . . 0
+2014-09-23 15:17:53.466 CANs received from controller:  . . . . . . . . . . . . . 0
+2014-09-23 15:17:53.466 NAKs received from controller:  . . . . . . . . . . . . . 0
+2014-09-23 15:17:53.466 Out of frame data flow errors:  . . . . . . . . . . . . . 0
+2014-09-23 15:17:53.466 Messages retransmitted: . . . . . . . . . . . . . . . . . 0
+2014-09-23 15:17:53.466 Messages dropped and not delivered: . . . . . . . . . . . 0
+2014-09-23 15:17:53.466 ***************************************************************************
+2014-09-23 15:17:55.481 mgr,     Driver for controller /dev/cu.SLAB_USBtoUART removed

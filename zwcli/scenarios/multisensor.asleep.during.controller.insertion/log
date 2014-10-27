@@ -1,0 +1,1212 @@
+2014-09-23 16:05:04.235 mgr,     Added driver for controller /dev/cu.SLAB_USBtoUART
+2014-09-23 16:05:04.236   Opening controller /dev/cu.SLAB_USBtoUART
+2014-09-23 16:05:04.236 Trying to open serial port /dev/cu.SLAB_USBtoUART (attempt 1)
+2014-09-23 16:05:04.241 Serial port /dev/cu.SLAB_USBtoUART opened (attempt 1)
+2014-09-23 16:05:04.242 contrlr, Queuing (Command) FUNC_ID_ZW_GET_VERSION: 0x01, 0x03, 0x00, 0x15, 0xe9
+2014-09-23 16:05:04.242 contrlr, Queuing (Command) FUNC_ID_ZW_MEMORY_GET_ID: 0x01, 0x03, 0x00, 0x20, 0xdc
+2014-09-23 16:05:04.242 contrlr, Queuing (Command) FUNC_ID_ZW_GET_CONTROLLER_CAPABILITIES: 0x01, 0x03, 0x00, 0x05, 0xf9
+2014-09-23 16:05:04.242 contrlr, Queuing (Command) FUNC_ID_SERIAL_API_GET_CAPABILITIES: 0x01, 0x03, 0x00, 0x07, 0xfb
+2014-09-23 16:05:04.242 contrlr, Queuing (Command) FUNC_ID_ZW_GET_SUC_NODE_ID: 0x01, 0x03, 0x00, 0x56, 0xaa
+2014-09-23 16:05:04.242 Specified option [RetryTimeout] was not found.
+2014-09-23 16:05:04.242 
+2014-09-23 16:05:04.242 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x15) - FUNC_ID_ZW_GET_VERSION: 0x01, 0x03, 0x00, 0x15, 0xe9
+2014-09-23 16:05:04.245 contrlr,   Received: 0x01, 0x10, 0x01, 0x15, 0x5a, 0x2d, 0x57, 0x61, 0x76, 0x65, 0x20, 0x32, 0x2e, 0x37, 0x38, 0x00, 0x01, 0x9b
+2014-09-23 16:05:04.245 
+2014-09-23 16:05:04.245 contrlr, Received reply to FUNC_ID_ZW_GET_VERSION:
+2014-09-23 16:05:04.245 contrlr,     Static Controller library, version Z-Wave 2.78
+2014-09-23 16:05:04.245 contrlr,   Expected reply was received
+2014-09-23 16:05:04.246 contrlr,   Message transaction complete
+2014-09-23 16:05:04.246 
+2014-09-23 16:05:04.246 contrlr, Removing current message
+2014-09-23 16:05:04.246 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.246 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.246 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.246 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.246 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.246 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.247 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.247 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.247 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.247 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.247 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.247 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.247 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.247 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.247 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.247 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.247 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.247 mgr,     Manager::GetDriver failed - Home ID 0x00000000 is unknown
+2014-09-23 16:05:04.248 
+2014-09-23 16:05:04.248 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x20) - FUNC_ID_ZW_MEMORY_GET_ID: 0x01, 0x03, 0x00, 0x20, 0xdc
+2014-09-23 16:05:04.250 contrlr,   Received: 0x01, 0x08, 0x01, 0x20, 0x01, 0x61, 0xd3, 0x66, 0x01, 0x02
+2014-09-23 16:05:04.250 
+2014-09-23 16:05:04.250 contrlr, Received reply to FUNC_ID_ZW_MEMORY_GET_ID. Home ID = 0x0161d366.  Our node ID = 1
+2014-09-23 16:05:04.250 contrlr,   Expected reply was received
+2014-09-23 16:05:04.250 contrlr,   Message transaction complete
+2014-09-23 16:05:04.250 
+2014-09-23 16:05:04.250 contrlr, Removing current message
+2014-09-23 16:05:04.251 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.251 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.251 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.251 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.251 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.251 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.251 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.251 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.251 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.251 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.251 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.252 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.252 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.252 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.252 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.252 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.252 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.252 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.252 
+2014-09-23 16:05:04.252 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x05) - FUNC_ID_ZW_GET_CONTROLLER_CAPABILITIES: 0x01, 0x03, 0x00, 0x05, 0xf9
+2014-09-23 16:05:04.254 contrlr,   Received: 0x01, 0x04, 0x01, 0x05, 0x1c, 0xe3
+2014-09-23 16:05:04.254 
+2014-09-23 16:05:04.254 contrlr, Received reply to FUNC_ID_ZW_GET_CONTROLLER_CAPABILITIES:
+2014-09-23 16:05:04.254 contrlr,     There is a SUC ID Server (SIS) in this network.
+2014-09-23 16:05:04.254 contrlr,     The PC controller is an inclusion static update controller (SUC) and was the original primary before the SIS was added.
+2014-09-23 16:05:04.254 contrlr,   Expected reply was received
+2014-09-23 16:05:04.255 contrlr,   Message transaction complete
+2014-09-23 16:05:04.255 
+2014-09-23 16:05:04.255 contrlr, Removing current message
+2014-09-23 16:05:04.255 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.255 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.255 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.255 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.255 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.255 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.255 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.256 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.256 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.256 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.256 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.256 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.256 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.256 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.256 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.256 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.256 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.256 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.256 
+2014-09-23 16:05:04.257 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x07) - FUNC_ID_SERIAL_API_GET_CAPABILITIES: 0x01, 0x03, 0x00, 0x07, 0xfb
+2014-09-23 16:05:04.262 contrlr,   Received: 0x01, 0x2b, 0x01, 0x07, 0x03, 0x07, 0x00, 0x86, 0x00, 0x02, 0x00, 0x01, 0xfe, 0x80, 0xfe, 0x88, 0x0f, 0x00, 0x00, 0x00, 0xfb, 0x97, 0x7f, 0x82, 0x07, 0x00, 0x00, 0x80, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc2
+2014-09-23 16:05:04.262 
+2014-09-23 16:05:04.262 contrlr,  Received reply to FUNC_ID_SERIAL_API_GET_CAPABILITIES
+2014-09-23 16:05:04.263 contrlr,     Serial API Version:   3.7
+2014-09-23 16:05:04.263 contrlr,     Manufacturer ID:      0x0086
+2014-09-23 16:05:04.263 contrlr,     Product Type:         0x0002
+2014-09-23 16:05:04.263 contrlr,     Product ID:           0x0001
+2014-09-23 16:05:04.263 contrlr, Queuing (Command) FUNC_ID_ZW_GET_RANDOM: 0x01, 0x04, 0x00, 0x1c, 0x20, 0xc7
+2014-09-23 16:05:04.263 contrlr, Queuing (Command) FUNC_ID_SERIAL_API_GET_INIT_DATA: 0x01, 0x03, 0x00, 0x02, 0xfe
+2014-09-23 16:05:04.263 contrlr, Queuing (Command) FUNC_ID_SERIAL_API_SET_TIMEOUTS: 0x01, 0x05, 0x00, 0x06, 0x64, 0x0f, 0x97
+2014-09-23 16:05:04.263 contrlr, Queuing (Command) FUNC_ID_SERIAL_API_APPL_NODE_INFORMATION: 0x01, 0x07, 0x00, 0x03, 0x01, 0x02, 0x01, 0x00, 0xf9
+2014-09-23 16:05:04.264 contrlr,   Expected reply was received
+2014-09-23 16:05:04.264 contrlr,   Message transaction complete
+2014-09-23 16:05:04.264 
+2014-09-23 16:05:04.264 contrlr, Removing current message
+2014-09-23 16:05:04.264 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.264 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.264 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.264 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.264 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.264 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.264 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.265 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.265 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.265 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.265 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.265 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.265 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.265 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.265 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.265 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.265 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.265 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.266 
+2014-09-23 16:05:04.266 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x56) - FUNC_ID_ZW_GET_SUC_NODE_ID: 0x01, 0x03, 0x00, 0x56, 0xaa
+2014-09-23 16:05:04.267 contrlr,   Received: 0x01, 0x04, 0x01, 0x56, 0x01, 0xad
+2014-09-23 16:05:04.267 
+2014-09-23 16:05:04.267 contrlr, Received reply to GET_SUC_NODE_ID.  Node ID = 1
+2014-09-23 16:05:04.268 contrlr,   Expected reply was received
+2014-09-23 16:05:04.268 contrlr,   Message transaction complete
+2014-09-23 16:05:04.268 
+2014-09-23 16:05:04.268 contrlr, Removing current message
+2014-09-23 16:05:04.268 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.268 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.268 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.268 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.268 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.268 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.269 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.269 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.269 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.269 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.269 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.269 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.269 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.269 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.269 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.269 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.269 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.269 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.270 
+2014-09-23 16:05:04.270 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x1c) - FUNC_ID_ZW_GET_RANDOM: 0x01, 0x04, 0x00, 0x1c, 0x20, 0xc7
+2014-09-23 16:05:04.322 contrlr,   Received: 0x01, 0x25, 0x01, 0x1c, 0x01, 0x20, 0xa1, 0x68, 0xfa, 0x36, 0x3e, 0x6d, 0xbe, 0x4e, 0x74, 0xff, 0x5f, 0x70, 0x2a, 0xe9, 0x2b, 0x21, 0x25, 0xf5, 0xd8, 0xfc, 0x7e, 0x53, 0xb4, 0x15, 0x39, 0xc1, 0x2f, 0x9e, 0x6f, 0xf0, 0x17, 0x8a, 0x1e
+2014-09-23 16:05:04.322 
+2014-09-23 16:05:04.323 contrlr, Received reply to FUNC_ID_ZW_GET_RANDOM: true
+2014-09-23 16:05:04.323 contrlr,   Expected reply was received
+2014-09-23 16:05:04.323 contrlr,   Message transaction complete
+2014-09-23 16:05:04.323 
+2014-09-23 16:05:04.323 contrlr, Removing current message
+2014-09-23 16:05:04.323 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.323 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.323 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.324 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.324 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.324 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.324 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.324 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.324 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.324 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.324 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.324 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.324 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.324 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.324 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.325 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.325 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.325 mgr,     Manager::GetDriver failed - Home ID 0x0161d366 is unknown
+2014-09-23 16:05:04.325 
+2014-09-23 16:05:04.325 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x02) - FUNC_ID_SERIAL_API_GET_INIT_DATA: 0x01, 0x03, 0x00, 0x02, 0xfe
+2014-09-23 16:05:04.374 contrlr,   Received: 0x01, 0x25, 0x01, 0x02, 0x05, 0x08, 0x1d, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x01, 0xce
+2014-09-23 16:05:04.374 
+2014-09-23 16:05:04.374 mgr,     Driver with Home ID of 0x0161d366 is now ready.
+2014-09-23 16:05:04.374 
+2014-09-23 16:05:04.374 contrlr, Received reply to FUNC_ID_SERIAL_API_GET_INIT_DATA:
+2014-09-23 16:05:04.374 contrlr,     Node 001 - New
+2014-09-23 16:05:04.374 Node001, AdvanceQueries queryPending=0 queryRetries=0 queryStage=ProtocolInfo live=1
+2014-09-23 16:05:04.374 Node001, QueryStage_ProtocolInfo
+2014-09-23 16:05:04.374 Node001, Queuing (Query) Get Node Protocol Info (Node=1): 0x01, 0x04, 0x00, 0x41, 0x01, 0xbb
+2014-09-23 16:05:04.374 Node001, Queuing (Query) Query Stage Complete (ProtocolInfo)
+2014-09-23 16:05:04.375 contrlr,     Node 003 - New
+2014-09-23 16:05:04.375 Node003, AdvanceQueries queryPending=0 queryRetries=0 queryStage=ProtocolInfo live=1
+2014-09-23 16:05:04.375 Node003, QueryStage_ProtocolInfo
+2014-09-23 16:05:04.375 Node003, Queuing (Query) Get Node Protocol Info (Node=3): 0x01, 0x04, 0x00, 0x41, 0x03, 0xb9
+2014-09-23 16:05:04.375 Node003, Queuing (Query) Query Stage Complete (ProtocolInfo)
+2014-09-23 16:05:04.375 contrlr,   Expected reply was received
+2014-09-23 16:05:04.375 contrlr,   Message transaction complete
+2014-09-23 16:05:04.375 
+2014-09-23 16:05:04.375 contrlr, Removing current message
+2014-09-23 16:05:04.376 
+2014-09-23 16:05:04.376 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x06) - FUNC_ID_SERIAL_API_SET_TIMEOUTS: 0x01, 0x05, 0x00, 0x06, 0x64, 0x0f, 0x97
+2014-09-23 16:05:04.378 contrlr,   Received: 0x01, 0x05, 0x01, 0x06, 0x96, 0x0f, 0x64
+2014-09-23 16:05:04.378 
+2014-09-23 16:05:04.378 contrlr, Received reply to FUNC_ID_SERIAL_API_SET_TIMEOUTS
+2014-09-23 16:05:04.379 contrlr,   Expected reply was received
+2014-09-23 16:05:04.379 contrlr,   Message transaction complete
+2014-09-23 16:05:04.379 
+2014-09-23 16:05:04.379 contrlr, Removing current message
+2014-09-23 16:05:04.379 
+2014-09-23 16:05:04.379 contrlr, Sending (Command) message (Callback ID=0x00, Expected Reply=0x00) - FUNC_ID_SERIAL_API_APPL_NODE_INFORMATION: 0x01, 0x07, 0x00, 0x03, 0x01, 0x02, 0x01, 0x00, 0xf9
+2014-09-23 16:05:04.381 contrlr, Removing current message
+2014-09-23 16:05:04.381 
+2014-09-23 16:05:04.381 Node001, Sending (Query) message (Callback ID=0x00, Expected Reply=0x41) - Get Node Protocol Info (Node=1): 0x01, 0x04, 0x00, 0x41, 0x01, 0xbb
+2014-09-23 16:05:04.383 Node001,   Received: 0x01, 0x09, 0x01, 0x41, 0x92, 0x16, 0x00, 0x02, 0x02, 0x00, 0x32
+2014-09-23 16:05:04.383 
+2014-09-23 16:05:04.383 Node001, Received reply to FUNC_ID_ZW_GET_NODE_PROTOCOL_INFO
+2014-09-23 16:05:04.384 Node001,   Protocol Info for Node 1:
+2014-09-23 16:05:04.384 Node001,     Listening     = true
+2014-09-23 16:05:04.384 Node001,     Beaming       = true
+2014-09-23 16:05:04.384 Node001,     Routing       = false
+2014-09-23 16:05:04.384 Node001,     Max Baud Rate = 40000
+2014-09-23 16:05:04.384 Node001,     Version       = 3
+2014-09-23 16:05:04.384 Node001,     Security      = false
+2014-09-23 16:05:04.386 Node001,   Basic device class    (0x02) - Static Controller
+2014-09-23 16:05:04.386 Node001,   Generic device Class  (0x02) - Static Controller
+2014-09-23 16:05:04.386 Node001,   No specific device class defined
+2014-09-23 16:05:04.386 Node001,     COMMAND_CLASS_BASIC is not mapped
+2014-09-23 16:05:04.386 Node001,   Mandatory Command Classes for Node 1:
+2014-09-23 16:05:04.386 Node001,     None
+2014-09-23 16:05:04.386 Node001,   Mandatory Command Classes controlled by Node 1:
+2014-09-23 16:05:04.386 Node001,     COMMAND_CLASS_BASIC
+2014-09-23 16:05:04.386 Driver::ReadButtons - zwbutton.xml file not found.
+2014-09-23 16:05:04.387 Node001,   Expected reply was received
+2014-09-23 16:05:04.387 Node001,   Message transaction complete
+2014-09-23 16:05:04.387 
+2014-09-23 16:05:04.387 Node001, Removing current message
+2014-09-23 16:05:04.387 Node001, Query Stage Complete (ProtocolInfo)
+2014-09-23 16:05:04.387 Node001, AdvanceQueries queryPending=0 queryRetries=0 queryStage=Probe live=1
+2014-09-23 16:05:04.387 Node001, QueryStage_Probe
+2014-09-23 16:05:04.387 Node001, QueryStage_WakeUp
+2014-09-23 16:05:04.387 Node001, QueryStage_ManufacturerSpecific1
+2014-09-23 16:05:04.389 Node001, QueryStage_NodeInfo
+2014-09-23 16:05:04.389 Node001, Queuing (Query) Request Node Info (Node=1): 0x01, 0x04, 0x00, 0x60, 0x01, 0x9a
+2014-09-23 16:05:04.390 Node001, Queuing (Query) Query Stage Complete (NodeInfo)
+2014-09-23 16:05:04.390 
+2014-09-23 16:05:04.390 Node003, Sending (Query) message (Callback ID=0x00, Expected Reply=0x41) - Get Node Protocol Info (Node=3): 0x01, 0x04, 0x00, 0x41, 0x03, 0xb9
+2014-09-23 16:05:04.392 Node003,   Received: 0x01, 0x09, 0x01, 0x41, 0x52, 0x9c, 0x00, 0x04, 0x20, 0x01, 0x5d
+2014-09-23 16:05:04.392 
+2014-09-23 16:05:04.393 Node003, Received reply to FUNC_ID_ZW_GET_NODE_PROTOCOL_INFO
+2014-09-23 16:05:04.393 Node003,   Protocol Info for Node 3:
+2014-09-23 16:05:04.393 Node003,     Listening     = false
+2014-09-23 16:05:04.393 Node003,     Frequent      = false
+2014-09-23 16:05:04.393 Node003,     Beaming       = true
+2014-09-23 16:05:04.393 Node003,     Routing       = true
+2014-09-23 16:05:04.394 Node003,     Max Baud Rate = 40000
+2014-09-23 16:05:04.394 Node003,     Version       = 3
+2014-09-23 16:05:04.394 Node003,     Security      = false
+2014-09-23 16:05:04.394 Node003,   Basic device class    (0x04) - Routing Slave
+2014-09-23 16:05:04.394 Node003,   Generic device Class  (0x20) - Binary Sensor
+2014-09-23 16:05:04.394 Node003,   Specific device class (0x01) - Routing Binary Sensor
+2014-09-23 16:05:04.394 Specified option [AssumeAwake] was not found.
+2014-09-23 16:05:04.394 Node003,     COMMAND_CLASS_BASIC will be mapped to COMMAND_CLASS_SENSOR_BINARY
+2014-09-23 16:05:04.395 Node003,   Mandatory Command Classes for Node 3:
+2014-09-23 16:05:04.395 Node003,     COMMAND_CLASS_SENSOR_BINARY
+2014-09-23 16:05:04.395 Node003,     COMMAND_CLASS_WAKE_UP
+2014-09-23 16:05:04.395 Node003,   Mandatory Command Classes controlled by Node 3:
+2014-09-23 16:05:04.395 Node003,     COMMAND_CLASS_BASIC
+2014-09-23 16:05:04.395 Node003,   Expected reply was received
+2014-09-23 16:05:04.395 Node003,   Message transaction complete
+2014-09-23 16:05:04.396 
+2014-09-23 16:05:04.396 Node003, Removing current message
+2014-09-23 16:05:04.397 Node003, Query Stage Complete (ProtocolInfo)
+2014-09-23 16:05:04.397 Node003, AdvanceQueries queryPending=0 queryRetries=0 queryStage=Probe live=1
+2014-09-23 16:05:04.397 Node003, QueryStage_Probe
+2014-09-23 16:05:04.397 Node003, NoOperation::Set - Routing=true
+2014-09-23 16:05:04.397 Node003, Queuing (NoOp) NoOperation_Set (Node=3): 0x01, 0x09, 0x00, 0x13, 0x03, 0x02, 0x00, 0x00, 0x25, 0x01, 0xc0
+2014-09-23 16:05:04.397 Node003, Queuing (Query) Query Stage Complete (Probe)
+2014-09-23 16:05:04.397 
+2014-09-23 16:05:04.397 Node003, Sending (NoOp) message (Callback ID=0x01, Expected Reply=0x13) - NoOperation_Set (Node=3): 0x01, 0x09, 0x00, 0x13, 0x03, 0x02, 0x00, 0x00, 0x25, 0x01, 0xc0
+2014-09-23 16:05:04.402 Node003,   Received: 0x01, 0x04, 0x01, 0x13, 0x01, 0xe8
+2014-09-23 16:05:04.402 Node003,   ZW_SEND_DATA delivered to Z-Wave stack
+2014-09-23 16:05:04.499 Node003,   Received: 0x01, 0x05, 0x00, 0x13, 0x01, 0x01, 0xe9
+2014-09-23 16:05:04.499 Node003,   ZW_SEND_DATA Request with callback ID 0x01 received (expected 0x01)
+2014-09-23 16:05:04.499 Node003, WARNING: ZW_SEND_DATA failed. No ACK received - device may be asleep.
+2014-09-23 16:05:04.499 Node003,   Node 3 has been marked as asleep
+2014-09-23 16:05:04.500 Node003, Node not responding - moving QueryStageComplete command to Wake-Up queue
+2014-09-23 16:05:04.500 
+2014-09-23 16:05:04.500 Node001, Sending (Query) message (Callback ID=0x00, Expected Reply=0x49) - Request Node Info (Node=1): 0x01, 0x04, 0x00, 0x60, 0x01, 0x9a
+2014-09-23 16:05:04.504 Node001,   Received: 0x01, 0x04, 0x01, 0x60, 0x01, 0x9b
+2014-09-23 16:05:04.504 
+2014-09-23 16:05:04.504 Node001, FUNC_ID_ZW_REQUEST_NODE_INFO Request successful.
+2014-09-23 16:05:04.923 Node001,   Received: 0x01, 0x06, 0x00, 0x49, 0x81, 0x00, 0x00, 0x31
+2014-09-23 16:05:04.923 
+2014-09-23 16:05:04.924 WARNING: FUNC_ID_ZW_APPLICATION_UPDATE: UPDATE_STATE_NODE_INFO_REQ_FAILED received
+2014-09-23 16:05:04.924 Node001, QueryStageRetry stage NodeInfo requested stage NodeInfo max 2 retries 0 pending 1
+2014-09-23 16:05:04.924 Node001,   Expected reply was received
+2014-09-23 16:05:04.924 Node001,   Message transaction complete
+2014-09-23 16:05:04.925 
+2014-09-23 16:05:04.925 Node001, Removing current message
+2014-09-23 16:05:04.925 Node001, Query Stage Complete (NodeInfo)
+2014-09-23 16:05:04.925 Node001, AdvanceQueries queryPending=0 queryRetries=1 queryStage=NodeInfo live=1
+2014-09-23 16:05:04.925 Node001, QueryStage_NodeInfo
+2014-09-23 16:05:04.925 Node001, Queuing (Query) Request Node Info (Node=1): 0x01, 0x04, 0x00, 0x60, 0x01, 0x9a
+2014-09-23 16:05:04.925 Node001, Queuing (Query) Query Stage Complete (NodeInfo)
+2014-09-23 16:05:04.925 
+2014-09-23 16:05:04.926 Node001, Sending (Query) message (Callback ID=0x00, Expected Reply=0x49) - Request Node Info (Node=1): 0x01, 0x04, 0x00, 0x60, 0x01, 0x9a
+2014-09-23 16:05:04.930 Node001,   Received: 0x01, 0x04, 0x01, 0x60, 0x01, 0x9b
+2014-09-23 16:05:04.930 
+2014-09-23 16:05:04.930 Node001, FUNC_ID_ZW_REQUEST_NODE_INFO Request successful.
+2014-09-23 16:05:05.469 Node001,   Received: 0x01, 0x06, 0x00, 0x49, 0x81, 0x00, 0x00, 0x31
+2014-09-23 16:05:05.469 
+2014-09-23 16:05:05.470 WARNING: FUNC_ID_ZW_APPLICATION_UPDATE: UPDATE_STATE_NODE_INFO_REQ_FAILED received
+2014-09-23 16:05:05.470 Node001, QueryStageRetry stage NodeInfo requested stage NodeInfo max 2 retries 1 pending 1
+2014-09-23 16:05:05.470 Node001,   Expected reply was received
+2014-09-23 16:05:05.470 Node001,   Message transaction complete
+2014-09-23 16:05:05.471 
+2014-09-23 16:05:05.471 Node001, Removing current message
+2014-09-23 16:05:05.471 Node001, Query Stage Complete (NodeInfo)
+2014-09-23 16:05:05.471 Node001, AdvanceQueries queryPending=0 queryRetries=0 queryStage=ManufacturerSpecific2 live=1
+2014-09-23 16:05:05.471 Node001, QueryStage_ManufacturerSpecific2
+2014-09-23 16:05:05.471 Node001, QueryStage_Versions
+2014-09-23 16:05:05.471 Node001, QueryStage_Instances
+2014-09-23 16:05:05.471 Node001, Essential node queries are complete
+2014-09-23 16:05:05.472 Node001, QueryStage_Static
+2014-09-23 16:05:05.472 Node001, QueryStage_Associations
+2014-09-23 16:05:05.472 Node001, QueryStage_Neighbors
+2014-09-23 16:05:05.472 Requesting routing info (neighbor list) for Node 1
+2014-09-23 16:05:05.472 Node001, Queuing (Command) Get Routing Info (Node=1): 0x01, 0x07, 0x00, 0x80, 0x01, 0x00, 0x00, 0x03, 0x7a
+2014-09-23 16:05:05.472 Node001, Queuing (Query) Query Stage Complete (Neighbors)
+2014-09-23 16:05:05.472 
+2014-09-23 16:05:05.472 Node001, Sending (Command) message (Callback ID=0x00, Expected Reply=0x80) - Get Routing Info (Node=1): 0x01, 0x07, 0x00, 0x80, 0x01, 0x00, 0x00, 0x03, 0x7a
+2014-09-23 16:05:05.478 Node001,   Received: 0x01, 0x20, 0x01, 0x80, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x5a
+2014-09-23 16:05:05.478 
+2014-09-23 16:05:05.478 Node001, Received reply to FUNC_ID_ZW_GET_ROUTING_INFO
+2014-09-23 16:05:05.478 Node001,     Neighbors of this node are:
+2014-09-23 16:05:05.478 Node001,     Node 3
+2014-09-23 16:05:05.479 Node001,   Expected reply was received
+2014-09-23 16:05:05.479 Node001,   Message transaction complete
+2014-09-23 16:05:05.479 
+2014-09-23 16:05:05.479 Node001, Removing current message
+2014-09-23 16:05:05.479 Node001, Query Stage Complete (Neighbors)
+2014-09-23 16:05:05.479 Node001, AdvanceQueries queryPending=0 queryRetries=0 queryStage=Session live=1
+2014-09-23 16:05:05.479 Node001, QueryStage_Session
+2014-09-23 16:05:05.480 Node001, QueryStage_Dynamic
+2014-09-23 16:05:05.480 Node001, QueryStage_Configuration
+2014-09-23 16:05:05.480 Node001, QueryStage_Complete
+2014-09-23 16:05:05.480 CheckCompletedNodeQueries m_allNodesQueried=0 m_awakeNodesQueried=0
+2014-09-23 16:05:05.480 CheckCompletedNodeQueries all=0, deadFound=0 sleepingOnly=1
+2014-09-23 16:05:05.480          Node query processing complete except for sleeping nodes.
+2014-09-23 16:06:57.928 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:06:57.928 
+2014-09-23 16:06:57.929 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:06:57.929 Node003, Initial read of value
+2014-09-23 16:06:57.935 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:06:57.935 
+2014-09-23 16:06:57.935 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:06:57.935 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:06:57.935 Node003, Changes to this value are not verified
+2014-09-23 16:07:07.621 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:07:07.621 
+2014-09-23 16:07:07.622 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:07:07.622 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:07:07.623 Node003, Changes to this value are not verified
+2014-09-23 16:07:07.628 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:07:07.628 
+2014-09-23 16:07:07.628 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:07:07.628 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:07:07.628 Node003, Changes to this value are not verified
+2014-09-23 16:07:58.242 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:07:58.243 
+2014-09-23 16:07:58.243 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:07:58.243 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:07:58.244 Node003, Changes to this value are not verified
+2014-09-23 16:07:58.249 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:07:58.250 
+2014-09-23 16:07:58.250 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:07:58.250 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:07:58.250 Node003, Changes to this value are not verified
+2014-09-23 16:08:07.646 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:08:07.647 
+2014-09-23 16:08:07.647 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:08:07.648 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:08:07.648 Node003, Changes to this value are not verified
+2014-09-23 16:08:07.653 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:08:07.653 
+2014-09-23 16:08:07.653 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:08:07.653 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:08:07.654 Node003, Changes to this value are not verified
+2014-09-23 16:09:51.142 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:09:51.142 
+2014-09-23 16:09:51.143 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:09:51.143 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:09:51.143 Node003, Changes to this value are not verified
+2014-09-23 16:09:51.149 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:09:51.149 
+2014-09-23 16:09:51.149 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:09:51.149 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:09:51.149 Node003, Changes to this value are not verified
+2014-09-23 16:10:00.694 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:10:00.695 
+2014-09-23 16:10:00.697 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:10:00.697 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:10:00.697 Node003, Changes to this value are not verified
+2014-09-23 16:10:00.701 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:10:00.701 
+2014-09-23 16:10:00.701 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:10:00.701 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:10:00.701 Node003, Changes to this value are not verified
+2014-09-23 16:10:09.790 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:10:09.790 
+2014-09-23 16:10:09.791 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:10:09.791 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:10:09.791 Node003, Changes to this value are not verified
+2014-09-23 16:10:09.797 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:10:09.797 
+2014-09-23 16:10:09.797 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:10:09.797 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:10:09.797 Node003, Changes to this value are not verified
+2014-09-23 16:10:19.703 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:10:19.703 
+2014-09-23 16:10:19.703 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:10:19.703 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:10:19.703 Node003, Changes to this value are not verified
+2014-09-23 16:10:19.709 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:10:19.709 
+2014-09-23 16:10:19.710 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:10:19.710 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:10:19.710 Node003, Changes to this value are not verified
+2014-09-23 16:10:43.587 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:10:43.587 
+2014-09-23 16:10:43.588 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:10:43.588 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:10:43.588 Node003, Changes to this value are not verified
+2014-09-23 16:10:43.594 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:10:43.594 
+2014-09-23 16:10:43.594 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:10:43.594 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:10:43.594 Node003, Changes to this value are not verified
+2014-09-23 16:10:52.717 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:10:52.717 
+2014-09-23 16:10:52.718 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:10:52.718 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:10:52.718 Node003, Changes to this value are not verified
+2014-09-23 16:10:52.724 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:10:52.724 
+2014-09-23 16:10:52.724 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:10:52.724 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:10:52.724 Node003, Changes to this value are not verified
+2014-09-23 16:11:15.988 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:11:15.988 
+2014-09-23 16:11:15.989 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:11:15.989 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:11:15.989 Node003, Changes to this value are not verified
+2014-09-23 16:11:15.995 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:11:15.995 
+2014-09-23 16:11:15.995 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:11:15.995 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:11:15.995 Node003, Changes to this value are not verified
+2014-09-23 16:11:25.731 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:11:25.731 
+2014-09-23 16:11:25.732 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:11:25.732 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:11:25.732 Node003, Changes to this value are not verified
+2014-09-23 16:11:25.738 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:11:25.738 
+2014-09-23 16:11:25.738 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:11:25.738 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:11:25.738 Node003, Changes to this value are not verified
+2014-09-23 16:11:32.747 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:11:32.747 
+2014-09-23 16:11:32.747 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:11:32.747 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:11:32.747 Node003, Changes to this value are not verified
+2014-09-23 16:11:32.754 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:11:32.754 
+2014-09-23 16:11:32.754 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:11:32.754 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:11:32.754 Node003, Changes to this value are not verified
+2014-09-23 16:11:42.738 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:11:42.738 
+2014-09-23 16:11:42.738 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:11:42.739 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:11:42.739 Node003, Changes to this value are not verified
+2014-09-23 16:11:42.745 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:11:42.745 
+2014-09-23 16:11:42.745 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:11:42.745 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:11:42.745 Node003, Changes to this value are not verified
+2014-09-23 16:11:58.962 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:11:58.962 
+2014-09-23 16:11:58.963 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:11:58.963 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:11:58.963 Node003, Changes to this value are not verified
+2014-09-23 16:11:58.968 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:11:58.969 
+2014-09-23 16:11:58.969 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:11:58.969 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:11:58.969 Node003, Changes to this value are not verified
+2014-09-23 16:12:08.749 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:12:08.749 
+2014-09-23 16:12:08.750 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:12:08.750 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:12:08.750 Node003, Changes to this value are not verified
+2014-09-23 16:12:08.756 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:12:08.756 
+2014-09-23 16:12:08.756 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:12:08.756 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:12:08.756 Node003, Changes to this value are not verified
+2014-09-23 16:12:16.080 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:12:16.080 
+2014-09-23 16:12:16.081 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:12:16.081 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:12:16.081 Node003, Changes to this value are not verified
+2014-09-23 16:12:16.087 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:12:16.087 
+2014-09-23 16:12:16.087 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:12:16.087 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:12:16.087 Node003, Changes to this value are not verified
+2014-09-23 16:12:25.756 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:12:25.756 
+2014-09-23 16:12:25.757 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:12:25.757 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:12:25.757 Node003, Changes to this value are not verified
+2014-09-23 16:12:25.763 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:12:25.763 
+2014-09-23 16:12:25.763 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:12:25.763 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:12:25.763 Node003, Changes to this value are not verified
+2014-09-23 16:16:54.805 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:16:54.805 
+2014-09-23 16:16:54.806 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:16:54.806 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:16:54.807 Node003, Changes to this value are not verified
+2014-09-23 16:16:54.812 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:16:54.812 
+2014-09-23 16:16:54.812 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:16:54.812 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:16:54.812 Node003, Changes to this value are not verified
+2014-09-23 16:17:03.875 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:17:03.875 
+2014-09-23 16:17:03.876 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:17:03.876 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:17:03.876 Node003, Changes to this value are not verified
+2014-09-23 16:17:03.881 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:17:03.882 
+2014-09-23 16:17:03.882 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:17:03.882 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:17:03.882 Node003, Changes to this value are not verified
+2014-09-23 16:17:12.073 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:17:12.073 
+2014-09-23 16:17:12.074 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:17:12.074 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:17:12.074 Node003, Changes to this value are not verified
+2014-09-23 16:17:12.079 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:17:12.079 
+2014-09-23 16:17:12.079 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:17:12.080 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:17:12.080 Node003, Changes to this value are not verified
+2014-09-23 16:17:21.882 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:17:21.882 
+2014-09-23 16:17:21.883 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:17:21.883 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:17:21.883 Node003, Changes to this value are not verified
+2014-09-23 16:17:21.889 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:17:21.889 
+2014-09-23 16:17:21.889 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:17:21.889 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:17:21.889 Node003, Changes to this value are not verified
+2014-09-23 16:35:11.464 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:35:11.464 
+2014-09-23 16:35:11.464 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:35:11.465 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:35:11.465 Node003, Changes to this value are not verified
+2014-09-23 16:35:11.471 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:35:11.471 
+2014-09-23 16:35:11.471 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:35:11.471 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:35:11.472 Node003, Changes to this value are not verified
+2014-09-23 16:35:21.341 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:35:21.341 
+2014-09-23 16:35:21.342 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:35:21.342 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:35:21.342 Node003, Changes to this value are not verified
+2014-09-23 16:35:21.348 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:35:21.348 
+2014-09-23 16:35:21.348 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:35:21.348 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:35:21.348 Node003, Changes to this value are not verified
+2014-09-23 16:35:49.294 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:35:49.294 
+2014-09-23 16:35:49.295 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:35:49.295 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:35:49.295 Node003, Changes to this value are not verified
+2014-09-23 16:35:49.300 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:35:49.300 
+2014-09-23 16:35:49.301 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:35:49.301 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:35:49.301 Node003, Changes to this value are not verified
+2014-09-23 16:35:58.356 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:35:58.356 
+2014-09-23 16:35:58.357 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:35:58.357 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:35:58.357 Node003, Changes to this value are not verified
+2014-09-23 16:35:58.363 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:35:58.363 
+2014-09-23 16:35:58.363 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:35:58.363 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:35:58.363 Node003, Changes to this value are not verified
+2014-09-23 16:40:29.325 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:40:29.325 
+2014-09-23 16:40:29.326 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:40:29.326 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:40:29.326 Node003, Changes to this value are not verified
+2014-09-23 16:40:29.331 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:40:29.331 
+2014-09-23 16:40:29.332 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:40:29.332 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:40:29.332 Node003, Changes to this value are not verified
+2014-09-23 16:40:38.475 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:40:38.475 
+2014-09-23 16:40:38.475 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:40:38.475 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:40:38.475 Node003, Changes to this value are not verified
+2014-09-23 16:40:38.482 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:40:38.482 
+2014-09-23 16:40:38.482 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:40:38.482 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:40:38.482 Node003, Changes to this value are not verified
+2014-09-23 16:40:47.957 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:40:47.962 
+2014-09-23 16:40:47.962 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:40:47.963 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:40:47.963 Node003, Changes to this value are not verified
+2014-09-23 16:40:47.964 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:40:47.964 
+2014-09-23 16:40:47.965 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:40:47.965 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:40:47.965 Node003, Changes to this value are not verified
+2014-09-23 16:40:57.484 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:40:57.484 
+2014-09-23 16:40:57.485 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:40:57.485 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:40:57.485 Node003, Changes to this value are not verified
+2014-09-23 16:40:57.490 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:40:57.491 
+2014-09-23 16:40:57.491 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:40:57.491 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:40:57.491 Node003, Changes to this value are not verified
+2014-09-23 16:41:08.188 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:41:08.188 
+2014-09-23 16:41:08.189 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:41:08.189 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:41:08.189 Node003, Changes to this value are not verified
+2014-09-23 16:41:08.195 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:41:08.195 
+2014-09-23 16:41:08.195 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:41:08.196 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:41:08.196 Node003, Changes to this value are not verified
+2014-09-23 16:41:17.491 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:41:17.492 
+2014-09-23 16:41:17.493 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:41:17.493 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:41:17.493 Node003, Changes to this value are not verified
+2014-09-23 16:41:17.498 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:41:17.498 
+2014-09-23 16:41:17.499 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:41:17.499 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:41:17.499 Node003, Changes to this value are not verified
+2014-09-23 16:42:37.861 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:42:37.862 
+2014-09-23 16:42:37.862 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:42:37.863 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:42:37.863 Node003, Changes to this value are not verified
+2014-09-23 16:42:37.868 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:42:37.868 
+2014-09-23 16:42:37.868 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:42:37.868 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:42:37.869 Node003, Changes to this value are not verified
+2014-09-23 16:42:47.530 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:42:47.530 
+2014-09-23 16:42:47.531 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:42:47.531 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:42:47.531 Node003, Changes to this value are not verified
+2014-09-23 16:42:47.537 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:42:47.537 
+2014-09-23 16:42:47.537 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:42:47.537 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:42:47.537 Node003, Changes to this value are not verified
+2014-09-23 16:42:58.385 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:42:58.385 
+2014-09-23 16:42:58.386 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:42:58.386 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:42:58.386 Node003, Changes to this value are not verified
+2014-09-23 16:42:58.392 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:42:58.393 
+2014-09-23 16:42:58.393 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:42:58.393 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:42:58.393 Node003, Changes to this value are not verified
+2014-09-23 16:43:07.539 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:43:07.539 
+2014-09-23 16:43:07.540 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:43:07.540 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:43:07.540 Node003, Changes to this value are not verified
+2014-09-23 16:43:07.546 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:43:07.546 
+2014-09-23 16:43:07.546 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:43:07.546 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:43:07.546 Node003, Changes to this value are not verified
+2014-09-23 16:45:15.296 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:45:15.296 
+2014-09-23 16:45:15.297 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:45:15.297 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:45:15.297 Node003, Changes to this value are not verified
+2014-09-23 16:45:15.303 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:45:15.303 
+2014-09-23 16:45:15.303 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:45:15.304 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:45:15.304 Node003, Changes to this value are not verified
+2014-09-23 16:45:24.596 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:45:24.597 
+2014-09-23 16:45:24.597 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:45:24.597 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:45:24.598 Node003, Changes to this value are not verified
+2014-09-23 16:45:24.603 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:45:24.603 
+2014-09-23 16:45:24.604 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:45:24.604 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:45:24.604 Node003, Changes to this value are not verified
+2014-09-23 16:45:35.166 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:45:35.166 
+2014-09-23 16:45:35.167 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:45:35.167 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:45:35.167 Node003, Changes to this value are not verified
+2014-09-23 16:45:35.173 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:45:35.173 
+2014-09-23 16:45:35.173 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:45:35.173 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:45:35.173 Node003, Changes to this value are not verified
+2014-09-23 16:45:44.605 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:45:44.605 
+2014-09-23 16:45:44.606 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:45:44.606 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:45:44.606 Node003, Changes to this value are not verified
+2014-09-23 16:45:44.612 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:45:44.612 
+2014-09-23 16:45:44.612 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:45:44.612 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:45:44.612 Node003, Changes to this value are not verified
+2014-09-23 16:46:11.509 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:46:11.509 
+2014-09-23 16:46:11.509 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:46:11.509 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:46:11.510 Node003, Changes to this value are not verified
+2014-09-23 16:46:11.516 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:46:11.516 
+2014-09-23 16:46:11.516 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:46:11.516 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:46:11.517 Node003, Changes to this value are not verified
+2014-09-23 16:46:20.620 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:46:20.620 
+2014-09-23 16:46:20.621 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:46:20.621 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:46:20.621 Node003, Changes to this value are not verified
+2014-09-23 16:46:20.627 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:46:20.627 
+2014-09-23 16:46:20.627 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:46:20.627 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:46:20.628 Node003, Changes to this value are not verified
+2014-09-23 16:46:39.456 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:46:39.457 
+2014-09-23 16:46:39.457 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:46:39.458 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:46:39.458 Node003, Changes to this value are not verified
+2014-09-23 16:46:39.463 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:46:39.463 
+2014-09-23 16:46:39.463 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:46:39.463 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:46:39.464 Node003, Changes to this value are not verified
+2014-09-23 16:46:48.632 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:46:48.632 
+2014-09-23 16:46:48.633 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:46:48.633 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:46:48.633 Node003, Changes to this value are not verified
+2014-09-23 16:46:48.639 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:46:48.639 
+2014-09-23 16:46:48.639 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:46:48.639 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:46:48.639 Node003, Changes to this value are not verified
+2014-09-23 16:48:52.968 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:48:52.968 
+2014-09-23 16:48:52.969 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:48:52.969 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:48:52.969 Node003, Changes to this value are not verified
+2014-09-23 16:48:52.975 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:48:52.975 
+2014-09-23 16:48:52.975 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:48:52.975 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:48:52.975 Node003, Changes to this value are not verified
+2014-09-23 16:49:02.689 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:49:02.689 
+2014-09-23 16:49:02.690 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:49:02.690 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:49:02.690 Node003, Changes to this value are not verified
+2014-09-23 16:49:02.696 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:49:02.696 
+2014-09-23 16:49:02.696 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:49:02.696 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:49:02.696 Node003, Changes to this value are not verified
+2014-09-23 16:50:08.319 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:50:08.319 
+2014-09-23 16:50:08.320 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:50:08.320 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:50:08.320 Node003, Changes to this value are not verified
+2014-09-23 16:50:08.325 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:50:08.326 
+2014-09-23 16:50:08.326 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:50:08.326 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:50:08.326 Node003, Changes to this value are not verified
+2014-09-23 16:50:17.721 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:50:17.721 
+2014-09-23 16:50:17.722 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:50:17.722 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:50:17.722 Node003, Changes to this value are not verified
+2014-09-23 16:50:17.728 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:50:17.728 
+2014-09-23 16:50:17.728 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:50:17.728 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:50:17.728 Node003, Changes to this value are not verified
+2014-09-23 16:50:23.868 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:50:23.868 
+2014-09-23 16:50:23.868 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:50:23.868 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:50:23.868 Node003, Changes to this value are not verified
+2014-09-23 16:50:23.875 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:50:23.875 
+2014-09-23 16:50:23.875 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:50:23.875 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:50:23.875 Node003, Changes to this value are not verified
+2014-09-23 16:50:33.728 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:50:33.728 
+2014-09-23 16:50:33.729 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:50:33.729 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:50:33.729 Node003, Changes to this value are not verified
+2014-09-23 16:50:33.735 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:50:33.735 
+2014-09-23 16:50:33.735 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:50:33.736 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:50:33.736 Node003, Changes to this value are not verified
+2014-09-23 16:51:29.074 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:51:29.075 
+2014-09-23 16:51:29.075 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:51:29.075 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:51:29.076 Node003, Changes to this value are not verified
+2014-09-23 16:51:29.081 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:51:29.081 
+2014-09-23 16:51:29.081 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:51:29.082 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:51:29.082 Node003, Changes to this value are not verified
+2014-09-23 16:51:38.756 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:51:38.756 
+2014-09-23 16:51:38.757 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:51:38.757 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:51:38.757 Node003, Changes to this value are not verified
+2014-09-23 16:51:38.762 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:51:38.762 
+2014-09-23 16:51:38.763 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:51:38.763 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:51:38.763 Node003, Changes to this value are not verified
+2014-09-23 16:51:45.951 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:51:45.951 
+2014-09-23 16:51:45.952 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:51:45.952 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:51:45.952 Node003, Changes to this value are not verified
+2014-09-23 16:51:45.958 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:51:45.958 
+2014-09-23 16:51:45.958 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:51:45.958 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:51:45.958 Node003, Changes to this value are not verified
+2014-09-23 16:51:55.762 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:51:55.763 
+2014-09-23 16:51:55.763 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:51:55.763 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:51:55.763 Node003, Changes to this value are not verified
+2014-09-23 16:51:55.769 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:51:55.769 
+2014-09-23 16:51:55.769 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:51:55.770 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:51:55.770 Node003, Changes to this value are not verified
+2014-09-23 16:52:12.413 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:52:12.413 
+2014-09-23 16:52:12.413 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:52:12.414 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:52:12.414 Node003, Changes to this value are not verified
+2014-09-23 16:52:12.419 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:52:12.419 
+2014-09-23 16:52:12.420 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:52:12.420 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:52:12.420 Node003, Changes to this value are not verified
+2014-09-23 16:52:21.773 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:52:21.774 
+2014-09-23 16:52:21.774 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:52:21.774 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:52:21.775 Node003, Changes to this value are not verified
+2014-09-23 16:52:21.780 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:52:21.780 
+2014-09-23 16:52:21.780 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:52:21.781 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:52:21.781 Node003, Changes to this value are not verified
+2014-09-23 16:52:46.119 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:52:46.119 
+2014-09-23 16:52:46.120 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:52:46.120 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:52:46.120 Node003, Changes to this value are not verified
+2014-09-23 16:52:46.125 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:52:46.126 
+2014-09-23 16:52:46.126 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:52:46.126 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:52:46.126 Node003, Changes to this value are not verified
+2014-09-23 16:52:55.788 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:52:55.788 
+2014-09-23 16:52:55.788 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:52:55.788 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:52:55.788 Node003, Changes to this value are not verified
+2014-09-23 16:52:55.795 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:52:55.795 
+2014-09-23 16:52:55.795 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:52:55.795 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:52:55.795 Node003, Changes to this value are not verified
+2014-09-23 16:53:06.122 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:53:06.122 
+2014-09-23 16:53:06.123 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:53:06.123 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:53:06.123 Node003, Changes to this value are not verified
+2014-09-23 16:53:06.128 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:53:06.129 
+2014-09-23 16:53:06.129 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:53:06.129 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:53:06.129 Node003, Changes to this value are not verified
+2014-09-23 16:53:15.797 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:53:15.797 
+2014-09-23 16:53:15.797 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:53:15.797 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:53:15.797 Node003, Changes to this value are not verified
+2014-09-23 16:53:15.804 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:53:15.804 
+2014-09-23 16:53:15.804 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:53:15.804 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:53:15.804 Node003, Changes to this value are not verified
+2014-09-23 16:53:26.216 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:53:26.216 
+2014-09-23 16:53:26.217 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:53:26.217 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:53:26.217 Node003, Changes to this value are not verified
+2014-09-23 16:53:26.223 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:53:26.223 
+2014-09-23 16:53:26.223 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:53:26.223 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:53:26.223 Node003, Changes to this value are not verified
+2014-09-23 16:53:35.805 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:53:35.805 
+2014-09-23 16:53:35.805 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:53:35.805 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:53:35.805 Node003, Changes to this value are not verified
+2014-09-23 16:53:35.812 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:53:35.812 
+2014-09-23 16:53:35.812 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:53:35.812 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:53:35.812 Node003, Changes to this value are not verified
+2014-09-23 16:53:42.418 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:53:42.418 
+2014-09-23 16:53:42.418 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:53:42.418 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:53:42.418 Node003, Changes to this value are not verified
+2014-09-23 16:53:42.424 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:53:42.425 
+2014-09-23 16:53:42.425 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:53:42.425 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:53:42.425 Node003, Changes to this value are not verified
+2014-09-23 16:53:51.812 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:53:51.812 
+2014-09-23 16:53:51.813 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:53:51.813 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:53:51.813 Node003, Changes to this value are not verified
+2014-09-23 16:53:51.818 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:53:51.818 
+2014-09-23 16:53:51.818 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:53:51.819 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:53:51.819 Node003, Changes to this value are not verified
+2014-09-23 16:54:01.883 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:54:01.883 
+2014-09-23 16:54:01.884 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:54:01.884 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:54:01.884 Node003, Changes to this value are not verified
+2014-09-23 16:54:01.890 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:54:01.890 
+2014-09-23 16:54:01.890 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:54:01.890 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:54:01.891 Node003, Changes to this value are not verified
+2014-09-23 16:54:11.820 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:54:11.820 
+2014-09-23 16:54:11.820 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:54:11.820 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:54:11.821 Node003, Changes to this value are not verified
+2014-09-23 16:54:11.827 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:54:11.827 
+2014-09-23 16:54:11.827 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:54:11.827 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:54:11.827 Node003, Changes to this value are not verified
+2014-09-23 16:54:31.041 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:54:31.042 
+2014-09-23 16:54:31.042 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:54:31.042 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:54:31.043 Node003, Changes to this value are not verified
+2014-09-23 16:54:31.048 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:54:31.048 
+2014-09-23 16:54:31.049 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:54:31.049 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:54:31.049 Node003, Changes to this value are not verified
+2014-09-23 16:54:40.832 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:54:40.833 
+2014-09-23 16:54:40.833 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:54:40.833 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:54:40.834 Node003, Changes to this value are not verified
+2014-09-23 16:54:40.839 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:54:40.839 
+2014-09-23 16:54:40.839 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:54:40.839 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:54:40.840 Node003, Changes to this value are not verified
+2014-09-23 16:54:58.742 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:54:58.742 
+2014-09-23 16:54:58.743 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:54:58.743 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:54:58.743 Node003, Changes to this value are not verified
+2014-09-23 16:54:58.749 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:54:58.749 
+2014-09-23 16:54:58.749 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:54:58.749 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:54:58.749 Node003, Changes to this value are not verified
+2014-09-23 16:55:07.844 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:55:07.844 
+2014-09-23 16:55:07.845 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:55:07.845 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:55:07.845 Node003, Changes to this value are not verified
+2014-09-23 16:55:07.851 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:55:07.851 
+2014-09-23 16:55:07.851 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:55:07.851 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:55:07.851 Node003, Changes to this value are not verified
+2014-09-23 16:55:44.774 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:55:44.774 
+2014-09-23 16:55:44.775 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:55:44.775 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:55:44.775 Node003, Changes to this value are not verified
+2014-09-23 16:55:44.781 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:55:44.781 
+2014-09-23 16:55:44.781 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:55:44.781 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:55:44.782 Node003, Changes to this value are not verified
+2014-09-23 16:55:53.864 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:55:53.864 
+2014-09-23 16:55:53.865 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:55:53.865 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:55:53.865 Node003, Changes to this value are not verified
+2014-09-23 16:55:53.871 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:55:53.871 
+2014-09-23 16:55:53.871 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:55:53.871 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:55:53.871 Node003, Changes to this value are not verified
+2014-09-23 16:56:07.140 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:56:07.140 
+2014-09-23 16:56:07.141 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:56:07.141 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:56:07.141 Node003, Changes to this value are not verified
+2014-09-23 16:56:07.147 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:56:07.147 
+2014-09-23 16:56:07.147 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:56:07.147 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:56:07.147 Node003, Changes to this value are not verified
+2014-09-23 16:56:16.874 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:56:16.874 
+2014-09-23 16:56:16.875 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:56:16.875 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:56:16.875 Node003, Changes to this value are not verified
+2014-09-23 16:56:16.880 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:56:16.881 
+2014-09-23 16:56:16.881 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:56:16.881 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:56:16.881 Node003, Changes to this value are not verified
+2014-09-23 16:56:38.187 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:56:38.187 
+2014-09-23 16:56:38.188 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:56:38.188 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:56:38.188 Node003, Changes to this value are not verified
+2014-09-23 16:56:38.194 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:56:38.194 
+2014-09-23 16:56:38.194 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:56:38.194 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:56:38.194 Node003, Changes to this value are not verified
+2014-09-23 16:56:47.886 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:56:47.887 
+2014-09-23 16:56:47.887 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:56:47.887 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:56:47.888 Node003, Changes to this value are not verified
+2014-09-23 16:56:47.893 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:56:47.893 
+2014-09-23 16:56:47.893 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:56:47.893 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:56:47.894 Node003, Changes to this value are not verified
+2014-09-23 16:57:00.056 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:57:00.056 
+2014-09-23 16:57:00.057 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:57:00.057 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:57:00.057 Node003, Changes to this value are not verified
+2014-09-23 16:57:00.063 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:57:00.063 
+2014-09-23 16:57:00.063 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:57:00.063 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:57:00.064 Node003, Changes to this value are not verified
+2014-09-23 16:57:09.896 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:57:09.896 
+2014-09-23 16:57:09.897 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:57:09.897 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:57:09.897 Node003, Changes to this value are not verified
+2014-09-23 16:57:09.903 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:57:09.903 
+2014-09-23 16:57:09.903 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:57:09.903 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:57:09.903 Node003, Changes to this value are not verified
+2014-09-23 16:58:03.127 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:58:03.128 
+2014-09-23 16:58:03.128 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:58:03.128 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:58:03.129 Node003, Changes to this value are not verified
+2014-09-23 16:58:03.135 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:58:03.135 
+2014-09-23 16:58:03.135 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:58:03.135 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:58:03.135 Node003, Changes to this value are not verified
+2014-09-23 16:58:12.923 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:58:12.923 
+2014-09-23 16:58:12.924 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:58:12.924 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:58:12.924 Node003, Changes to this value are not verified
+2014-09-23 16:58:12.929 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:58:12.929 
+2014-09-23 16:58:12.929 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:58:12.930 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:58:12.930 Node003, Changes to this value are not verified
+2014-09-23 16:58:24.733 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:58:24.733 
+2014-09-23 16:58:24.734 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:58:24.734 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:58:24.734 Node003, Changes to this value are not verified
+2014-09-23 16:58:24.740 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:58:24.740 
+2014-09-23 16:58:24.740 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:58:24.740 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:58:24.740 Node003, Changes to this value are not verified
+2014-09-23 16:58:33.931 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:58:33.932 
+2014-09-23 16:58:33.932 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:58:33.932 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:58:33.932 Node003, Changes to this value are not verified
+2014-09-23 16:58:33.938 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:58:33.938 
+2014-09-23 16:58:33.938 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:58:33.938 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:58:33.939 Node003, Changes to this value are not verified
+2014-09-23 16:58:43.636 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0xff, 0x36
+2014-09-23 16:58:43.636 
+2014-09-23 16:58:43.637 Node003, Received SensorBinary report: Sensor:54 State=On
+2014-09-23 16:58:43.637 Node003, Refreshed Value: old value=false, new value=true, type=bool
+2014-09-23 16:58:43.637 Node003, Changes to this value are not verified
+2014-09-23 16:58:43.643 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0xff, 0x3e
+2014-09-23 16:58:43.643 
+2014-09-23 16:58:43.643 Node003, Received SensorBinary report: Sensor:62 State=On
+2014-09-23 16:58:43.643 Node003, Refreshed Value: old value=true, new value=true, type=bool
+2014-09-23 16:58:43.643 Node003, Changes to this value are not verified
+2014-09-23 16:58:52.939 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x08, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc9
+2014-09-23 16:58:52.939 
+2014-09-23 16:58:52.940 Node003, Received SensorBinary report: Sensor:201 State=Off
+2014-09-23 16:58:52.940 Node003, Refreshed Value: old value=true, new value=false, type=bool
+2014-09-23 16:58:52.940 Node003, Changes to this value are not verified
+2014-09-23 16:58:52.946 Node003,   Received: 0x01, 0x09, 0x00, 0x04, 0x00, 0x03, 0x03, 0x30, 0x03, 0x00, 0xc1
+2014-09-23 16:58:52.946 
+2014-09-23 16:58:52.947 Node003, Received SensorBinary report: Sensor:193 State=Off
+2014-09-23 16:58:52.947 Node003, Refreshed Value: old value=false, new value=false, type=bool
+2014-09-23 16:58:52.947 Node003, Changes to this value are not verified
+2014-09-23 16:59:00.358 ***************************************************************************
+2014-09-23 16:59:00.358 *********************  Cumulative Network Statistics  *********************
+2014-09-23 16:59:00.359 *** General
+2014-09-23 16:59:00.359 Driver run time: . .  . 0 days, 0 hours, 53 minutes
+2014-09-23 16:59:00.359 Frames processed: . . . . . . . . . . . . . . . . . . . . 185
+2014-09-23 16:59:00.359 Total messages successfully received: . . . . . . . . . . 185
+2014-09-23 16:59:00.359 Total Messages successfully sent: . . . . . . . . . . . . 15
+2014-09-23 16:59:00.359 ACKs received from controller:  . . . . . . . . . . . . . 15
+2014-09-23 16:59:00.359 *** Errors
+2014-09-23 16:59:00.359 Unsolicited messages received while waiting for ACK:  . . 0
+2014-09-23 16:59:00.359 Reads aborted due to timeouts:  . . . . . . . . . . . . . 0
+2014-09-23 16:59:00.359 Bad checksum errors:  . . . . . . . . . . . . . . . . . . 0
+2014-09-23 16:59:00.359 CANs received from controller:  . . . . . . . . . . . . . 0
+2014-09-23 16:59:00.360 NAKs received from controller:  . . . . . . . . . . . . . 0
+2014-09-23 16:59:00.360 Out of frame data flow errors:  . . . . . . . . . . . . . 0
+2014-09-23 16:59:00.360 Messages retransmitted: . . . . . . . . . . . . . . . . . 0
+2014-09-23 16:59:00.360 Messages dropped and not delivered: . . . . . . . . . . . 0
+2014-09-23 16:59:00.360 ***************************************************************************
+2014-09-23 16:59:02.375 mgr,     Driver for controller /dev/cu.SLAB_USBtoUART removed
