@@ -65,8 +65,8 @@ func newGoNode(cRef *C.Node) *node {
 	return &node{cRef, make(map[uint8]*valueClass), STATE_INIT, nil}
 }
 
-func (self *node) String() string {
-	cRef := self.cRef
+func (n *node) String() string {
+	cRef := n.cRef
 
 	return fmt.Sprintf(
 		"Node["+
@@ -96,31 +96,31 @@ func (self *node) String() string {
 		C.GoString(cRef.productId))
 }
 
-func (self *node) GetHomeId() uint32 {
-	return uint32(self.cRef.nodeId.homeId)
+func (n *node) GetHomeId() uint32 {
+	return uint32(n.cRef.nodeId.homeId)
 }
 
-func (self *node) GetId() uint8 {
-	return uint8(self.cRef.nodeId.nodeId)
+func (n *node) GetId() uint8 {
+	return uint8(n.cRef.nodeId.nodeId)
 }
 
-func (self *node) notify(api *api, nt *notification) {
+func (n *node) notify(api *api, nt *notification) {
 
 	var event Event
 
 	notificationType := nt.cRef.notificationType
 	switch notificationType {
 	case NT.NODE_REMOVED:
-		event = &NodeUnavailable{nodeEvent{self}}
-		if self.device != nil {
-			self.device.NodeRemoved()
+		event = &NodeUnavailable{nodeEvent{n}}
+		if n.device != nil {
+			n.device.NodeRemoved()
 		}
 		api.notifyEvent(event)
 		// TODO: free the C structure.
 		break
 
 	case NT.VALUE_REMOVED:
-		self.removeValue(nt)
+		n.removeValue(nt)
 		break
 
 	case NT.ESSENTIAL_NODE_QUERIES_COMPLETE,
@@ -128,23 +128,23 @@ func (self *node) notify(api *api, nt *notification) {
 		// move the node into the initialized state
 		// begin admission processing for the node
 
-		switch self.state {
+		switch n.state {
 		case STATE_INIT:
-			self.state = STATE_READY
+			n.state = STATE_READY
 
-			event = &NodeAvailable{nodeEvent{self}}
+			event = &NodeAvailable{nodeEvent{n}}
 			//
 			// Use a callback to construct the device for this node, then
 			// pass the event to the device.
 			//
 
-			self.device = api.deviceFactory(api, self)
-			self.device.NodeAdded()
+			n.device = api.deviceFactory(api, n)
+			n.device.NodeAdded()
 
 			break
 		default:
-			event = &NodeChanged{nodeEvent{self}}
-			self.device.NodeChanged()
+			event = &NodeChanged{nodeEvent{n}}
+			n.device.NodeChanged()
 			//
 			// Pass the event to the node.
 			//
@@ -155,9 +155,9 @@ func (self *node) notify(api *api, nt *notification) {
 	case NT.VALUE_ADDED,
 		NT.VALUE_CHANGED,
 		NT.VALUE_REFRESHED:
-		v := self.takeValue(nt)
-		if self.device != nil {
-			self.device.ValueChanged(v)
+		v := n.takeValue(nt)
+		if n.device != nil {
+			n.device.ValueChanged(v)
 		}
 		break
 
@@ -169,12 +169,12 @@ func (self *node) notify(api *api, nt *notification) {
 }
 
 // take the value structure from the notification
-func (self *node) takeValue(nt *notification) *value {
+func (n *node) takeValue(nt *notification) *value {
 	commandClassId := (uint8)(nt.value.cRef.valueId.commandClassId)
 	instanceId := (uint8)(nt.value.cRef.valueId.instance)
 	index := (uint8)(nt.value.cRef.valueId.index)
 
-	instance := self.createOrGetInstance(commandClassId, instanceId)
+	instance := n.createOrGetInstance(commandClassId, instanceId)
 	v, ok := instance.values[index]
 	if !ok {
 		v = nt.swapValueImpl(nil)
@@ -186,11 +186,11 @@ func (self *node) takeValue(nt *notification) *value {
 	return v
 }
 
-func (self *node) createOrGetInstance(commandClassId uint8, instanceId uint8) *valueInstance {
-	class, ok := self.classes[commandClassId]
+func (n *node) createOrGetInstance(commandClassId uint8, instanceId uint8) *valueInstance {
+	class, ok := n.classes[commandClassId]
 	if !ok {
 		class = &valueClass{commandClassId, make(map[uint8]*valueInstance)}
-		self.classes[commandClassId] = class
+		n.classes[commandClassId] = class
 	}
 	instance, ok := class.instances[instanceId]
 	if !ok {
@@ -200,9 +200,9 @@ func (self *node) createOrGetInstance(commandClassId uint8, instanceId uint8) *v
 	return instance
 }
 
-func (self *node) GetValue(commandClassId uint8, instanceId uint8, index uint8) Value {
+func (n *node) GetValue(commandClassId uint8, instanceId uint8, index uint8) Value {
 	var v *value
-	class, ok := self.classes[commandClassId]
+	class, ok := n.classes[commandClassId]
 	if ok {
 		instance, ok := class.instances[instanceId]
 		if ok {
@@ -217,16 +217,16 @@ func (self *node) GetValue(commandClassId uint8, instanceId uint8, index uint8) 
 	return v
 }
 
-func (self *node) GetValueWithId(valueId ValueID) Value {
-	return self.GetValue(valueId.CommandClassId, valueId.Instance, valueId.Index)
+func (n *node) GetValueWithId(valueId ValueID) Value {
+	return n.GetValue(valueId.CommandClassId, valueId.Instance, valueId.Index)
 }
 
-func (self *node) removeValue(nt *notification) {
+func (n *node) removeValue(nt *notification) {
 	commandClassId := (uint8)(nt.value.cRef.valueId.commandClassId)
 	instanceId := (uint8)(nt.value.cRef.valueId.instance)
 	index := (uint8)(nt.value.cRef.valueId.index)
 
-	class, ok := self.classes[commandClassId]
+	class, ok := n.classes[commandClassId]
 	if !ok {
 		return
 	}
@@ -247,32 +247,32 @@ func (self *node) removeValue(nt *notification) {
 		if len(instance.values) == 0 {
 			delete(class.instances, instanceId)
 			if len(class.instances) == 0 {
-				delete(self.classes, commandClassId)
+				delete(n.classes, commandClassId)
 			}
 		}
 	}
 
 }
 
-func (self *node) GetDevice() Device {
-	return self.device
+func (n *node) GetDevice() Device {
+	return n.device
 }
 
-func (self *node) GetProductId() *ProductId {
-	return &ProductId{C.GoString(self.cRef.manufacturerId), C.GoString(self.cRef.productId)}
+func (n *node) GetProductId() *ProductId {
+	return &ProductId{C.GoString(n.cRef.manufacturerId), C.GoString(n.cRef.productId)}
 }
 
-func (self *node) GetProductDescription() *ProductDescription {
+func (n *node) GetProductDescription() *ProductDescription {
 	return &ProductDescription{
-		C.GoString(self.cRef.manufacturerName),
-		C.GoString(self.cRef.productName),
-		C.GoString(self.cRef.productType)}
+		C.GoString(n.cRef.manufacturerName),
+		C.GoString(n.cRef.productName),
+		C.GoString(n.cRef.productType)}
 }
 
-func (self *node) GetNodeName() string {
-	return C.GoString(self.cRef.nodeName)
+func (n *node) GetNodeName() string {
+	return C.GoString(n.cRef.nodeName)
 }
 
-func (self *node) free() {
-	C.freeNode(self.cRef)
+func (n *node) free() {
+	C.freeNode(n.cRef)
 }

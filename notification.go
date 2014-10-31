@@ -27,38 +27,38 @@ type notification struct {
 }
 
 // Converts the notification into a string representation.
-func (self *notification) String() string {
+func (n *notification) String() string {
 	return fmt.Sprintf(
 		"Notification["+
 			"notificationType=%v/%v, "+
 			"node=%v, "+
 			"value=%v]",
-		NT.ToEnum(int(self.cRef.notificationType)),
-		CODE.ToEnum(int(self.cRef.notificationCode)),
-		self.GetNode(),
-		self.GetValue())
+		NT.ToEnum(int(n.cRef.notificationType)),
+		CODE.ToEnum(int(n.cRef.notificationCode)),
+		n.GetNode(),
+		n.GetValue())
 }
 
-func (self *notification) free() {
-	C.freeNotification(self.cRef)
-	if self.node != nil {
-		self.node.free()
+func (n *notification) free() {
+	C.freeNotification(n.cRef)
+	if n.node != nil {
+		n.node.free()
 	}
-	if self.value != nil {
-		self.value.free()
+	if n.value != nil {
+		n.value.free()
 	}
 }
 
-func (self *notification) GetValue() Value {
-	return self.value
+func (n *notification) GetValue() Value {
+	return n.value
 }
 
-func (self *notification) GetNode() Node {
-	return self.node
+func (n *notification) GetNode() Node {
+	return n.node
 }
 
-func (self *notification) GetNotificationType() *NT.Enum {
-	return NT.ToEnum(int(self.cRef.notificationType))
+func (n *notification) GetNotificationType() *NT.Enum {
+	return NT.ToEnum(int(n.cRef.notificationType))
 }
 
 func newGoNotification(cRef *C.Notification) *notification {
@@ -79,15 +79,15 @@ func newGoNotification(cRef *C.Notification) *notification {
 // If there is no existing object then we steal the whole go object from the
 // receiver.
 //
-func (self *notification) swapNodeImpl(existing *node) *node {
+func (n *notification) swapNodeImpl(existing *node) *node {
 	if existing != nil {
 		// then swap the cRef pointers
-		swap := self.node.cRef
-		self.node.cRef = existing.cRef
+		swap := n.node.cRef
+		n.node.cRef = existing.cRef
 		existing.cRef = swap
 	} else {
-		existing = self.node
-		self.node = nil
+		existing = n.node
+		n.node = nil
 	}
 	return existing
 }
@@ -100,15 +100,15 @@ func (self *notification) swapNodeImpl(existing *node) *node {
 // the old *C.Value by attaching it to the notification where it will then
 // be freed.
 //
-func (self *notification) swapValueImpl(existing *value) *value {
+func (n *notification) swapValueImpl(existing *value) *value {
 	if existing != nil {
 		// then swap the cRef pointers
-		swap := self.value.cRef
-		self.value.cRef = existing.cRef
+		swap := n.value.cRef
+		n.value.cRef = existing.cRef
 		existing.cRef = swap
 	} else {
-		existing = self.value
-		self.value = nil
+		existing = n.value
+		n.value = nil
 	}
 	return existing
 }

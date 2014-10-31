@@ -45,7 +45,7 @@ var defaultEventCallback = func(api API, event Event) {
 // lockup during driver removal processing. The exit code identifies which path
 // caused the exit to occur.
 //
-func (self *api) Run() int {
+func (a *api) Run() int {
 
 	// lock the options object, now we are done configuring it
 
@@ -64,22 +64,22 @@ func (self *api) Run() int {
 
 		signal := <-signals
 		// once we receive a signal, exit of the process is inevitable
-		self.logger.Infof("received %v signal - commencing shutdown\n", signal)
+		a.logger.Infof("received %v signal - commencing shutdown\n", signal)
 
 		// try a graceful shutdown of the event loop
-		self.shutdownDriver <- EXIT_INTERRUPTED
+		a.shutdownDriver <- EXIT_INTERRUPTED
 		// and the device monitor loop
-		self.quitDeviceMonitor <- EXIT_INTERRUPTED
+		a.quitDeviceMonitor <- EXIT_INTERRUPTED
 
 		// but, just in case this doesn't happen, set up an abort timer.
 		time.AfterFunc(time.Second*5, func() {
-			self.logger.Errorf("timed out while waiting for event loop to quit - aborting now\n")
+			a.logger.Errorf("timed out while waiting for event loop to quit - aborting now\n")
 			exit <- EXIT_INTERRUPT_FAILED
 		})
 
 		// the user is impatient - just die now
 		signal = <-signals
-		self.logger.Errorf("received 2nd %v signal - aborting now\n", signal)
+		a.logger.Errorf("received 2nd %v signal - aborting now\n", signal)
 		exit <- EXIT_INTERRUPTED_AGAIN
 	}()
 
@@ -108,17 +108,17 @@ func (self *api) Run() int {
 	//
 
 	go func() {
-		cSelf := unsafe.Pointer(self) // a reference to self
+		cSelf := unsafe.Pointer(a) // a reference to a
 
 		C.startManager(cSelf) // start the manager
 		defer C.stopManager(cSelf)
 
-		cDevice := C.CString(self.device) // allocate a C string for device
+		cDevice := C.CString(a.device) // allocate a C string for device
 		defer C.free(unsafe.Pointer(cDevice))
 
 		// a function which returns true if the device exists
 		deviceExists := func() bool {
-			if _, err := os.Stat(self.device); err == nil {
+			if _, err := os.Stat(a.device); err == nil {
 				return true
 			} else {
 				if os.IsNotExist(err) {
@@ -141,50 +141,50 @@ func (self *api) Run() int {
 		doneExit := 0
 		for !done {
 			select {
-			case doneExit = <-self.quitDeviceMonitor: // we received a signal, allow us to quit
+			case doneExit = <-a.quitDeviceMonitor: // we received a signal, allow us to quit
 				done = true
 			default:
 				// one iteration of a device insert/removal cycle
 
 				// wait until device present
-				self.logger.Infof("waiting until %s is available\n", self.device)
+				a.logger.Infof("waiting until %s is available\n", a.device)
 				pollUntilDeviceExistsStateEquals(true)
-				self.logger.Infof("device %s is available\n", self.device)
+				a.logger.Infof("device %s is available\n", a.device)
 
 				go func() {
 
 					// wait until device absent
 					pollUntilDeviceExistsStateEquals(false)
-					self.logger.Infof("device %s has been removed.\n", self.device)
+					a.logger.Infof("device %s has been removed.\n", a.device)
 
 					// start the removal of the driver
-					self.shutdownDriver <- 0
+					a.shutdownDriver <- 0
 				}()
 
 				C.addDriver(cDevice)
 
 				go func() {
 					// wait until something (OS signal handler or device existence monitor) decides we need to terminate
-					rc := <-self.shutdownDriver
+					rc := <-a.shutdownDriver
 
 					// we start an abort timer, because if the driver blocks, we need to restart the driver process
 					// to guarantee successful operation.
 					abortTimer := time.AfterFunc(5*time.Second, func() {
-						self.logger.Errorf("failed to remove driver - exiting driver process\n")
+						a.logger.Errorf("failed to remove driver - exiting driver process\n")
 						exit <- EXIT_QUIT_FAILED
 					})
 
 					// try to remove the driver
 					if C.removeDriver(cDevice) {
-						self.quitEventLoop <- rc
+						a.quitEventLoop <- rc
 						abortTimer.Stop() // if we get to here in a timely fashion we can stop the abort timer
 					} else {
 						// this is unexpected, if we get to here, let the abort timer do its thing
-						self.logger.Errorf("removeDriver call failed - waiting for abort\n")
+						a.logger.Errorf("removeDriver call failed - waiting for abort\n")
 					}
 				}()
 
-				rc := self.loop(self) // run the event loop
+				rc := a.loop(a) // run the event loop
 
 				if rc != 0 {
 					done = true
@@ -200,16 +200,16 @@ func (self *api) Run() int {
 	return <-exit
 }
 
-func (self *api) Shutdown(exit int) {
+func (a *api) Shutdown(exit int) {
 
 	select {
-	case self.quitDeviceMonitor <- exit:
+	case a.quitDeviceMonitor <- exit:
 		break
 	default:
 	}
 
 	select {
-	case self.shutdownDriver <- exit:
+	case a.shutdownDriver <- exit:
 		break
 	default:
 	}
@@ -219,14 +219,14 @@ func (self *api) Shutdown(exit int) {
 //export onNotificationWrapper
 func onNotificationWrapper(cNotification *C.Notification, context unsafe.Pointer) {
 	// marshal from C to Go
-	self := (*api)(context)
+	a := (*api)(context)
 	goNotification := newGoNotification(cNotification)
-	if self.callback != nil {
-		self.callback(self, goNotification)
+	if a.callback != nil {
+		a.callback(a, goNotification)
 	}
 
 	// forward the notification to the network
-	self.getNetwork(goNotification.GetNode().GetHomeId()).notify(self, goNotification)
+	a.getNetwork(goNotification.GetNode().GetHomeId()).notify(a, goNotification)
 
 	// release the notification
 	goNotification.free()

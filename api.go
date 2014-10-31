@@ -82,25 +82,25 @@ func BuildAPI(configPath string, userPath string, overrides string) Configurator
 		quitDeviceMonitor: make(chan int, 2)}
 }
 
-func (self *api) QuitSignal() chan int {
-	return self.quitEventLoop
+func (a *api) QuitSignal() chan int {
+	return a.quitEventLoop
 }
 
-func (self *api) Logger() Logger {
-	return self.logger
+func (a *api) Logger() Logger {
+	return a.logger
 }
 
-func (self *api) getNetwork(homeId uint32) *network {
-	net, ok := self.networks[homeId]
+func (a *api) getNetwork(homeId uint32) *network {
+	net, ok := a.networks[homeId]
 	if !ok {
 		net = newNetwork(homeId)
-		self.networks[homeId] = net
+		a.networks[homeId] = net
 	}
 	return net
 }
 
-func (self *api) notifyEvent(event Event) {
-	if self.eventCallback != nil {
-		self.eventCallback(self, event)
+func (a *api) notifyEvent(event Event) {
+	if a.eventCallback != nil {
+		a.eventCallback(a, event)
 	}
 }

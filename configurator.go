@@ -47,44 +47,44 @@ type Configurator interface {
 }
 
 // configure the C++ Options object with an integer value
-func (self *api) AddIntOption(option string, value int) Configurator {
+func (a *api) AddIntOption(option string, value int) Configurator {
 	var cOption *C.char = C.CString(option)
 	//defer C.free(unsafe.Pointer(cOption))
 
 	C.addIntOption(cOption, C.int(value))
-	return self
+	return a
 }
 
 // configure the C++ Options object with a boolean value
-func (self *api) AddBoolOption(option string, value bool) Configurator {
+func (a *api) AddBoolOption(option string, value bool) Configurator {
 	var cOption *C.char = C.CString(option)
 
 	//defer C.free(unsafe.Pointer(cOption))
 	C.addBoolOption(cOption, C._Bool(value))
-	return self
+	return a
 }
 
 // configure the C++ Options object with a string value
-func (self *api) AddStringOption(option string, value string, append bool) Configurator {
+func (a *api) AddStringOption(option string, value string, append bool) Configurator {
 	var cOption *C.char = C.CString(option)
 
 	//defer C.free(unsafe.Pointer(cOption))
 	C.addStringOption(cOption, C.CString(value), C._Bool(append))
-	return self
+	return a
 }
 
 // set the device name
-func (self *api) SetDeviceName(device string) Configurator {
+func (a *api) SetDeviceName(device string) Configurator {
 	if device != "" {
-		self.device = device
+		a.device = device
 	}
-	return self
+	return a
 }
 
 // set the logger
-func (self *api) SetLogger(logger Logger) Configurator {
-	self.logger = logger
-	return self
+func (a *api) SetLogger(logger Logger) Configurator {
+	a.logger = logger
+	return a
 }
 
 // Clients of the API should provide Configuration.Run() with an implementation of this type to
@@ -96,9 +96,9 @@ func (self *api) SetLogger(logger Logger) Configurator {
 type EventLoop func(API) int
 
 // set the event loop
-func (self *api) SetEventLoop(loop EventLoop) Configurator {
-	self.loop = loop
-	return self
+func (a *api) SetEventLoop(loop EventLoop) Configurator {
+	a.loop = loop
+	return a
 }
 
 // A type of function that can receive notifications from the OpenZWave library when they occur.
@@ -110,21 +110,21 @@ func (self *api) SetEventLoop(loop EventLoop) Configurator {
 type NotificationCallback func(API, Notification)
 
 // set the synchronous call back
-func (self *api) SetNotificationCallback(callback NotificationCallback) Configurator {
-	self.callback = callback
-	return self
+func (a *api) SetNotificationCallback(callback NotificationCallback) Configurator {
+	a.callback = callback
+	return a
 }
 
 type EventCallback func(API, Event)
 
 // set the synchronous call back
-func (self *api) SetEventsCallback(eventCallback EventCallback) Configurator {
-	self.eventCallback = eventCallback
-	return self
+func (a *api) SetEventsCallback(eventCallback EventCallback) Configurator {
+	a.eventCallback = eventCallback
+	return a
 }
 
 // set the device factory
-func (self *api) SetDeviceFactory(deviceFactory DeviceFactory) Configurator {
-	self.deviceFactory = deviceFactory
-	return self
+func (a *api) SetDeviceFactory(deviceFactory DeviceFactory) Configurator {
+	a.deviceFactory = deviceFactory
+	return a
 }

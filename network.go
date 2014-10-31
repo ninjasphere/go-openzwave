@@ -23,11 +23,11 @@ func newNetwork(homeId uint32) *network {
 	return &network{homeId, make(map[uint8]*node)}
 }
 
-func (self *network) GetHomeId() uint32 {
-	return self.homeId
+func (nw *network) GetHomeId() uint32 {
+	return nw.homeId
 }
 
-func (self *network) notify(api *api, nt *notification) {
+func (nw *network) notify(api *api, nt *notification) {
 	notificationType := nt.GetNotificationType()
 	switch notificationType.Code {
 
@@ -35,7 +35,7 @@ func (self *network) notify(api *api, nt *notification) {
 	case NT.DRIVER_READY,
 		NT.DRIVER_RESET:
 		// reset network object to reset state
-		self.reset()
+		nw.reset()
 		break
 
 	// group associations
@@ -53,24 +53,24 @@ func (self *network) notify(api *api, nt *notification) {
 	default:
 		node := nt.GetNode()
 		if node.GetId() <= MAX_NODES {
-			self.handleNodeEvent(api, nt, self.takeNode(nt))
+			nw.handleNodeEvent(api, nt, nw.takeNode(nt))
 		} else {
 			unhandled(api, nt)
 		}
 	}
 }
 
-func (self *network) handleNodeEvent(api *api, nt *notification, nodeV *node) {
+func (nw *network) handleNodeEvent(api *api, nt *notification, nodeV *node) {
 
 	notificationType := nt.cRef.notificationType
 	id := (uint8)(nodeV.cRef.nodeId.nodeId)
 
-	n, ok := self.nodes[id]
+	n, ok := nw.nodes[id]
 
 	switch notificationType {
 	case NT.NODE_REMOVED:
 		if ok {
-			delete(self.nodes, id)
+			delete(nw.nodes, id)
 			n.notify(api, nt)
 		}
 		break
@@ -86,7 +86,7 @@ func (self *network) handleNodeEvent(api *api, nt *notification, nodeV *node) {
 	case NT.NODE_NEW,
 		NT.NODE_ADDED:
 		if !ok {
-			self.nodes[id] = nodeV
+			nw.nodes[id] = nodeV
 		}
 		fallthrough
 
@@ -108,16 +108,16 @@ func (self *network) handleNodeEvent(api *api, nt *notification, nodeV *node) {
 	}
 }
 
-func (self *network) reset() {
-	self.nodes = make(map[uint8]*node)
+func (nw *network) reset() {
+	nw.nodes = make(map[uint8]*node)
 }
 
-func (self *network) takeNode(nt *notification) *node {
+func (nw *network) takeNode(nt *notification) *node {
 	id := uint8(nt.node.cRef.nodeId.nodeId)
-	n, ok := self.nodes[id]
+	n, ok := nw.nodes[id]
 	if !ok {
 		n = nt.swapNodeImpl(nil)
-		self.nodes[id] = n
+		nw.nodes[id] = n
 	} else {
 		nt.swapNodeImpl(n)
 	}

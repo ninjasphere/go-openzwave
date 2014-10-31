@@ -43,7 +43,7 @@ type value struct {
 type missingValue struct {
 }
 
-func (self value) String() string {
+func (v value) String() string {
 	return fmt.Sprintf(
 		"Value["+
 			"type=%v, "+
@@ -57,79 +57,79 @@ func (self value) String() string {
 			"min=%d, "+
 			"max=%d, "+
 			"isSet=%v]",
-		VT.ToEnum(int(self.cRef.valueId.valueType)),
-		CC.ToEnum(int(self.cRef.valueId.commandClassId)),
-		uint(self.cRef.valueId.instance),
-		uint(self.cRef.valueId.index),
-		C.GoString(self.cRef.value),
-		C.GoString(self.cRef.label),
-		C.GoString(self.cRef.units),
-		C.GoString(self.cRef.help),
-		(int32)(self.cRef.min),
-		(int32)(self.cRef.max),
-		(bool)(self.cRef.isSet))
+		VT.ToEnum(int(v.cRef.valueId.valueType)),
+		CC.ToEnum(int(v.cRef.valueId.commandClassId)),
+		uint(v.cRef.valueId.instance),
+		uint(v.cRef.valueId.index),
+		C.GoString(v.cRef.value),
+		C.GoString(v.cRef.label),
+		C.GoString(v.cRef.units),
+		C.GoString(v.cRef.help),
+		(int32)(v.cRef.min),
+		(int32)(v.cRef.max),
+		(bool)(v.cRef.isSet))
 }
 
 func newGoValue(cRef *C.Value) *value {
 	return &value{cRef}
 }
 
-func (self *value) notify(api *api, nt *notification) {
+func (v *value) notify(api *api, nt *notification) {
 	// TODO
 }
 
-func (self *value) Id() ValueID {
+func (v *value) Id() ValueID {
 	return ValueID{
-		CommandClassId: uint8(self.cRef.valueId.commandClassId),
-		Instance:       uint8(self.cRef.valueId.instance),
-		Index:          uint8(self.cRef.valueId.index),
+		CommandClassId: uint8(v.cRef.valueId.commandClassId),
+		Instance:       uint8(v.cRef.valueId.instance),
+		Index:          uint8(v.cRef.valueId.index),
 	}
 }
 
-func (self *value) SetUint8(value uint8) bool {
-	return (bool)(C.setUint8Value(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), C.uint8_t(value)))
+func (v *value) SetUint8(value uint8) bool {
+	return (bool)(C.setUint8Value(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), C.uint8_t(value)))
 }
 
-func (self *value) GetUint8() (uint8, bool) {
+func (v *value) GetUint8() (uint8, bool) {
 	var value C.uint8_t
-	ok := (bool)(C.getUint8Value(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), (*C.uint8_t)(&value)))
+	ok := (bool)(C.getUint8Value(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), (*C.uint8_t)(&value)))
 	return (uint8)(value), ok
 }
 
-func (self *value) SetBool(value bool) bool {
-	return (bool)(C.setBoolValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), C._Bool(value)))
+func (v *value) SetBool(value bool) bool {
+	return (bool)(C.setBoolValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), C._Bool(value)))
 }
 
-func (self *value) GetBool() (bool, bool) {
+func (v *value) GetBool() (bool, bool) {
 	var value C._Bool
-	ok := (bool)(C.getBoolValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), (*C._Bool)(&value)))
+	ok := (bool)(C.getBoolValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), (*C._Bool)(&value)))
 	return (bool)(value), ok
 }
 
-func (self *value) SetInt(value int) bool {
-	return (bool)(C.setIntValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), C.int(value)))
+func (v *value) SetInt(value int) bool {
+	return (bool)(C.setIntValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), C.int(value)))
 }
 
-func (self *value) GetInt() (int, bool) {
+func (v *value) GetInt() (int, bool) {
 	var value C.int
-	ok := (bool)(C.getIntValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), (*C.int)(&value)))
+	ok := (bool)(C.getIntValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), (*C.int)(&value)))
 	return (int)(value), ok
 }
 
-func (self *value) SetFloat(value float64) bool {
-	return (bool)(C.setFloatValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), C.float(value)))
+func (v *value) SetFloat(value float64) bool {
+	return (bool)(C.setFloatValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), C.float(value)))
 }
 
-func (self *value) GetFloat() (float64, bool) {
+func (v *value) GetFloat() (float64, bool) {
 	var value C.float
-	ok := (bool)(C.getFloatValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), (*C.float)(&value)))
+	ok := (bool)(C.getFloatValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), (*C.float)(&value)))
 	return (float64)(value), ok
 }
 
 // for a missing value, the get operation always fails
-func (self *value) GetString() (string, bool) {
+func (v *value) GetString() (string, bool) {
 	var value *C.char
-	ok := (bool)(C.getStringValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), (**C.char)(&value)))
+	ok := (bool)(C.getStringValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), (**C.char)(&value)))
 	if ok && value != nil {
 		result := C.GoString(value)
 		C.free(unsafe.Pointer(value))
@@ -140,82 +140,82 @@ func (self *value) GetString() (string, bool) {
 }
 
 // for a missing value, the set operation always fails
-func (self *value) SetString(value string) bool {
+func (v *value) SetString(value string) bool {
 	tmp := C.CString(value)
-	return (bool)(C.setStringValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), tmp))
+	return (bool)(C.setStringValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), tmp))
 }
 
-func (self *value) Refresh() bool {
-	return (bool)(C.refreshValue(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id)))
+func (v *value) Refresh() bool {
+	return (bool)(C.refreshValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id)))
 }
 
-func (self *value) free() {
-	C.freeValue(self.cRef)
+func (v *value) free() {
+	C.freeValue(v.cRef)
 }
 
-func (self *value) SetPollingState(state bool) bool {
-	return (bool)(C.setPollingState(C.uint32_t(self.cRef.homeId), C.uint64_t(self.cRef.valueId.id), C._Bool(state)))
+func (v *value) SetPollingState(state bool) bool {
+	return (bool)(C.setPollingState(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), C._Bool(state)))
 }
 
 // for a missing value, the set operation always fails
-func (self *missingValue) SetUint8(value uint8) bool {
+func (v *missingValue) SetUint8(value uint8) bool {
 	return false
 }
 
 // for a missing value, the get operation always fails
-func (self *missingValue) GetUint8() (uint8, bool) {
+func (v *missingValue) GetUint8() (uint8, bool) {
 	return 0, false
 }
 
 // for a missing value, the set operation always fails
-func (self *missingValue) SetBool(value bool) bool {
+func (v *missingValue) SetBool(value bool) bool {
 	return false
 }
 
 // for a missing value, the get operation always fails
-func (self *missingValue) GetBool() (bool, bool) {
+func (v *missingValue) GetBool() (bool, bool) {
 	return false, false
 }
 
 // for a missing value, the get operation always fails
-func (self *missingValue) GetInt() (int, bool) {
+func (v *missingValue) GetInt() (int, bool) {
 	return 0, false
 }
 
 // for a missing value, the set operation always fails
-func (self *missingValue) SetInt(value int) bool {
+func (v *missingValue) SetInt(value int) bool {
 	return false
 }
 
 // for a missing value, the get operation always fails
-func (self *missingValue) GetFloat() (float64, bool) {
+func (v *missingValue) GetFloat() (float64, bool) {
 	return 0.0, false
 }
 
 // for a missing value, the set operation always fails
-func (self *missingValue) SetFloat(value float64) bool {
+func (v *missingValue) SetFloat(value float64) bool {
 	return false
 }
 
 // for a missing value, the get operation always fails
-func (self *missingValue) GetString() (string, bool) {
+func (v *missingValue) GetString() (string, bool) {
 	return "", false
 }
 
 // for a missing value, the set operation always fails
-func (self *missingValue) SetString(value string) bool {
+func (v *missingValue) SetString(value string) bool {
 	return false
 }
 
 // for a missing value, the get operation always fails
-func (self *missingValue) Refresh() bool {
+func (v *missingValue) Refresh() bool {
 	return false
 }
 
-func (self *missingValue) SetPollingState(state bool) bool {
+func (v *missingValue) SetPollingState(state bool) bool {
 	return false
 }
 
-func (self *missingValue) Id() ValueID {
+func (v *missingValue) Id() ValueID {
 	return ValueID{0, 0, 0}
 }
