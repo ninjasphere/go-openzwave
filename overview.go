@@ -7,9 +7,6 @@
 //                fmt.Printf("event loop starts\n")
 //                for {
 //                        select {
-//                        case notification := <-api.Notifications():
-//                                fmt.Printf("notification received - %v", notification)
-//                                api.FreeNotification(notification)
 //                        case quitNow := <-api.QuitSignal():
 //                                _ = quitNow
 //                                fmt.Printf("event loop ends\n")
