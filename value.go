@@ -71,7 +71,10 @@ func (v value) String() string {
 }
 
 func newGoValue(cRef *C.Value) *value {
-	return &value{cRef}
+	if cRef != nil {
+		return &value{cRef}
+	}
+	return nil
 }
 
 func (v *value) notify(api *api, nt *notification) {
