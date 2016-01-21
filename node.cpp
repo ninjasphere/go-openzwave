@@ -1,6 +1,6 @@
 #include "api.h"
 
-static Node * newNode(uint32_t homeId, uint8_t nodeId)
+static Node * newNode(uint32 homeId, uint8 nodeId)
 {
   Node * tmp = (Node *)malloc(sizeof(Node));
   *tmp = (Node){0};
@@ -21,7 +21,7 @@ void freeNode(Node * node)
   free(node);
 };
 
-Node * exportNode(API * api, uint32_t homeId, uint8_t nodeId)
+Node * exportNode(API * api, uint32 homeId, uint8 nodeId)
 {
   Node * result = newNode(homeId, nodeId);
   OpenZWave::Manager * cppRef = OpenZWave::Manager::Get();

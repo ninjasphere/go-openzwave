@@ -87,49 +87,49 @@ func (v *value) Id() ValueID {
 }
 
 func (v *value) SetUint8(value uint8) bool {
-	return (bool)(C.setUint8Value(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), C.uint8_t(value)))
+	return (bool)(C.setUint8Value(C.uint32(v.cRef.homeId), C.uint64(v.cRef.valueId.id), C.uint8(value)))
 }
 
 func (v *value) GetUint8() (uint8, bool) {
-	var value C.uint8_t
-	ok := (bool)(C.getUint8Value(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), (*C.uint8_t)(&value)))
+	var value C.uint8
+	ok := (bool)(C.getUint8Value(C.uint32(v.cRef.homeId), C.uint64(v.cRef.valueId.id), (*C.uint8)(&value)))
 	return (uint8)(value), ok
 }
 
 func (v *value) SetBool(value bool) bool {
-	return (bool)(C.setBoolValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), C._Bool(value)))
+	return (bool)(C.setBoolValue(C.uint32(v.cRef.homeId), C.uint64(v.cRef.valueId.id), C._Bool(value)))
 }
 
 func (v *value) GetBool() (bool, bool) {
 	var value C._Bool
-	ok := (bool)(C.getBoolValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), (*C._Bool)(&value)))
+	ok := (bool)(C.getBoolValue(C.uint32(v.cRef.homeId), C.uint64(v.cRef.valueId.id), (*C._Bool)(&value)))
 	return (bool)(value), ok
 }
 
 func (v *value) SetInt(value int) bool {
-	return (bool)(C.setIntValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), C.int(value)))
+	return (bool)(C.setIntValue(C.uint32(v.cRef.homeId), C.uint64(v.cRef.valueId.id), C.int(value)))
 }
 
 func (v *value) GetInt() (int, bool) {
 	var value C.int
-	ok := (bool)(C.getIntValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), (*C.int)(&value)))
+	ok := (bool)(C.getIntValue(C.uint32(v.cRef.homeId), C.uint64(v.cRef.valueId.id), (*C.int)(&value)))
 	return (int)(value), ok
 }
 
 func (v *value) SetFloat(value float64) bool {
-	return (bool)(C.setFloatValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), C.float(value)))
+	return (bool)(C.setFloatValue(C.uint32(v.cRef.homeId), C.uint64(v.cRef.valueId.id), C.float(value)))
 }
 
 func (v *value) GetFloat() (float64, bool) {
 	var value C.float
-	ok := (bool)(C.getFloatValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), (*C.float)(&value)))
+	ok := (bool)(C.getFloatValue(C.uint32(v.cRef.homeId), C.uint64(v.cRef.valueId.id), (*C.float)(&value)))
 	return (float64)(value), ok
 }
 
 // for a missing value, the get operation always fails
 func (v *value) GetString() (string, bool) {
 	var value *C.char
-	ok := (bool)(C.getStringValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), (**C.char)(&value)))
+	ok := (bool)(C.getStringValue(C.uint32(v.cRef.homeId), C.uint64(v.cRef.valueId.id), (**C.char)(&value)))
 	if ok && value != nil {
 		result := C.GoString(value)
 		C.free(unsafe.Pointer(value))
@@ -142,11 +142,11 @@ func (v *value) GetString() (string, bool) {
 // for a missing value, the set operation always fails
 func (v *value) SetString(value string) bool {
 	tmp := C.CString(value)
-	return (bool)(C.setStringValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), tmp))
+	return (bool)(C.setStringValue(C.uint32(v.cRef.homeId), C.uint64(v.cRef.valueId.id), tmp))
 }
 
 func (v *value) Refresh() bool {
-	return (bool)(C.refreshValue(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id)))
+	return (bool)(C.refreshValue(C.uint32(v.cRef.homeId), C.uint64(v.cRef.valueId.id)))
 }
 
 func (v *value) free() {
@@ -154,7 +154,7 @@ func (v *value) free() {
 }
 
 func (v *value) SetPollingState(state bool) bool {
-	return (bool)(C.setPollingState(C.uint32_t(v.cRef.homeId), C.uint64_t(v.cRef.valueId.id), C._Bool(state)))
+	return (bool)(C.setPollingState(C.uint32(v.cRef.homeId), C.uint64(v.cRef.valueId.id), C._Bool(state)))
 }
 
 // for a missing value, the set operation always fails

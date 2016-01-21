@@ -1,6 +1,6 @@
 
 #include "api.h"
-static Notification * newNotification(uint8_t notificationType)
+static Notification * newNotification(uint8 notificationType)
 {
   Notification * tmp = (Notification *)malloc(sizeof(Notification));
   *tmp = (Notification){0};

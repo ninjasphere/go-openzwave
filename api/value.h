@@ -1,16 +1,16 @@
 typedef void GoValue;
 
 typedef struct ValueID {
-  uint64_t  id;
-  uint8_t   valueType;
-  uint8_t   commandClassId;
-  uint8_t   instance;
-  uint8_t   index;
+  uint64  id;
+  uint8   valueType;
+  uint8   commandClassId;
+  uint8   instance;
+  uint8   index;
 
 } ValueID;
 
 typedef struct Value {
-  uint32_t  homeId;
+  uint32  homeId;
   ValueID   valueId;
   char    * value;
   char    * label;
@@ -22,19 +22,19 @@ typedef struct Value {
 } Value;
 
 extern void  freeValue(Value *);
-extern bool  setUint8Value(uint32_t homeId, uint64_t id, uint8_t value);
-extern bool  getUint8Value(uint32_t homeId, uint64_t id, uint8_t *value);
-extern bool  setBoolValue(uint32_t homeId, uint64_t id, bool value);
-extern bool  getBoolValue(uint32_t homeId, uint64_t id, bool *value);
-extern bool  setFloatValue(uint32_t homeId, uint64_t id, float value);
-extern bool  getFloatValue(uint32_t homeId, uint64_t id, float *value);
-extern bool  setIntValue(uint32_t homeId, uint64_t id, int value);
-extern bool  getIntValue(uint32_t homeId, uint64_t id, int *value);
-extern bool  setStringValue(uint32_t homeId, uint64_t id, char * value);
-extern bool  getStringValue(uint32_t homeId, uint64_t id, char ** value);
-extern bool  refreshValue(uint32_t homeId, uint64_t id);
-extern bool  setPollingState(uint32_t homeId, uint64_t id, bool state);
+extern bool  setUint8Value(uint32 homeId, uint64 id, uint8 value);
+extern bool  getUint8Value(uint32 homeId, uint64 id, uint8 *value);
+extern bool  setBoolValue(uint32 homeId, uint64 id, bool value);
+extern bool  getBoolValue(uint32 homeId, uint64 id, bool *value);
+extern bool  setFloatValue(uint32 homeId, uint64 id, float value);
+extern bool  getFloatValue(uint32 homeId, uint64 id, float *value);
+extern bool  setIntValue(uint32 homeId, uint64 id, int value);
+extern bool  getIntValue(uint32 homeId, uint64 id, int *value);
+extern bool  setStringValue(uint32 homeId, uint64 id, char * value);
+extern bool  getStringValue(uint32 homeId, uint64 id, char ** value);
+extern bool  refreshValue(uint32 homeId, uint64 id);
+extern bool  setPollingState(uint32 homeId, uint64 id, bool state);
 
 #ifdef __cplusplus
-extern Value * exportValue(API *, uint32_t homeId, OpenZWave::ValueID const &);
+extern Value * exportValue(API *, uint32 homeId, OpenZWave::ValueID const &);
 #endif

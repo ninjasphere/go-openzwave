@@ -1,15 +1,15 @@
 typedef void GoNode;
 
 typedef struct NodeId {
-	uint32_t homeId;
-	uint8_t nodeId;
+	uint32 homeId;
+	uint8 nodeId;
 } NodeId;
 
 typedef struct Node {
 	struct NodeId nodeId;
-	uint8_t basicType;
-	uint8_t genericType;
-	uint8_t specificType;
+	uint8 basicType;
+	uint8 genericType;
+	uint8 specificType;
 	char * nodeType;
 	char * manufacturerName;
 	char * productName;

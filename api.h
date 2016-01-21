@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "zwave_types.h"
 
 #ifdef __cplusplus
 #include <iostream>
