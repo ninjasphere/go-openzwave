@@ -14,11 +14,23 @@ Notification * exportNotification(API * api, OpenZWave::Notification const* noti
 {
   Notification * result = newNotification(notification->GetType());
   result->node = exportNode(api, notification->GetHomeId(), notification->GetNodeId());
-  result->notificationCode =
-    notification->GetType() == OpenZWave::Notification::Type_Notification
-    ? notification->GetNotification()
-    : -1;
-  result->value = exportValue(api, notification->GetHomeId(), notification->GetValueID());
+  OpenZWave::Notification::NotificationType nt = notification->GetType();
+  result->notificationCode = -1;
+
+  switch (nt) {
+  case OpenZWave::Notification::Type_ValueAdded:
+  case OpenZWave::Notification::Type_ValueRemoved:
+  case OpenZWave::Notification::Type_ValueChanged:
+  case OpenZWave::Notification::Type_ValueRefreshed:
+    result->value = exportValue(api, notification->GetHomeId(), notification->GetValueID());
+    break;
+  case OpenZWave::Notification::Type_Notification:
+    result->notificationCode = notification->GetNotification();
+    break;
+  default:
+    break;
+    // do nothing
+  }
   return result;
 }
 
