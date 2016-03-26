@@ -108,7 +108,7 @@ func (a *api) Run() int {
 	//
 
 	go func() {
-		cSelf := unsafe.Pointer(a) // a reference to a
+		cSelf := a.C()
 
 		C.startManager(cSelf) // start the manager
 		defer C.stopManager(cSelf)
@@ -214,12 +214,14 @@ func (a *api) Shutdown(exit int) {
 	default:
 	}
 
+	a.shareable.destroy()
+
 }
 
 //export onNotificationWrapper
 func onNotificationWrapper(cNotification *C.Notification, context unsafe.Pointer) {
 	// marshal from C to Go
-	a := (*api)(context)
+	a := unmarshal(context).Go().(*api)
 	goNotification := newGoNotification(cNotification)
 	if a.callback != nil {
 		a.callback(a, goNotification)

@@ -1,4 +1,4 @@
-#ifndef API_H 
+#ifndef API_H
 #define API_H
 //
 // api.h
@@ -39,13 +39,14 @@ extern "C" {
 #else
 #endif
 
+#include "api/shareable.h"
 typedef void API;
-
 #include "api/manager.h"
 #include "api/node.h"
 #include "api/value.h"
 #include "api/notification.h"
 #include "api/options.h"
+
 
 #ifdef __cplusplus
 #include "_cgo_export.h"

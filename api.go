@@ -23,6 +23,7 @@ import "C"
 // ask an EventLoop to quit.
 
 type api struct {
+	shareable
 	loop              EventLoop
 	callback          NotificationCallback
 	eventCallback     EventCallback
@@ -69,7 +70,8 @@ func BuildAPI(configPath string, userPath string, overrides string) Configurator
 	//defer C.free(unsafe.Pointer(cUserPath))
 	//defer C.free(unsafe.Pointer(cOverrides)
 	C.startOptions(cConfigPath, cUserPath, cOverrides)
-	return &api{
+	var r *api
+	r = &api{
 		loop:              defaultEventLoop,
 		callback:          nil,
 		eventCallback:     defaultEventCallback,
@@ -80,6 +82,8 @@ func BuildAPI(configPath string, userPath string, overrides string) Configurator
 		logger:            &defaultLogger{},
 		networks:          make(map[uint32]*network),
 		quitDeviceMonitor: make(chan int, 2)}
+	r.shareable.init(r)
+	return r
 }
 
 func (a *api) QuitSignal() chan int {
