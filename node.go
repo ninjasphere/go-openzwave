@@ -139,12 +139,16 @@ func (n *node) notify(api *api, nt *notification) {
 			//
 
 			n.device = api.deviceFactory(api, n)
-			n.device.NodeAdded()
+			if n.device != nil {
+				n.device.NodeAdded()
+			}
 
 			break
 		default:
 			event = &NodeChanged{nodeEvent{n}}
-			n.device.NodeChanged()
+			if n.device != nil {
+				n.device.NodeChanged()
+			}
 			//
 			// Pass the event to the node.
 			//
