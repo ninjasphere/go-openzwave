@@ -46,9 +46,9 @@ type Enum struct {
 }
 
 func init() {
-     for _, e := range enums {
-        fromName[e.Name] = &e
-        fromCode[e.Code] = &e
+     for i, e := range enums {
+        fromName[e.Name] = &enums[i]
+        fromCode[e.Code] = &enums[i]
      }
 }
 
