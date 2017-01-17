@@ -1,5 +1,10 @@
 package openzwave
 
+// #cgo LDFLAGS: -lopenzwave -Lgo/src/github.com/ninjasphere/go-openzwave/openzwave
+// #cgo CPPFLAGS: -Iopenzwave/cpp/src
+// #include "api.h"
+import "C"
+
 import (
 	"github.com/ninjasphere/go-openzwave/NT"
 )
@@ -12,6 +17,10 @@ const (
 type Network interface {
 	// the identifier of the home network
 	GetHomeId() uint32
+	// tell the controller to allow new nodes to register
+	// Secure: try to register securely
+	// returns true if the registration request succeeded
+	AddNode(secure bool) bool
 }
 
 type network struct {
@@ -25,6 +34,10 @@ func newNetwork(homeId uint32) *network {
 
 func (nw *network) GetHomeId() uint32 {
 	return nw.homeId
+}
+
+func (nw *network) AddNode(secure bool) bool {
+	return bool(C.addNode(C.uint32(nw.GetHomeId()), C.bool(secure)))
 }
 
 func (nw *network) notify(api *api, nt *notification) {

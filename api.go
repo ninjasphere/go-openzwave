@@ -47,6 +47,10 @@ type API interface {
 	// the API logger
 	Logger() Logger
 
+	// Get a network by HomeID
+	// Returns network, or nil if no network exists matching the specified HomeID
+	GetNetwork(homeId uint32) Network
+
 	// Shutdown the event loop
 	Shutdown(exit int)
 }
@@ -92,6 +96,14 @@ func (a *api) QuitSignal() chan int {
 
 func (a *api) Logger() Logger {
 	return a.logger
+}
+
+func (a *api) GetNetwork(homeId uint32) Network {
+	net, ok := a.networks[homeId]
+	if !ok {
+		return nil
+	}
+	return net
 }
 
 func (a *api) getNetwork(homeId uint32) *network {
