@@ -1,5 +1,3 @@
-*note: this fork of go-openzwave will add support for new node discovery to the go-openzwave library. This message will be removed when adding this support is successful*
-
 go-openzwave
 ============
 A minimal 'Go' binding to the C++ openzwave library.
