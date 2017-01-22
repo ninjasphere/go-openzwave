@@ -19,6 +19,10 @@ void stopManager(API * api)
   OpenZWave::Manager::Destroy();
 }
 
+bool addNode(uint32 homeId, bool secure) {
+  return OpenZWave::Manager::Get()->AddNode(homeId, secure);
+}
+
 bool addDriver(char * device)
 {
   return OpenZWave::Manager::Get()->AddDriver(device);
